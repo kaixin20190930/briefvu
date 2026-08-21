@@ -1,0 +1,43 @@
+{
+  "name": "threadline-intake",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "wrangler d1 migrations apply threadline-intake --local",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:scenarios": "vitest run lib/scenarios/registry.test.ts",
+    "test:scenarios:production": "SCENARIO_EVAL_BASE_URL=https://briefvu.com vitest run lib/scenarios/production-eval.test.ts",
+    "test:scenarios:production:supported": "SCENARIO_EVAL_BASE_URL=https://briefvu.com SCENARIO_EVAL_SCOPE=supported vitest run lib/scenarios/production-eval.test.ts",
+    "test:scenarios:production:all": "SCENARIO_EVAL_BASE_URL=https://briefvu.com SCENARIO_EVAL_SCOPE=all vitest run lib/scenarios/production-eval.test.ts",
+    "test:scenarios:production:m01": "SCENARIO_EVAL_BASE_URL=https://briefvu.com SCENARIO_EVAL_SCOPE=all SCENARIO_EVAL_IDS=M01 vitest run lib/scenarios/production-eval.test.ts",
+    "test:scenarios:production:v2": "SCENARIO_EVAL_BASE_URL=https://briefvu.com SCENARIO_EVAL_SCOPE=all SCENARIO_EVAL_IDS=M09,M10,M11,M12,M13,M14,M15,M16,M21,M23 vitest run lib/scenarios/production-eval.test.ts",
+    "test:scenarios:production:remaining": "SCENARIO_EVAL_BASE_URL=https://briefvu.com SCENARIO_EVAL_SCOPE=all SCENARIO_EVAL_IDS=M17,M18,M19,M20,M22,M24 vitest run lib/scenarios/production-eval.test.ts",
+    "test:seo": "vitest run lib/seo-foundation.test.ts",
+    "monitoring:report": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/monitoring-report.mts",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "latest",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "wrangler": "latest"
+  }
+}
