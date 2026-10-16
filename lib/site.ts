@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 export const DEFAULT_SITE_URL = "https://briefvu.com";
 
 export const siteConfig = {
-  name: "Briefvu",
-  defaultTitle: "Briefvu — Custom apparel intake, ready for quoting",
-  description: "Turn messy custom apparel enquiries into verified, quote-ready job specifications with evidence and a reviewable customer reply loop.",
+  name: "BriefVu",
+  defaultTitle: "BriefVu — Small tools, instantly useful",
+  description: "Fast, focused browser tools for text, color, documents, and other practical jobs.",
 };
 
 export function getSiteUrl() {
@@ -42,13 +42,13 @@ export function createPageMetadata(input: {
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Briefvu custom apparel intake" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "BriefVu browser tools" }],
     },
     twitter: {
       card: "summary_large_image",
       title: input.title,
       description: input.description,
-      images: [{ url: "/opengraph-image", alt: "Briefvu custom apparel intake" }],
+      images: [{ url: "/opengraph-image", alt: "BriefVu browser tools" }],
     },
   };
 }

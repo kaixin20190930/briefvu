@@ -13,12 +13,19 @@ const nextConfig: NextConfig = {
       },
     ];
     return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), clipboard-write=(self)" },
+        ],
+      },
       { source: "/", headers: revalidateDocument },
-      { source: "/custom-apparel-intake-software", headers: revalidateDocument },
-      { source: "/examples", headers: revalidateDocument },
-      { source: "/examples/:slug", headers: revalidateDocument },
-      { source: "/guides/:path*", headers: revalidateDocument },
-      { source: "/use-cases/:path*", headers: revalidateDocument },
+      { source: "/tools", headers: revalidateDocument },
+      { source: "/tools/:path*", headers: revalidateDocument },
+      { source: "/privacy", headers: revalidateDocument },
+      { source: "/terms", headers: revalidateDocument },
       { source: "/robots.txt", headers: revalidateDocument },
       { source: "/sitemap.xml", headers: revalidateDocument },
       { source: "/opengraph-image", headers: revalidateDocument },

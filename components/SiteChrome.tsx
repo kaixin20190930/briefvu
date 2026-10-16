@@ -1,20 +1,16 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="Briefvu home">
-        <span className="brand-mark"><span /></span>
-        <span>briefvu</span>
-        <em>Beta</em>
+      <Link className="brand" href="/" aria-label="BriefVu home">
+        <span className="brand-mark" aria-hidden="true"><span /></span>
+        <span>BriefVu</span>
       </Link>
       <nav aria-label="Main navigation">
-        <Link href="/custom-apparel-intake-software">Product</Link>
-        <Link href="/use-cases/screen-printing-enquiries">Use cases</Link>
-        <Link href="/examples">Examples</Link>
-        <Link href="/guides/custom-apparel-quote-intake-checklist">Guide</Link>
-        <Link className="pilot-link" href="/#pilot">Early shop plan <ArrowUpRight size={14} /></Link>
+        <Link href="/tools">All tools</Link>
+        <Link className="header-tool-link" href="/tools">Browse tools <ArrowRight size={15} /></Link>
       </nav>
     </header>
   );
@@ -24,15 +20,15 @@ export function SiteFooter() {
   return (
     <footer>
       <Link className="brand" href="/">
-        <span className="brand-mark"><span /></span><span>briefvu</span>
+        <span className="brand-mark" aria-hidden="true"><span /></span><span>BriefVu</span>
       </Link>
-      <p>Intake clarity for busy apparel shops.</p>
+      <p>Small tools, instantly useful.</p>
       <nav aria-label="Footer navigation">
-        <Link href="/custom-apparel-intake-software">Product</Link>
-        <Link href="/use-cases/embroidery-enquiries">Embroidery</Link>
-        <Link href="/examples">Examples</Link>
+        <Link href="/tools">Tools</Link>
+        <Link href="/privacy">Privacy</Link>
+        <Link href="/terms">Terms</Link>
       </nav>
-      <span>© 2026 Briefvu</span>
+      <span>© 2026 BriefVu</span>
     </footer>
   );
 }

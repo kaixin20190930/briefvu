@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "briefvu-apps",
+  "main": "apps-worker.ts",
+  "compatibility_date": "2026-08-18",
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "apps.briefvu.com", "custom_domain": true }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "APPS_BUCKET",
+      "bucket_name": "briefvu-apps"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}

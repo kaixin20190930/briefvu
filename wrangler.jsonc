@@ -1,13 +1,12 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "threadline-intake",
-  "main": ".open-next/worker.js",
+  "name": "briefvu-tools",
+  "main": "worker.mjs",
   "compatibility_date": "2026-08-18",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "preview_urls": false,
   "vars": {
-    "OPENAI_MODEL": "gpt-5-mini",
     "SITE_URL": "https://briefvu.com"
   },
   "routes": [
@@ -18,14 +17,6 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "threadline-intake",
-      "database_id": "0a995e9c-719d-46d9-b3a7-03ad70b0a402",
-      "migrations_dir": "migrations"
-    }
-  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1

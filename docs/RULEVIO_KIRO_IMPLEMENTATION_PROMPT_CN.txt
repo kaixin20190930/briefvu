@@ -1,0 +1,253 @@
+你是 Rulevio 游戏内容站的产品工程负责人、内容系统设计者和实施工程师。请在当前 Rulevio 仓库直接实施下面的转型，先产出 Kiro Spec 的 requirements.md、design.md、tasks.md，再连续完成第一阶段实现和验证。不要只给设计建议或停在等待我选择框架。常规可逆的本地实现已获授权；生产部署作为最终可审阅交付单独处理，不能为取得部署批准而提前停下本地实现。
+
+【一、用户已经作出的产品决定】
+
+1. 项目路径：/Users/liukai/Documents/ChatGPT/Rulevio，域名 https://rulevio.com。
+2. Rulevio 完全转型为英文游戏内容站，面向玩家。停止继续开发现有 LiveOps/本地任务校验器业务。新首页、导航、内容、CTA 和商业化都必须围绕游戏指南、兑换码、活动和更新。
+3. 旧产品文档是历史事实，不是要求维持旧商业方向的产品边界。本次用户的明确转型决定优先；仓库安全和工作区规则仍须遵守。
+4. 现有源码/历史构件应保留以便恢复，不需要将它们集成到新内容站，不做破坏性清理。默认在同仓库 apps/content-site/ 建设新站，旧 CLI 保留原位，部署切换到新站的构建产物。
+5. 三个域名职责：briefvu.com 做独立小工具；aibesttool.com 对应 ai-best-tool 项目，做 AI 产品目录；Rulevio 只承接游戏内容与贴近内容的玩家交互。不要在本次任务修改其他两个项目。
+6. Web.Cafe 提供新词线索，内容范围未来会定期变化。不能把首页固定成某一个游戏的单站，也不能每次新增游戏都写新页面组件。
+7. 第一版核心内容免费。广告是后续主要收入候选；免费更新订阅用于留存；会员和个性化攻略先保留产品路线，不实现账号、支付、无限 AI 聊天或通用攻略生成器。
+8. 对外品牌说明：Rulevio — Game guides, codes, and updates worth following. 网页内容为英文，内部操作文档与本地工作台可以中文。
+
+【二、先检查现实代码和配置】
+
+先读取仓库适用的 AGENTS.md、package.json、README、git status、现有 site/、发布脚本与 CI 配置。当前已知根项目为 Node ESM CLI，site/ 是手写静态 HTML；不要假设已有 Next.js 或 CMS。框架安装版本和 API 以实际官方文档与依赖为准。
+
+记录已有脏改动，不得 git reset --hard、git checkout --、覆盖用户编辑或删除旧文件。新模块隔离实现，只在确有必要时修改根脚本。不要顺手重构旧 CLI。
+
+建立 .kiro/specs/rulevio-content-pivot/requirements.md、design.md、tasks.md，以及 docs/content-site/ 下的运行说明、内容手册、迁移清单与上线检查。逐项更新 tasks 完成状态。遇到不依赖外部信息的技术选择，依据本提示自行决定；只有密钥、账户或确实冲突的外部配置才记录阻塞，并继续完成不依赖它的部分。
+
+【三、定位和参考】
+
+定位为「帮助玩家快速找到答案并追踪所玩游戏的英文指南站」。借鉴以下站点的结构，不复制其文章、图片、品牌或版式：
+
+- Game8 的游戏中心和主题导航：https://game8.co/games/Roblox
+- Pro Game Guides 的稳定兑换码页：https://progameguides.com/roblox/busy-business-codes/
+- PCGamesN 的免费实用内容与广告模式：https://www.pcgamesn.com/advertising
+- Icy Veins 的深度内容、去广告等会员权益：https://www.icy-veins.com/premium-faq
+- Raider.IO 的玩家工具、刷新与便利权益：https://raider.io/premium
+
+这些是结构参考，不是营收保证。不要把外部估算的流量、收入和 SEO 指标当作真实经营数据。
+
+初期只覆盖 2–3 个可维护游戏，每个游戏目标 3–5 个具有独立用途的页面。不同游戏可不断加入，页面质量与维护能力决定是否扩展。不要生成数百篇占位内容。
+
+【四、技术架构】
+
+默认采用 Astro + TypeScript + Content Collections，普通 Markdown 正文与 JSON 结构化数据，静态构建发布到 Cloudflare。遵循安装版本的官方文档：https://docs.astro.build/en/guides/content-collections/ 。首页与正文在不执行客户端 JS 时仍应提供核心内容。只给搜索、复制、勾选、收藏、时间和日历等行为添加必要的客户端代码。
+
+建议模块：
+
+apps/content-site/
+  content/games/
+  content/articles/
+  content/codes/
+  content/events/
+  content/authors/
+  content/sources/
+  operations/opportunities/
+  operations/review-history/
+  src/components/
+  src/layouts/
+  src/pages/
+  src/lib/content/
+  scripts/
+  public/
+
+目录可根据框架实际惯例调整，但要保留清楚的数据边界。内容文件为唯一事实来源，游戏和来源通过稳定 id 引用，不要在数据库再复制一份。数据访问封装到 repository 层，未来接 CMS 时保持 schema、id、URL 和组件不变。正文只接普通 Markdown/允许的结构化块，禁止运营内容执行任意 MDX import、脚本或 HTML 注入。
+
+首版不依赖新付费服务或 API。不存在的配置必须让对应功能 disabled 并给站主明确说明，禁止返回假成功。
+
+【五、信息架构和路由】
+
+采用下列稳定结构或清晰等价结构，统一尾斜杠策略：
+
+/
+/games/
+/games/[game]/
+/games/[game]/codes/
+/games/[game]/guides/[topic]/
+/games/[game]/events/[event]/
+/games/[game]/updates/[update]/
+/guides/
+/codes/
+/events/
+/trending/
+/search/
+/following/
+/authors/[author]/
+/about/
+/editorial-policy/
+/corrections/
+/contact/
+/privacy/
+/terms/
+/affiliate-disclosure/
+/feed.xml
+/sitemap-index.xml
+
+不创建无内容的公开分类或游戏中心。游戏中心不足以独立帮助用户时标 noindex，或暂不生成，不能发布空列表壳。每月代码更新保留同一 URL，不把年月加进 slug；同义词合并到 canonical 页面。文章 ID 与 slug 分开，改变标题不改变 URL。
+
+首页模块：编辑精选/新兴游戏、重要更新、实用指南、最新代码核验、进行中的活动。无真实点击数据时使用有标识的 Editorial picks，不伪造 Trending、用户人数、阅读量或实时在线数。真实热榜以后基于匿名事件和明确时间窗口计算；稿件修改不自动当成热度。
+
+游戏中心包含游戏简述、平台和官方入口、版本或适用范围、维护状态、该游戏代码/指南/活动/更新、关注按钮。文章页先给答案，再给详细说明，不在答案前塞广告、长篇通用介绍或付费弹窗。
+
+【六、内容数据模型】
+
+实现强类型 schema 和构建验证，至少支持：
+
+Game：id、name、slug、aliases、platforms、officialUrls、description、currentVersion（可空）、coverageStatus、maintenancePriority、image（可选且有来源/许可）。
+
+Article：id、gameId、type（codes/guide/event/update）、slug、title、summary、authorId、body、publicationStatus（draft/review/published/archived）、freshnessStatus（current/due/outdated/maintenance_paused）、publishedAt、updatedAt、lastReviewedAt、nextReviewAt、gameVersion、sourceIds、changeSummary、seo。发布日期和未来事件时间必须分开；发布时间不能由构建时间自动重置。
+
+Code：id、gameId、code、reward、conditions、region/server/version（可空）、status、officialStatus、testStatus、discoveredAt、lastReviewedAt、sourceIds。状态允许 official_active、tested_working、reported_expired、unknown，并明确说明是官方发布、编辑亲测还是待核验。不把官方发布等同于亲测成功；没有账号/证据时禁止显示 tested。
+
+Event：id、gameId、slug、name、startsAt/endsAt（可空）、datePrecision、sourceTimezone、region/server、eligibility、rewards、status、sourceIds、lastReviewedAt。时间存 ISO UTC；只有日期时保留 date-only 精度，不能默认填零点误导。展示用户本地时间时同时保留原时区或 UTC。日期未知不要倒计时。
+
+Source：id、url、publisher、sourceType、accessedAt、supports、verificationMethod、notes。只存必要摘要和自主结论；不存付费源全文。HTTP 200 只是链接检查，不能自动把内容改成 verified。
+
+Author：真实 id、名称、简介、实际职责；没有真人实玩团队时用诚实的 Rulevio Editorial，不虚构玩家资历。
+
+Opportunity：id、keyword、discoveredAt、sourceReference、gameId（可空）、intent、aliases、targetContentId、suggestedCanonical、scoreBreakdown、status、nextAction、owner、nextReviewAt。status 至少含 discovered/researched/qualified/planned/drafting/published/measuring/stopped/blocked。这里的 blocked 是候选内容状态，不是工程可以停止的理由。
+
+Revision/Review：contentId、reviewedAt、reviewMethod、changedFields、summary、operatorType、nextReviewAt。核验无变化只更新 lastReviewedAt；有实质变化才更新 updatedAt。单一代码/事件数据被多个模板引用时只维护一次。
+
+验证包括：引用存在、slug/ID 唯一、code 去重、时间顺序合法、未来 publishedAt 不误公开、草稿不进入列表/搜索/sitemap/RSS/推荐、来源完整、无假作者、无假测验状态。时间逻辑封装为可注入 now 的纯函数，便于跨时区测试。
+
+【七、四类模板与玩家交互】
+
+1. Codes：首屏代码表、奖励、状态、适用条件、来源和最后核验说明；复制按钮有动态成功与失败反馈；过期与未知分区；兑换步骤、失败排错、官方入口、更新记录。复制成功不是兑换成功，不能自动改变 code 状态。
+2. Guide：简明答案、版本/前提、材料和步骤、必要分支、排错、来源和相关指南。步骤支持本地勾选，按 articleId + revision/version 保存；文章大改要提示重新核对，避免旧完成进度误应用。
+3. Event：起止时间、当前状态、地区/服务器、参与条件、奖励、来源；明确时间才允许倒计时和 ICS 导出。已经结束显示 Ended，不能无限倒计时到负数；日期精度不足时拒绝导出错误的精确时间。
+4. Update：补丁或公告摘要、变化、玩家下一步、受影响指南和官方原文。小变更优先更新已有页，不把每条公告都扩成新薄页。
+
+收藏/关注：首版 localStorage，无需账号；/following/ 聚合本地关注游戏和收藏页，显示本地保存说明、取消和清空。存储不可用时优雅退化，不阻塞正文。没有后端时不要显示跨设备同步或邮件已订阅成功。
+
+搜索：采用适合静态内容的本地搜索索引，支持游戏名、别名、标题和类型；草稿不入索引。搜索结果提供用途和游戏；查询参数不生成可索引页面。输入不能导致 XSS。
+
+【八、本地内容工作台】
+
+这是第一阶段的核心交付之一。为站主提供浏览器表单，避免日常需要手写 frontmatter：
+
+- 候选机会导入与编辑：支持粘贴关键词和简单 JSON/CSV；预览导入、去重、游戏匹配、关联已有页。
+- 内容列表：按游戏、类型、发布状态、新鲜度过滤。
+- 表单编辑游戏、文章、代码、活动、来源，支持 Markdown 预览、schema 错误定位、保存草稿。
+- 复核队列：到期原因、当前来源、复核方法、是否变化、下一次检查时间。
+- 保存前差异预览；发布前运行验证；明确区分保存、标记待发布、实际部署。
+- 显示最后内容修改与最后复核两个时间。
+
+工作台只在本地开发模式运行，不得暴露生产写入能力。写入服务仅绑定 loopback，检查 origin/CSRF，限定到内容目录，阻止路径穿越、符号链接逃逸和并发覆盖，采用原子写入与版本冲突检查。不接受任意命令或任意文件路径。生产构建排除工作台和写入 API。
+
+同一套 schema、校验器和数据读取供站点、CLI、工作台共用。若当前环境无法完成工作台的部分功能，先提供真实可用 CLI 并明确剩余任务，不能把只有静态界面的工作台宣称完成。
+
+【九、新词工作流和维护报告】
+
+Web.Cafe 仅用于发现关键词。支持手动粘贴/授权导出，不绕过登录，不抓取付费全文，不假设存在 API，不镜像付费数据库。即使以后接入 API，也只影响机会入口，不影响内容 schema。
+
+流程：发现 → 确认游戏/玩家意图 → 去重/关联已有页 → 公开研究 → 排序 → 创建或更新草稿 → 编辑审核 → 发布 → 指标复盘 → 复核/停止维护。
+
+评分权重为玩家需求25、现有主题匹配20、更好答案空间20、资料可靠性15、持续价值10、维护成本10。score 是内部决策，不显示给玩家，不伪造搜索量。无法确认游戏实体和核心事实时保持候选状态。
+
+实现命令（名称可等价）：
+content:validate
+content:new
+content:import-opportunities
+content:report
+content:report -- --check-links
+content:seo-check
+content:build
+content:preview
+content:studio
+
+report 输出到期、过期活动、来源失效、重复主题、未完成稿件、维护暂停页和后续动作。默认只读；mark-reviewed 之类变更必须显式，并记录真正的方法和时间。HTTP 检查不得自动修改验证状态。
+
+首版报告输出 JSON 和人可读摘要，带稳定 alert id，用于将来 CI/定时任务去重。提供一份可选每天运行的 CI 样例与本地说明，不在未确认远程配置时假装启用了定时任务。异常提醒需要目标内容、原因、证据、建议、负责人；无变化避免重复通知。
+
+初期活跃代码页内部复核目标24–48小时；攻略依据版本和30天复盘；事件按临近时间。它们是提醒目标，不意味着已亲测。暂停维护可继续提供有价值的历史内容，但必须显示日期和维护状态。重要错误是 P0，到期重要页是 P1，常规机会进入周报。
+
+【十、内容研究和首批真实数据】
+
+可复核的候选有 Anime Zero codes、Pokémon Winds and Waves starter trio、Morioh High codes、Gears of War E-Day、Little Cup Pokémon GO、AION 2 server transfer、Fishing Master codes。候选名单不是已确认可发布事实。
+
+先依据当日官方来源选择2–3个能做出有用内容的游戏，目标总共6–10篇，但宁可少发也不能为凑数编造。每篇有来源、明确玩家问题和原创组织。找不到官方代码时不编代码；没有实测条件不能编造实玩经历。不能沿用旧研究中的具体版本、发布日期、代码与功能而不重新核验。
+
+无联网或官方来源不可访问时，将内容保存为 draft/review，给出研究清单；开发验收数据放 test fixtures，生产不展示假案例、假玩家或假热榜。
+
+游戏支持、mod、模拟器等主题按其实际用户价值与可验证事实审稿；不发布非法下载、作弊脚本或虚假的「免费货币生成」入口。不得把搜索热度当作功能存在的证据。
+
+【十一、SEO、设计和内容质量】
+
+- 页面可抓取，title/description/canonical 独立且准确；sitemap/RSS/搜索索引只含适合公开的发布内容。
+- Article、BreadcrumbList、Organization 标记与可见内容一致。无虚假评分；无虚构 FAQ 富结果承诺。
+- 内链以同游戏、同任务和自然关联为依据，不全站机械互链。
+- 日期与版本真实，不因构建每天刷新 updatedAt。
+- 空分类、内部搜索、筛选参数、工作台和个人计划不索引；不要误 noindex 所有生产正文。
+- 不能直接搬运其他攻略站的文字、截图或数据库。AI 可帮助整理研究和草稿，不自动把大量低价值页面推向生产。
+- 视觉采用高可读性的游戏出版物风格：清楚字体层级、适中正文宽度、轻量卡片、精简导航。不要做后台式首页或满屏 neon 玻璃卡片。
+- 先保证移动端阅读与复制：360/390px、桌面、键盘和200%缩放可用；TOC不挡正文，表格有可访问的响应式处理。
+- 图片为有授权来源或原创，提供尺寸和 alt，懒加载非首屏图片。无可用图片时用清晰排版，不制造假游戏截图。
+- 广告槽组件配置关闭时完全不显示；预留尺寸避免 CLS。代码复制按钮不紧贴广告，不做首屏插屏或自动播放视频。
+- Contact/Corrections 无服务时给出真实现有联系渠道或明确配置说明；表单不能只在前端弹出“发送成功”。
+
+【十二、商业化和分析边界】
+
+第一版不用付费墙，所有核心答案免费。实现广告配置接口但默认不加载任何未知广告账号；只在获得对应实际配置后启用。不要提前接 Stripe。
+
+免费订阅：优先提供 RSS 和本地关注；预留 newsletter adapter。服务未配置时不收集邮箱、不假订阅。接入邮件后要支持真实确认/退订、游戏偏好与低噪音摘要，不能自动群发。
+
+后续会员候选是去广告、多计划保存、跨设备同步、定制更新提醒。后续 Progression Planner 先选一个游戏，使用明确版本的规则和已验证资料，再研究 AI 检索式解释。用户生成计划默认私有且不索引。
+
+实现轻量可替换 analytics adapter，默认不收集邮件、正文、自由输入或身份信息。事件：article_view、code_copy_success/failure、step_toggle、guide_complete、follow_game、bookmark、calendar_export、related_click、newsletter_interest。复制事件不等于代码兑换成功。统计未配置不伪造数据，关注和私有进度不进入公共热榜。
+
+基础复盘按游戏和模板统计搜索曝光/点击、使用行为、维护耗时和错误。流量目标是运营实验，不是工程验收或排名保证。
+
+【十三、旧站迁移与部署】
+
+盘点旧 URL：首页、validator 相关页、docs/getting-started、download、feedback、privacy 等。新站不残留旧 Public Beta、美国成年人限定横幅、validator 付费与下载入口。不能直接把旧隐私条款套给新业务。
+
+建立 redirect/retirement map：真正内容等价才301；无等价页面明确退役并可410，禁止所有旧页重定向到首页。保留旧构建/资产的本地历史备份说明，不能破坏性清空旧目录。
+
+查明当前 Cloudflare 项目、构建根目录、输出目录、域名和部署方式；没有证据不能猜。先完成本地和预览构建，给出精确生产配置与回滚步骤。生产发布需要的批准放到可审阅结果最后处理，不能以此中断尚可完成的本地工作。
+
+【十四、实施顺序】
+
+阶段A：仓库审计、转型Spec、旧URL清单、模块隔离、schema和内容读取层。
+阶段B：游戏中心、四类模板、首页和列表、SEO/RSS/sitemap、Markdown渲染、真实内容草稿。
+阶段C：搜索、复制、步骤勾选、本地关注、活动状态与ICS、到期报告。
+阶段D：本地内容工作台、导入、预览、差异、校验和复核记录。
+阶段E：实际内容研究、公开内容检查、迁移配置、测试、操作手册和预览。
+
+不要把五个阶段理解为每完成一个都停下来询问。连续完成第一阶段产品所需的A到E；依赖外部密钥的newsletter/analytics/广告真实接入例外，保持禁用并写清后续配置。
+
+【十五、必须可演示的验收】
+
+1. 新增游戏和新文章只新增数据，不改路由组件；预览能正确出现并链接。
+2. 修改一个代码记录，所有引用处同步；状态、来源和核验日期不丢失。
+3. draft/review文章无法从生产URL访问，也不出现在sitemap、RSS、索引和推荐。
+4. 公开文章主答案在禁用JS时可见。
+5. 复制失败有反馈，成功后明确提示；勾选与收藏刷新可恢复，存储禁用仍能阅读。
+6. 活动在未开始/进行中/结束的边界正确，日期精度和UTC/本地显示正确，ICS无需第三方账号且不导出虚假时间。
+7. 复核无变化只改lastReviewedAt；真正内容修改保留revision。
+8. content:report能指出人为构造的到期/失效fixture，但不会把fixture发布到生产或冒充真实核验。
+9. slug重复、断引用、非法日期、错误code状态的构建失败且定位文件字段。
+10. 本地工作台真实保存内容并检测并发覆盖；生产没有写入API，非法路径、CSRF和脚本注入检查通过。
+11. 内链、canonical、schema、404/410/redirect语义正确；没有旧LiveOps/validator营销残留。
+12. 移动端、键盘和200%缩放完成检查；广告与外部服务未配置不会出现假成功或空广告框。
+13. 写清如何导入Web.Cafe候选、研究、发布一篇攻略、更新一条代码、复核一篇内容、暂停维护、构建、预览、部署和回滚。
+
+对schema、发布过滤、状态边界、代码去重、工作台写入限制和时间/ICS做有意义的自动测试；对关键读者/编辑流程做少量浏览器测试。不要写只镜像实现的冗余测试。不能通过删旧测试或伪造输出让检查通过，旧业务测试与新站测试分开执行和报告。
+
+【十六、最后交付】
+
+给我：
+- 实际完成的功能和可运行预览方式；
+- requirements/design/tasks与架构选择；
+- 内容模型、首批已核验页面和未核验草稿清单；
+- 测试结果与人工界面检查；
+- 日常运营手册；
+- 原站迁移映射、生产构建配置、回滚方法；
+- 尚未配置的外部服务与最小接入步骤；
+- 是否可发布的结论和具体依据。
+
+所有完成声明必须由实际文件、运行结果或可见页面支撑。现在开始执行。

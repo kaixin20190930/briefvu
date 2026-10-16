@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { canonicalRedirectUrl, LEGACY_HOSTS } from "./domain-redirects";
+import {
+  canonicalRedirectUrl,
+  LEGACY_HOSTS,
+  resolveRequestHostname,
+} from "./domain-redirects";
 
 describe("canonical domain redirects", () => {
   it("creates a literal-free, path-and-query-preserving URL for every legacy host", () => {
@@ -17,5 +21,16 @@ describe("canonical domain redirects", () => {
 
   it("does not redirect the canonical host", () => {
     expect(canonicalRedirectUrl("https://briefvu.com/examples", "briefvu.com")).toBeNull();
+  });
+
+  it("prefers the forwarded host and normalizes port, case, and proxy lists", () => {
+    expect(
+      resolveRequestHostname(
+        "WWW.BRIEFVU.COM:8787, internal.example",
+        "localhost:8787",
+        "localhost",
+      ),
+    ).toBe("www.briefvu.com");
+    expect(resolveRequestHostname(null, "BRIEFVU.COM:443", "localhost")).toBe("briefvu.com");
   });
 });
