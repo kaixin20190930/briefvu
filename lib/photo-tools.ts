@@ -18,6 +18,8 @@ export type PhotoToolConfig = {
   steps: readonly [string, string][];
   useCasesTitle: string;
   useCases: readonly [string, string][];
+  guideTitle: string;
+  guideParagraphs: readonly string[];
   faqs: readonly PhotoToolFaq[];
 };
 
@@ -26,7 +28,7 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
     slug: "crop-image",
     mode: "crop",
     eyebrow: "Free private image cropper",
-    title: "Crop Image Online",
+    title: "Crop Image Online — Free Image Cropper",
     description: "Crop images online for free with preset aspect ratios or a custom crop area. Your PNG, JPEG, or WebP image stays in your browser.",
     hero: "Use this image cropper to trim unwanted edges, change an aspect ratio, or frame the important part of a photo. Nothing is uploaded to BriefVu.",
     introLabel: "Image cropper",
@@ -39,14 +41,22 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
     ],
     useCasesTitle: "Common Ways to Use an Online Image Cropper",
     useCases: [
-      ["Profile and avatar images", "Create a centered square crop for a profile photo while keeping the original file untouched."],
-      ["Social and presentation layouts", "Switch between portrait, landscape, and widescreen ratios without installing an image editor."],
-      ["Remove unwanted edges", "Trim excess background, screenshots, or scanned margins before sharing or placing the image in a document."],
+      ["Profile and avatar images", "Create a centered square crop for a profile photo while keeping the original file untouched. Move the crop until the face or subject has enough space around it, then check the preview before export."],
+      ["Social and presentation layouts", "Switch between portrait, landscape, and widescreen ratios without installing an image editor. A preset ratio keeps a group of images visually consistent even when their original dimensions differ."],
+      ["Remove unwanted edges", "Trim excess background, screenshot controls, or scanned margins before sharing or placing the image in a document. Cropping changes the visible frame without modifying the source file on your device."],
+    ],
+    guideTitle: "Choose the Right Crop and Output Format",
+    guideParagraphs: [
+      "Start with the destination rather than guessing at the crop. A square works well for many avatars, a portrait frame emphasizes a person or product, and a landscape or widescreen crop fits slides and horizontal layouts. Custom mode is useful when a preset would remove an important detail. Keep the subject away from the very edge so small differences in how another app displays the image do not cut it off.",
+      "Cropping removes the pixels outside your selection; it does not enlarge the remaining area. A very small crop from a large photo can therefore look soft when displayed at a large size. Check the output dimensions shown in the editor before downloading, and return to the original if you need a wider frame or more resolution.",
+      "Choose PNG when you need transparency or crisp interface graphics. JPEG is usually smaller for photographs but uses lossy compression. WebP often provides a useful balance between quality and file size for modern websites. The image cropper exports a new file, so you can compare formats without changing the original.",
     ],
     faqs: [
       { question: "How do I crop an image online?", answer: "Open the image in the editor, choose an aspect ratio or Custom, adjust the crop size, and drag the highlighted crop area to the part you want to keep. Select an output format and download the result. BriefVu creates a new file and does not overwrite the original image." },
       { question: "Can I crop an image to a specific aspect ratio?", answer: "Yes. The image cropper includes square, portrait, landscape, and widescreen presets. Custom mode lets you adjust the crop freely. The dimensions shown below the preview update with the selected crop so you can check the expected output before downloading." },
       { question: "Does cropping reduce image quality?", answer: "Cropping removes pixels outside the selected area but does not need to resize the pixels you keep. JPEG export can introduce normal lossy compression, while PNG is lossless and WebP balances file size and quality. Choose PNG for graphics or transparency and JPEG for photographs when a smaller file matters." },
+      { question: "What is the difference between cropping and resizing?", answer: "Cropping changes the frame by removing pixels outside a selected area. Resizing changes the width and height of the entire remaining image. BriefVu's image cropper focuses on selecting the part you want to keep and shows the resulting pixel dimensions before export; it does not stretch the crop to a different size." },
+      { question: "Can I use the image cropper on a phone?", answer: "Yes, in a modern mobile browser. Open a photo, choose a ratio, drag the crop area, and export the result. Very large camera files may use substantial device memory, so the editor limits inputs to 25 MB and 24 megapixels to keep the page responsive." },
       { question: "Is my image uploaded to BriefVu?", answer: "No. The file is decoded, edited, and exported locally by your browser. BriefVu does not provide an upload endpoint or cloud storage for this editor. Refreshing or closing the page clears the current editing session, so download the result before leaving." },
     ],
   },
@@ -71,10 +81,18 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
       ["Mirror a composition", "Flip an image horizontally to test a layout, reverse a visual direction, or create a mirrored reference."],
       ["Prepare documents", "Rotate scans, receipts, diagrams, and screenshots before adding them to a report or presentation."],
     ],
+    guideTitle: "Rotation, Flipping, and Photo Orientation",
+    guideParagraphs: [
+      "Rotate left or right when the whole image is sideways. Each action turns the visible pixels by 90 degrees, while a 180-degree correction can be made with two turns. Use the live preview to confirm that text, faces, and the horizon are upright before downloading the new file.",
+      "Flipping is different from rotating. A horizontal flip creates a left-to-right mirror image, while a vertical flip swaps the top and bottom. Mirroring can help test a composition or reverse the direction of a visual, but it will also reverse readable text and logos, so inspect those details before export.",
+      "Phone cameras may record orientation as metadata instead of physically rotating the stored pixels. Some apps respect that metadata and others do not. Exporting the corrected preview creates a new image with the visible orientation applied, which is often more dependable when moving the file between apps.",
+    ],
     faqs: [
       { question: "How do I rotate an image online?", answer: "Open the image, then select Rotate left or Rotate right. Each click turns the picture by 90 degrees and updates the preview. When the orientation is correct, choose an output format and download a new copy." },
       { question: "Can I flip an image horizontally or vertically?", answer: "Yes. Horizontal flip mirrors the image from left to right, while vertical flip mirrors it from top to bottom. You can combine a flip with 90-degree rotations, and Reset orientation returns the image to its original direction." },
       { question: "Why does my phone photo appear sideways?", answer: "Some cameras store the sensor pixels in one direction and save orientation separately as metadata. An app that ignores or removes that metadata can show the photo sideways. Rotating and exporting the pixels creates a new file with the visible orientation applied." },
+      { question: "Will rotating an image change its dimensions?", answer: "A 90-degree rotation swaps the image width and height, while a 180-degree rotation keeps them in the same order. The editor does not resize the pixels during rotation. The selected export format can still affect file size and, for JPEG or WebP, compression quality." },
+      { question: "Can I rotate and flip the same image?", answer: "Yes. You can combine left or right rotation with a horizontal or vertical flip and inspect the result in the shared preview. If the combination is not right, Reset orientation returns to the image's original direction before you export." },
       { question: "Does BriefVu store the image I rotate?", answer: "No. The editor uses browser image and canvas features on your device. BriefVu does not receive or store the image. The current file and edits disappear when you refresh or close the page." },
     ],
   },
@@ -82,12 +100,12 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
     slug: "add-text-to-photo",
     mode: "text",
     eyebrow: "Free private text overlay tool",
-    title: "Add Text to Photo Online",
+    title: "Add Text to Photo Online Free",
     description: "Add text to a photo online, choose color, size and position, then export PNG, JPEG, or WebP. No upload, account, or install required.",
     hero: "Add a caption, label, title, or watermark to a local image. Click the preview to position the text, then download a new file.",
     introLabel: "Text on image",
     introTitle: "Write on a Photo Without Installing an App",
-    intro: "Enter the text, choose its size and color, and place it directly on the preview. A contrasting outline keeps the words readable across light and dark parts of the image.",
+    intro: "Use this free online tool to enter text, choose its size and color, and place it directly on the photo preview. A contrasting outline keeps the words readable across light and dark parts of the image, and the finished file is created locally in your browser.",
     steps: [
       ["Open a photo", "Choose, drag, or paste the image you want to label. The source stays on your device."],
       ["Style and position text", "Enter a short caption, set its size and color, then click or tap the preview to move it."],
@@ -95,14 +113,22 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
     ],
     useCasesTitle: "Simple Reasons to Add Text to a Photo",
     useCases: [
-      ["Captions and announcements", "Add a short title, date, location, or callout before sharing an image or placing it in a post."],
-      ["Labels and instructions", "Mark a screenshot, product photo, or reference image with a clear label that remains part of the exported file."],
-      ["Lightweight watermarking", "Place a name or source note on an image. This is a visual label, not copy protection or access control."],
+      ["Captions and announcements", "Add a short title, date, location, or callout before sharing an image or placing it in a post. Keep the message concise so it remains readable when the image is displayed at a smaller size."],
+      ["Labels and instructions", "Mark a screenshot, product photo, or reference image with a clear label that remains part of the exported file. Position the text near the relevant subject without covering an important detail."],
+      ["Lightweight watermarking", "Place a name or source note on an image and export it as part of the pixels. This is a visible label for attribution, not copy protection or access control, and it can still be cropped or edited."],
+    ],
+    guideTitle: "Make Text Easy to Read on a Photo",
+    guideParagraphs: [
+      "Write for the final display size. A short caption in a larger font is usually easier to read than a full paragraph placed over an image. Before exporting, zoom out or view the whole preview and make sure the text still works when the photo is shown in a post, message, or presentation.",
+      "Choose a color that contrasts with the area behind the words. The editor adds an opposing outline to improve separation across mixed light and dark regions, but placement still matters. Open sky, a plain wall, or another quiet part of the photo usually produces a clearer result than a detailed face or patterned background.",
+      "Click or tap the preview to move the text, then export a new flattened copy. PNG is useful for sharp graphics, JPEG is common for photographs, and WebP can reduce file size for web use. The original remains unchanged, so keep it if you may need to revise the wording or position later.",
     ],
     faqs: [
       { question: "How do I add text to a photo online?", answer: "Open a photo, type the caption in the Text panel, then choose its color and size. Click or tap the preview where you want the text to appear. Export the finished image as PNG, JPEG, or WebP." },
       { question: "Can I move the text on the image?", answer: "Yes. Click or tap any point in the preview to move the text baseline to that location. The editor keeps the text inside the canvas as closely as possible, and you can reposition it before downloading." },
       { question: "Can I add a watermark to a photo?", answer: "You can add a simple visible name or source label. The text is flattened into the downloaded image, but it is not a secure ownership system and can still be cropped or edited. Keep an original copy and use formal licensing information when ownership matters." },
+      { question: "Does BriefVu add its own watermark?", answer: "No. BriefVu does not add a logo or watermark to the exported image. Only the text you enter is rendered onto the downloaded copy. The tool is free to use and does not require an account." },
+      { question: "How can I make text readable over a busy photo?", answer: "Use a short message, choose a strong contrast, and place it over a quieter part of the image. The editor automatically draws a contrasting outline around the text, which helps when the background contains both light and dark areas. Check the full preview before export." },
       { question: "Is the photo sent to a server?", answer: "No. The browser reads the local file and draws both the image and text on a canvas on your device. BriefVu does not upload or store the photo, and the session clears when the page is refreshed or closed." },
     ],
   },
@@ -127,10 +153,18 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
       ["Create a labelled visual", "Add a title or short note to a screenshot, reference photo, announcement, or presentation asset."],
       ["Avoid a heavy desktop workflow", "Complete a straightforward flat-image edit without creating an account or opening a full layer-based editor."],
     ],
+    guideTitle: "Use the Smallest Editor That Fits the Job",
+    guideParagraphs: [
+      "This workspace combines the most common flat-image changes without trying to reproduce a desktop design application. Use it when you need to crop a frame, correct orientation, add one text overlay, or make a basic tonal adjustment and then export a finished copy.",
+      "The focused Crop Image, Rotate Image, and Add Text to Photo pages open the same editor with only the relevant controls visible. They are useful when you want a shorter workflow. This combined page is better when a single image needs more than one of those changes before download.",
+      "For layered compositions, masks, PSD files, or repeated design work, open PhotoCraft Online instead. Choosing the smaller tool for a simple task reduces setup and keeps the controls easier to scan, while the larger editor remains available for work that genuinely needs it.",
+    ],
     faqs: [
       { question: "What can I do with this online photo editor?", answer: "You can crop an image, rotate or flip it, add one text overlay, and adjust brightness, contrast, and saturation. The editor exports a flattened PNG, JPEG, or WebP file. It is intentionally smaller than a full layer-based application." },
       { question: "What image formats can I open and export?", answer: "The editor is designed and tested for PNG, JPEG, and WebP input in modern browsers, and it exports those same three formats. Browser support can vary for other image types, so convert an unusual file to PNG or JPEG before editing." },
       { question: "Is this the same as PhotoCraft Online?", answer: "No. This editor focuses on quick crop, rotate, text, and adjustment tasks. PhotoCraft Online is a larger open-source application for layers, masks, PSD files, and more advanced workflows. Choose the smallest tool that fits the job." },
+      { question: "Can I combine several edits before downloading?", answer: "Yes. Crop the image, rotate or flip it, add a text overlay, and adjust brightness, contrast, or saturation in the same session. The preview combines the active changes, and the exported file is a flattened copy of that result." },
+      { question: "Does the editor overwrite my original photo?", answer: "No. The browser reads the selected file and exports a separate PNG, JPEG, or WebP copy. Your original file remains unchanged on the device. Give the downloaded copy a clear name if you want to keep several versions." },
       { question: "Are my photos private?", answer: "The image is decoded, edited, and exported locally in your browser. BriefVu does not provide an image upload API or cloud storage for this tool. Normal website requests still load the page code, but they do not include your image file." },
     ],
   },

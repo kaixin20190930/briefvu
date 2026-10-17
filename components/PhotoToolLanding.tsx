@@ -59,6 +59,11 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
         <div className="comparison-grid">{config.useCases.map(([title, text]) => <article key={title}><strong>{title}</strong><p>{text}</p></article>)}</div>
       </section>
 
+      <section className="content-section" aria-labelledby={`${config.slug}-guide`}>
+        <div className="content-heading"><span>Practical guide</span><h2 id={`${config.slug}-guide`}>{config.guideTitle}</h2></div>
+        <div className="photo-tool-guide">{config.guideParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+      </section>
+
       <section className="content-section" aria-labelledby={`${config.slug}-privacy`}>
         <div className="wordcraft-privacy photo-editor-privacy">
           <div><ShieldCheck size={30} /><span className="section-label">Local processing</span><h2 id={`${config.slug}-privacy`}>Your image stays on your device</h2></div>
