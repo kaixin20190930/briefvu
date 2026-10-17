@@ -10,7 +10,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function PrivacyPage() {
   return (
     <main className="legal-shell">
-      <span className="section-label">Last updated October 17, 2026</span>
+      <span className="section-label">Last updated October 18, 2026</span>
       <h1>Privacy Policy</h1>
       <p className="legal-lead">
         BriefVu is operated by Moxion Labs LLC, a Wyoming limited liability company in the United States. This policy explains how we handle information when you use briefvu.com, apps.briefvu.com, and the browser tools available through them.
@@ -22,11 +22,11 @@ export default function PrivacyPage() {
       </section>
       <section>
         <h2>Technical data</h2>
-        <p>Our hosting and security provider may process ordinary request data needed to deliver and protect the service, including an IP address, browser and device information, requested URL, timestamp, and security signals. We use this information to operate the site, prevent abuse, investigate failures, and maintain security. We do not intentionally place your tool inputs in URLs or application logs.</p>
+        <p>Our hosting and security provider may process ordinary request data needed to deliver and protect the service, including an IP address, browser and device information, requested URL, timestamp, and security signals. BriefVu also records limited first-party product events, such as which tool was started and whether a file was successfully loaded, a value was copied, an export completed, or a hosted editor was opened. These events contain the tool name and event type only. They do not include file names, file contents, text entered into a tool, account identifiers, or a persistent visitor identifier. We use this information to understand whether the tools work and which tools are useful. We do not intentionally place your tool inputs in URLs or application logs.</p>
       </section>
       <section>
         <h2>Browser storage, cookies, and clipboard access</h2>
-        <p>BriefVu does not currently use advertising cookies or third-party behavioral analytics. A tool may use browser memory, caching, or local storage for essential preferences and local functionality. Clipboard access occurs only after you initiate a copy or paste action. Cloudflare may use essential security technologies when serving or protecting the site.</p>
+        <p>BriefVu does not currently use advertising cookies or third-party behavioral analytics. The limited first-party product events described above do not use cookies or local storage to identify or follow a visitor. A tool may use browser memory, caching, or local storage for essential preferences and local functionality. Clipboard access occurs only after you initiate a copy or paste action. Cloudflare may use essential security technologies when serving or protecting the site.</p>
       </section>
       <section>
         <h2>Communications</h2>
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
       </section>
       <section>
         <h2>Retention</h2>
-        <p>BriefVu does not retain tool inputs or uploaded files on its application servers. We do not currently maintain visitor accounts or a separate visitor database. Hosting and security records may be retained by Cloudflare according to its service settings and policies. Communications are retained only as described above.</p>
+        <p>BriefVu does not retain tool inputs or uploaded files on its application servers. We do not currently maintain visitor accounts or a separate visitor database. Anonymous product event records are retained in Cloudflare Analytics Engine for up to three months. Hosting and security records may be retained by Cloudflare according to its service settings and policies. Communications are retained only as described above.</p>
       </section>
       <section>
         <h2>Your privacy rights</h2>

@@ -17,6 +17,12 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "briefvu_tool_events"
+    }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1

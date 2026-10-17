@@ -30,6 +30,7 @@ import {
   type PixelPoint,
   type RgbColor,
 } from "@/lib/image-color";
+import { trackToolEvent, trackToolStarted } from "@/lib/tool-events-client";
 
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
 const MAX_IMAGE_PIXELS = 20_000_000;
@@ -173,6 +174,8 @@ export function ImageColorPicker() {
       setLocked(false);
       samplePixel(center);
       drawLoupe(center);
+      trackToolStarted("image-color-picker");
+      trackToolEvent("image-color-picker", "file_loaded");
     } catch {
       setError("BriefVu could not decode this image. Try exporting it as PNG, JPEG, or another format your browser supports.");
     } finally {
@@ -273,6 +276,7 @@ export function ImageColorPicker() {
       copied = fallbackCopy(value);
     }
     setCopyState(copied ? target : "failed");
+    if (copied) trackToolEvent("image-color-picker", "copy_completed");
     if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
     copyResetTimer.current = setTimeout(() => setCopyState(null), 1600);
   }

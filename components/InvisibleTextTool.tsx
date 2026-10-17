@@ -18,6 +18,7 @@ import {
   type InvisibleCharacterId,
   verifyPasteBack,
 } from "@/lib/invisible-text";
+import { trackToolEvent, trackToolStarted } from "@/lib/tool-events-client";
 
 const quickCounts = [1, 3, 5, 10, 25, 50];
 const verificationLabels = {
@@ -115,6 +116,8 @@ export function InvisibleTextTool() {
     setCopyState(copied ? "copied" : "failed");
     if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
     if (copied) {
+      trackToolStarted("invisible-text");
+      trackToolEvent("invisible-text", "copy_completed");
       copyResetTimer.current = setTimeout(() => setCopyState("idle"), 1500);
     }
   }

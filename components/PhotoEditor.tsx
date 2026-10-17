@@ -21,6 +21,8 @@ import {
   type PointerEvent,
 } from "react";
 import type { PhotoToolMode } from "@/lib/photo-tools";
+import { trackToolEvent, trackToolStarted } from "@/lib/tool-events-client";
+import type { ToolId } from "@/lib/tool-events";
 
 const MAX_FILE_BYTES = 25 * 1024 * 1024;
 const MAX_PIXELS = 24_000_000;
@@ -48,7 +50,18 @@ function outputName(name: string, type: ExportType) {
   return `${stem}-briefvu.${extensionFor(type)}`;
 }
 
+function toolIdForMode(mode: PhotoToolMode): ToolId {
+  return mode === "crop"
+    ? "crop-image"
+    : mode === "rotate"
+      ? "rotate-image"
+      : mode === "text"
+        ? "add-text-to-photo"
+        : "photo-editor";
+}
+
 export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
+  const toolId = toolIdForMode(mode);
   const inputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sourceRef = useRef<HTMLImageElement | null>(null);
@@ -197,6 +210,8 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       const initialScale = mode === "crop" ? 80 : 100;
       setCropScale(initialScale);
       setCrop(mode === "crop" ? { x: 0.1, y: 0.1, width: 0.8, height: 0.8 } : { x: 0, y: 0, width: 1, height: 1 });
+      trackToolStarted(toolId);
+      trackToolEvent(toolId, "file_loaded");
     } catch {
       setError("This image could not be decoded safely. Try a PNG, JPEG, or WebP file under 24 megapixels.");
     } finally {
@@ -204,7 +219,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       setLoading(false);
       if (inputRef.current) inputRef.current.value = "";
     }
-  }, [mode]);
+  }, [mode, toolId]);
 
   useEffect(() => {
     function paste(event: ClipboardEvent) {
@@ -280,6 +295,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       anchor.href = url;
       anchor.download = outputName(fileName, exportType);
       anchor.click();
+      trackToolEvent(toolId, "export_completed");
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       setNotice(`Downloaded ${anchor.download}`);
     }, exportType, quality);

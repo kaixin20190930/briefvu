@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "backlinks:report": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/backlink-report.mts",
+    "usage:report": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/tool-usage-report.mts",
     "apps:deploy": "wrangler deploy --config wrangler.apps.jsonc",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && wrangler deploy --env-file /dev/null",

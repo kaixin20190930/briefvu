@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 import { RelatedTools } from "@/components/RelatedTools";
+import { TrackedEditorLink } from "@/components/TrackedEditorLink";
 import { absoluteUrl, createPageMetadata } from "@/lib/site";
 import {
   wordcraftFaqs,
@@ -122,14 +123,13 @@ export default function WordCraftOnlinePage() {
             </div>
           </div>
           {wordcraftRuntimeReady ? (
-            <a
+            <TrackedEditorLink
               className="button-primary wordcraft-open-button"
               href={wordcraftRuntimeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              tool="wordcraft-online"
             >
               Open WordCraft Editor <ExternalLink size={17} />
-            </a>
+            </TrackedEditorLink>
           ) : (
             <span className="wordcraft-open-button wordcraft-open-disabled" aria-disabled="true">
               Production deployment pending

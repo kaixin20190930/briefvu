@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 import { RelatedTools } from "@/components/RelatedTools";
+import { TrackedEditorLink } from "@/components/TrackedEditorLink";
 import {
   photocraftFaqs,
   photocraftRelease,
@@ -109,14 +110,13 @@ export default function PhotoCraftOnlinePage() {
         </p>
         {photocraftRuntimeReady && (
           <div className="hero-actions tool-hero-actions">
-            <a
+            <TrackedEditorLink
               className="button-primary"
               href={photocraftRuntimeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              tool="photocraft-online"
             >
               Open PhotoCraft Editor <ExternalLink size={17} />
-            </a>
+            </TrackedEditorLink>
           </div>
         )}
       </section>
@@ -138,14 +138,13 @@ export default function PhotoCraftOnlinePage() {
             </div>
           </div>
           {photocraftRuntimeReady ? (
-            <a
+            <TrackedEditorLink
               className="button-primary wordcraft-open-button"
               href={photocraftRuntimeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              tool="photocraft-online"
             >
               Open PhotoCraft Editor <ExternalLink size={17} />
-            </a>
+            </TrackedEditorLink>
           ) : (
             <span className="wordcraft-open-button wordcraft-open-disabled" aria-disabled="true">
               Production verification pending
