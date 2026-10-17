@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "PhotoCraft Online — Free Browser Photo Editor",
     description:
-      "Try the open-source PhotoCraft image editor in your browser. Work with layers, masks, adjustments, and PSD files without installing software or creating an account.",
+      "PhotoCraft Online — free browser photo editor. Open PSD files, edit with layers and masks, export PNG/JPEG/WebP. No install, no account — runs in your browser.",
     path: "/tools/photocraft-online",
   }),
   robots: photocraftRuntimeReady ? undefined : { index: false, follow: false },
@@ -107,6 +107,18 @@ export default function PhotoCraftOnlinePage() {
           Edit images with layers, masks, adjustment tools, and PSD support. No install or
           account required — image processing stays in your browser.
         </p>
+        {photocraftRuntimeReady && (
+          <div className="hero-actions tool-hero-actions">
+            <a
+              className="button-primary"
+              href={photocraftRuntimeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open PhotoCraft Editor <ExternalLink size={17} />
+            </a>
+          </div>
+        )}
       </section>
 
       <div className="tool-page-wrap photocraft-page">
@@ -114,7 +126,7 @@ export default function PhotoCraftOnlinePage() {
           <div className="wordcraft-launch-icon"><ImageIcon size={30} /></div>
           <div>
             <span className="section-label">PhotoCraft v{photocraftRelease.version}</span>
-            <h2 id="photocraft-launch-title">Open the full browser photo editor</h2>
+            <h2 id="photocraft-launch-title">PhotoCraft Online Editor — No Download Required</h2>
             <p>
               {photocraftRuntimeReady
                 ? "The editor opens in a new tab on BriefVu's shared apps host, leaving this guide available for format, privacy, and compatibility details."
@@ -170,6 +182,26 @@ export default function PhotoCraftOnlinePage() {
           </div>
         </section>
 
+        <section className="content-section" aria-labelledby="photocraft-audience-title">
+          <div className="content-heading photocraft-audience-copy">
+            <span>Who it is for</span>
+            <h2 id="photocraft-audience-title">Who PhotoCraft Online Is For</h2>
+            <p>
+              PhotoCraft Online is for designers, photographers, marketers, students, and
+              anyone who needs to open a PSD without installing software. It is useful for
+              quick edits such as cropping an image, adding text, adjusting colours, checking
+              layers, or exporting a web-ready copy when you do not want to launch a full
+              desktop editor.
+            </p>
+            <p>
+              It also gives occasional editors a practical way to inspect a layered file on a
+              shared or temporary computer. There is no BriefVu account or subscription to set
+              up: open the editor, choose a local file, make the change, and save or export the
+              result before closing the tab.
+            </p>
+          </div>
+        </section>
+
         <section className="content-section" aria-labelledby="photocraft-privacy-title">
           <div className="wordcraft-privacy photocraft-privacy">
             <div><ShieldCheck size={30} /><span className="section-label">Local image processing</span><h2 id="photocraft-privacy-title">Your image stays on your device</h2></div>
@@ -215,7 +247,7 @@ export default function PhotoCraftOnlinePage() {
             <p>PhotoCraft has a broad feature surface, but the upstream project does not yet describe it as a replacement for daily professional Photoshop work.</p>
           </div>
           <div className="wordcraft-limit-grid">
-            <article><strong>Complex PSD fidelity</strong><p>Uncommon effects, typography, smart objects, colour modes, or metadata can behave differently after a round trip.</p></article>
+            <article><strong>Complex PSD fidelity</strong><p>Uncommon effects, typography, smart objects, colour modes, linked assets, or metadata can behave differently after a round trip. Keep the source file untouched, then compare the exported image and reopened layer structure before using PhotoCraft for a critical handoff.</p></article>
             <article><strong>Manual saving</strong><p>The hosted web build has no dependable crash recovery. Save or export before refreshing or closing the tab.</p></article>
             <article><strong>Browser memory</strong><p>Large canvases and many layers can use substantial device memory. Close other heavy tabs if editing slows down.</p></article>
             <article><strong>Fonts</strong><p>The web release includes a limited font set. Missing fonts can change text layout or appearance.</p></article>

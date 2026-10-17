@@ -10,7 +10,7 @@ export function RelatedTools({ currentSlug }: { currentSlug: string }) {
     <section className="related-tools" aria-labelledby="related-tools-title">
       <div>
         <span className="section-label">More from BriefVu</span>
-        <h2 id="related-tools-title">Try another free tool</h2>
+        <h2 id="related-tools-title">More Free Tools from BriefVu</h2>
       </div>
       <div className="related-tool-links">
         {relatedTools.map((tool) => (
