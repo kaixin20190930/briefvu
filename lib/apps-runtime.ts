@@ -1,4 +1,23 @@
 export const hostedApps = {
+  photocraft: {
+    slug: "photocraft",
+    version: "0.9.0",
+    releaseTag: "v0.9.0",
+    releaseAsset: "photocraft-web-0.9.0.zip",
+    releaseSha256: "b3fa5ab6a9d32bc5ff7dfdde31939a2337471a196a2e70f1ff961a61b1bb02e6",
+    files: new Set<string>([
+      "index.html",
+      "photocraft-web-4cc0a6fe355463b6.js",
+      "photocraft-web-4cc0a6fe355463b6_bg.wasm",
+      "LICENSE-MIT",
+      "LICENSE-APACHE",
+      "NOTICE",
+      "ATTRIBUTION.md",
+      "LICENSE-brand.txt",
+      "README.md",
+      "HOSTING.md",
+    ]),
+  },
   wordcraft: {
     slug: "wordcraft",
     version: "0.7.0",

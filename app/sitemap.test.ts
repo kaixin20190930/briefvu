@@ -9,6 +9,7 @@ describe("sitemap", () => {
       "/tools/invisible-text",
       "/tools/image-color-picker",
       "/tools/wordcraft-online",
+      "/tools/photocraft-online",
       "/privacy",
       "/terms",
     ]);

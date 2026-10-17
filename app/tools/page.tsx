@@ -5,7 +5,7 @@ import { toolRegistry } from "@/lib/tools/registry";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Browser Tools",
-  description: "Explore focused browser tools on BriefVu for invisible text, image colors, and browser-based document editing.",
+  description: "Explore focused browser tools on BriefVu for text, image colors, documents, and browser-based image editing.",
   path: "/tools",
 });
 

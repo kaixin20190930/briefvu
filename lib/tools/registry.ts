@@ -1,3 +1,4 @@
+import { photocraftRuntimeReady } from "../photocraft";
 import { wordcraftRuntimeReady } from "../wordcraft";
 
 export type ToolStatus = "available" | "coming-soon";
@@ -39,6 +40,15 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
     href: "/tools/wordcraft-online",
     category: "Documents",
     status: wordcraftRuntimeReady ? "available" : "coming-soon",
+    tier: "free",
+  },
+  {
+    slug: "photocraft-online",
+    name: "PhotoCraft Online",
+    shortDescription: "Edit images with layers, masks, adjustments, and PSD support in your browser.",
+    href: "/tools/photocraft-online",
+    category: "Images",
+    status: photocraftRuntimeReady ? "available" : "coming-soon",
     tier: "free",
   },
 ] as const;

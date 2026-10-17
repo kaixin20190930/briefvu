@@ -21,6 +21,18 @@ describe("shared apps runtime routing", () => {
         key: "wordcraft/v0.7.0/index.html",
       },
     });
+    expect(resolveHostedAppAsset("/photocraft")).toEqual({
+      kind: "redirect",
+      location: "/photocraft/",
+    });
+    expect(resolveHostedAppAsset("/photocraft/")).toEqual({
+      kind: "asset",
+      asset: {
+        app: "photocraft",
+        file: "index.html",
+        key: "photocraft/v0.9.0/index.html",
+      },
+    });
   });
 
   it("serves only files pinned in the verified release manifest", () => {
@@ -45,6 +57,11 @@ describe("shared apps runtime routing", () => {
       version: "0.7.0",
       releaseTag: "v0.7.0",
       releaseSha256: "98df7c68a0ac788a9ac0f531fd34c31ab7d89965abb4935f57168d287dab3189",
+    });
+    expect(hostedApps.photocraft).toMatchObject({
+      version: "0.9.0",
+      releaseTag: "v0.9.0",
+      releaseSha256: "b3fa5ab6a9d32bc5ff7dfdde31939a2337471a196a2e70f1ff961a61b1bb02e6",
     });
   });
 });

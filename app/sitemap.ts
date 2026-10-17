@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "../lib/site";
+import { photocraftRuntimeReady } from "../lib/photocraft";
 import { wordcraftRuntimeReady } from "../lib/wordcraft";
 
 export const sitemapEntries = [
@@ -10,12 +11,15 @@ export const sitemapEntries = [
   ...(wordcraftRuntimeReady
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
+  ...(photocraftRuntimeReady
+    ? [{ path: "/tools/photocraft-online", priority: 1, changeFrequency: "monthly" as const }]
+    : []),
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-10-16T00:00:00.000Z");
+  const lastModified = new Date("2026-10-17T00:00:00.000Z");
   return sitemapEntries.map((entry) => ({
     url: absoluteUrl(entry.path),
     lastModified,
