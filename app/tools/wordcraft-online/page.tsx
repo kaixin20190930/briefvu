@@ -102,8 +102,7 @@ export default function WordCraftOnlinePage() {
         <span className="eyebrow"><PencilLine size={15} /> Open-source document editor</span>
         <h1>WordCraft Online — Free Word Processor in Your Browser</h1>
         <p>
-          Open and edit Word documents with the open-source WordCraft editor {wordcraftRuntimeReady ? "hosted" : "being prepared"} by BriefVu.
-          Your document is processed in your browser, with no account or software installation required.
+          Edit DOCX, ODT, RTF, and Markdown files. No install, no account — everything runs in your browser.
         </p>
       </section>
 
