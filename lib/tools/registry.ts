@@ -51,6 +51,42 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
     status: photocraftRuntimeReady ? "available" : "coming-soon",
     tier: "free",
   },
+  {
+    slug: "crop-image",
+    name: "Image Cropper",
+    shortDescription: "Crop an image with preset or custom aspect ratios without uploading it.",
+    href: "/tools/crop-image",
+    category: "Images",
+    status: "available",
+    tier: "free",
+  },
+  {
+    slug: "rotate-image",
+    name: "Rotate Image",
+    shortDescription: "Rotate or flip a PNG, JPEG, or WebP image directly in your browser.",
+    href: "/tools/rotate-image",
+    category: "Images",
+    status: "available",
+    tier: "free",
+  },
+  {
+    slug: "add-text-to-photo",
+    name: "Add Text to Photo",
+    shortDescription: "Add and position a caption, label, or simple watermark on a photo.",
+    href: "/tools/add-text-to-photo",
+    category: "Images",
+    status: "available",
+    tier: "free",
+  },
+  {
+    slug: "photo-editor",
+    name: "Photo Editor",
+    shortDescription: "Crop, rotate, adjust, and add text to images in one focused editor.",
+    href: "/tools/photo-editor",
+    category: "Images",
+    status: "available",
+    tier: "free",
+  },
 ] as const;
 
 export const availableTools = toolRegistry.filter(

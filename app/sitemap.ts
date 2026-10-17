@@ -8,6 +8,10 @@ export const sitemapEntries = [
   { path: "/tools", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/tools/invisible-text", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/image-color-picker", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/crop-image", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/rotate-image", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/tools/add-text-to-photo", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/tools/photo-editor", priority: 0.9, changeFrequency: "monthly" as const },
   ...(wordcraftRuntimeReady
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
