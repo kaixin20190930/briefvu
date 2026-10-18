@@ -12,8 +12,11 @@ describe("sitemap", () => {
       "/tools/rotate-image",
       "/tools/add-text-to-photo",
       "/tools/photo-editor",
+      "/tools/rea-mcp-config",
       "/tools/wordcraft-online",
       "/tools/photocraft-online",
+      "/guides",
+      "/guides/rea-claude-code",
       "/privacy",
       "/terms",
     ]);

@@ -12,18 +12,21 @@ export const sitemapEntries = [
   { path: "/tools/rotate-image", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/add-text-to-photo", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/photo-editor", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/tools/rea-mcp-config", priority: 1, changeFrequency: "monthly" as const },
   ...(wordcraftRuntimeReady
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
   ...(photocraftRuntimeReady
     ? [{ path: "/tools/photocraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
+  { path: "/guides", priority: 0.7, changeFrequency: "weekly" as const },
+  { path: "/guides/rea-claude-code", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-10-17T00:00:00.000Z");
+  const lastModified = new Date("2026-10-18T00:00:00.000Z");
   return sitemapEntries.map((entry) => ({
     url: absoluteUrl(entry.path),
     lastModified,

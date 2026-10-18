@@ -79,6 +79,15 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
     tier: "free",
   },
   {
+    slug: "rea-mcp-config",
+    name: "REA MCP Setup Helper",
+    shortDescription: "Generate official REA setup, verification, and troubleshooting commands for your AI coding agent.",
+    href: "/tools/rea-mcp-config",
+    category: "Developer",
+    status: "available",
+    tier: "free",
+  },
+  {
     slug: "photo-editor",
     name: "Photo Editor",
     shortDescription: "Crop, rotate, adjust, and add text to images in one focused editor.",

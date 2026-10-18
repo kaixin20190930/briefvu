@@ -7,6 +7,7 @@ export const TOOL_IDS = [
   "photo-editor",
   "wordcraft-online",
   "photocraft-online",
+  "rea-mcp-config",
 ] as const;
 
 export const TOOL_EVENT_NAMES = [
