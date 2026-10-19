@@ -13,6 +13,9 @@ export const sitemapEntries = [
   { path: "/tools/add-text-to-photo", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/photo-editor", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/rea-mcp-config", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/text-reverser", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/character-remover", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/tools/text-to-lrc", priority: 0.9, changeFrequency: "monthly" as const },
   ...(wordcraftRuntimeReady
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
@@ -26,7 +29,7 @@ export const sitemapEntries = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-10-18T00:00:00.000Z");
+  const lastModified = new Date("2026-10-20T00:00:00.000Z");
   return sitemapEntries.map((entry) => ({
     url: absoluteUrl(entry.path),
     lastModified,

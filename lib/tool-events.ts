@@ -8,6 +8,9 @@ export const TOOL_IDS = [
   "wordcraft-online",
   "photocraft-online",
   "rea-mcp-config",
+  "text-reverser",
+  "character-remover",
+  "text-to-lrc",
 ] as const;
 
 export const TOOL_EVENT_NAMES = [
