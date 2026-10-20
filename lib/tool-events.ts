@@ -1,8 +1,13 @@
 export const TOOL_IDS = [
   "invisible-text",
   "image-color-picker",
+  "image-converter",
   "crop-image",
   "rotate-image",
+  "mirror-image",
+  "resize-image",
+  "compress-image",
+  "invert-image",
   "add-text-to-photo",
   "photo-editor",
   "wordcraft-online",

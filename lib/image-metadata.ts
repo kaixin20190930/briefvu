@@ -14,9 +14,9 @@ export function detectMetadataFormat(bytes: Uint8Array): MetadataResult["format"
 function categoryFor(value: string): MetadataBlock["category"] | null {
   if (/c2pa|jumb/i.test(value)) return "C2PA";
   if (/exif/i.test(value)) return "EXIF";
-  if (/xmp|xml|text/i.test(value)) return value === "iCCP" ? "Color profile" : value === "EXIF" ? "EXIF" : "XMP";
   if (value === "iCCP" || value === "ICCP") return "Color profile";
   if (["tEXt", "zTXt", "iTXt", "tIME"].includes(value)) return "Text";
+  if (/xmp|xml/i.test(value)) return "XMP";
   return null;
 }
 
@@ -41,7 +41,7 @@ export function scanMetadata(bytes: Uint8Array): MetadataResult | null {
   if (format === "jpeg") {
     for (const segment of jpegSegments(bytes)) {
       const signature = text(segment.body.subarray(0, 80));
-      const category = segment.marker === 0xfe ? "Text" : segment.marker === 0xe1 ? (/xmp/i.test(signature) ? "XMP" : "EXIF") : segment.marker === 0xe2 ? "Color profile" : segment.marker === 0xeb || /c2pa|jumb/i.test(signature) ? "C2PA" : null;
+      const category = segment.marker === 0xfe ? "Text" : segment.marker === 0xe1 ? (/xmp/i.test(signature) ? "XMP" : "EXIF") : segment.marker === 0xe2 && /icc_profile/i.test(signature) ? "Color profile" : segment.marker === 0xeb || /c2pa|jumb/i.test(signature) ? "C2PA" : null;
       if (category) blocks.push({ category, label: `${category} JPEG block`, bytes: segment.end - segment.start });
     }
   } else if (format === "png") {
@@ -74,7 +74,7 @@ export function stripMetadata(bytes: Uint8Array): Uint8Array {
   if (!result) throw new Error("Unsupported image format");
   if (result.format === "jpeg") {
     const segments = jpegSegments(bytes); const parts = [bytes.subarray(0, 2)]; let cursor = 2;
-    for (const segment of segments) { if (cursor < segment.start) parts.push(bytes.subarray(cursor, segment.start)); const signature = text(segment.body.subarray(0, 80)); const remove = segment.marker === 0xfe || segment.marker === 0xe1 || segment.marker === 0xe2 || segment.marker === 0xeb || /c2pa|jumb|xmp|exif/i.test(signature); if (!remove) parts.push(bytes.subarray(segment.start, segment.end)); cursor = segment.end; }
+    for (const segment of segments) { if (cursor < segment.start) parts.push(bytes.subarray(cursor, segment.start)); const signature = text(segment.body.subarray(0, 80)); const remove = segment.marker === 0xfe || segment.marker === 0xe1 || segment.marker === 0xeb || (segment.marker === 0xe2 && /icc_profile/i.test(signature)) || /c2pa|jumb|xmp|exif/i.test(signature); if (!remove) parts.push(bytes.subarray(segment.start, segment.end)); cursor = segment.end; }
     parts.push(bytes.subarray(cursor)); return join(parts);
   }
   if (result.format === "png") {
@@ -83,6 +83,6 @@ export function stripMetadata(bytes: Uint8Array): Uint8Array {
     return join(parts);
   }
   const chunks: Uint8Array[] = []; let offset = 12;
-  while (offset + 8 <= bytes.length) { const kind = text(bytes.subarray(offset, offset + 4)); const size = new DataView(bytes.buffer, bytes.byteOffset + offset + 4, 4).getUint32(0, true); const end = offset + 8 + size + (size % 2); if (!categoryFor(kind)) chunks.push(bytes.subarray(offset, end)); offset = end; }
+  while (offset + 8 <= bytes.length) { const kind = text(bytes.subarray(offset, offset + 4)); const size = new DataView(bytes.buffer, bytes.byteOffset + offset + 4, 4).getUint32(0, true); const end = offset + 8 + size + (size % 2); if (!categoryFor(kind)) { const chunk = bytes.slice(offset, end); if (kind === "VP8X" && size >= 1) chunk[8] &= ~0x2c; chunks.push(chunk); } offset = end; }
   const body = join(chunks); const output = new Uint8Array(12 + body.length); output.set(bytes.subarray(0, 12)); output.set(body, 12); new DataView(output.buffer).setUint32(4, output.length - 8, true); return output;
 }

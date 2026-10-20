@@ -1,4 +1,4 @@
-export type PhotoToolMode = "crop" | "rotate" | "text" | "all";
+export type PhotoToolMode = "crop" | "rotate" | "mirror" | "invert" | "text" | "all";
 
 export type PhotoToolFaq = {
   question: string;
@@ -95,6 +95,58 @@ export const photoToolConfigs: Record<PhotoToolMode, PhotoToolConfig> = {
       { question: "Can I rotate and flip the same image?", answer: "Yes. You can combine left or right rotation with a horizontal or vertical flip and inspect the result in the shared preview. If the combination is not right, Reset orientation returns to the image's original direction before you export." },
       { question: "Does BriefVu store the image I rotate?", answer: "No. The editor uses browser image and canvas features on your device. BriefVu does not receive or store the image. The current file and edits disappear when you refresh or close the page." },
     ],
+  },
+  mirror: {
+    slug: "mirror-image",
+    mode: "mirror",
+    eyebrow: "Free private mirror image tool",
+    title: "Mirror Image Online",
+    description: "Mirror an image horizontally or vertically in your browser. Preview the flip and export PNG, JPEG, or WebP with no upload or account.",
+    hero: "Create a left-to-right or top-to-bottom mirror image with the same private editor used by BriefVu’s rotation tool.",
+    introLabel: "Mirror image",
+    introTitle: "Flip an Image Without Uploading It",
+    intro: "Open a local PNG, JPEG, or WebP image, choose horizontal or vertical flip, check text and directional details in the preview, then export a new copy. The original file stays unchanged.",
+    steps: [
+      ["Open an image", "Choose, drag, or paste a PNG, JPEG, or WebP file. The browser decodes it locally."],
+      ["Choose a mirror direction", "Flip horizontally for a left-to-right mirror or vertically to exchange the top and bottom."],
+      ["Download a new copy", "Check text, logos, and visual direction, then export PNG, JPEG, or WebP."],
+    ],
+    useCasesTitle: "When to Mirror an Image",
+    useCases: [
+      ["Reverse visual direction", "Turn a subject or arrow toward the opposite side of a layout while preserving the image dimensions."],
+      ["Check a composition", "View a mirrored reference to spot balance, spacing, or drawing issues that are easy to miss in the original orientation."],
+      ["Create symmetrical assets", "Make an opposite-facing game sprite, decoration, or layout element from a source image you have permission to edit."],
+    ],
+    guideTitle: "Horizontal Flip, Vertical Flip, and Rotation",
+    guideParagraphs: [
+      "A horizontal flip creates the familiar mirror effect by exchanging the left and right sides. It also reverses readable text, logos, signs, and handed details, so check those areas before downloading.",
+      "A vertical flip exchanges the top and bottom. It is useful for reflections, patterns, and certain graphics, but it is not the same as rotating the image by 180 degrees. Combine rotation and flipping only when the preview shows the intended orientation.",
+      "The output keeps the visible pixel dimensions unless a 90-degree rotation is also applied. PNG preserves transparency, JPEG is common for photographs, and WebP can provide smaller modern web assets.",
+    ],
+    faqs: [
+      { question: "How do I mirror an image online?", answer: "Open the image and choose Flip horizontal for a left-to-right mirror. Use Flip vertical when you need to exchange the top and bottom. Preview the result, choose an output format, and download a new copy." },
+      { question: "Is mirroring the same as rotating?", answer: "No. Mirroring reverses pixels across an axis, while rotation turns the entire frame. A 180-degree rotation does not produce the same result as a horizontal mirror." },
+      { question: "Will text be reversed?", answer: "Yes. A horizontal mirror reverses text and logos just like a physical mirror. Inspect readable details before exporting and use rotation instead if the text must stay readable." },
+      { question: "Can I mirror a transparent PNG?", answer: "Yes. Open the PNG, apply the flip, and export PNG to preserve transparency. Choosing JPEG replaces transparency because JPG has no alpha channel." },
+      { question: "Is my image uploaded?", answer: "No. BriefVu reads, flips, previews, and exports the image in your browser. The image file is not sent to BriefVu storage." },
+    ],
+  },
+  invert: {
+    slug: "invert-image",
+    mode: "invert",
+    eyebrow: "Free private image inverter",
+    title: "Invert Image Colors Online",
+    description: "Invert image colors online in your browser. Preview the negative effect, preserve transparency, and export PNG, JPEG, or WebP with no upload.",
+    hero: "Create a color negative with one switch, preview the result, and export a new image without uploading the source.",
+    introLabel: "Invert colors",
+    introTitle: "Turn Image Colors Into Their Opposites",
+    intro: "Color inversion maps every red, green, and blue channel to its opposite value while leaving the alpha channel intact. Use the adjustment panel to switch inversion on or off before export.",
+    steps: [["Open an image", "Choose, drag, or paste a PNG, JPEG, or WebP file."], ["Invert the colors", "Choose Invert image colors and inspect the negative effect in the shared preview."], ["Export a copy", "Download PNG, JPEG, or WebP while keeping the original file unchanged."]],
+    useCasesTitle: "Common Reasons to Invert Image Colors",
+    useCases: [["Create a negative effect", "Reverse the RGB values for a photographic negative or high-contrast visual treatment."], ["Inspect light and dark structure", "Temporarily invert a drawing, scan, or interface capture to inspect edges and tonal balance."], ["Prepare alternate graphics", "Generate an opposite-color reference before making more deliberate brand or accessibility adjustments elsewhere."]],
+    guideTitle: "What Image Color Inversion Changes",
+    guideParagraphs: ["Inversion transforms each RGB channel so dark values become light and complementary colors replace the originals. It is a mathematical color effect, not automatic enhancement or color correction.", "Transparent PNG pixels keep their alpha transparency, although the RGB values of visible and partially visible pixels are inverted. Export PNG when transparency must remain.", "JPEG cannot preserve transparency and uses lossy compression. Choose PNG for graphics and WebP or JPEG when a smaller photographic output is more important."],
+    faqs: [{ question: "How do I invert image colors online?", answer: "Open the image, select Invert image colors in the Adjust panel, inspect the preview, and download a new PNG, JPEG, or WebP copy." }, { question: "Is invert the same as black and white?", answer: "No. Inversion maps every RGB value to its opposite. Grayscale removes color information and keeps only tonal brightness." }, { question: "Does inversion preserve transparency?", answer: "The editor preserves alpha transparency in the canvas. Export PNG or WebP to retain it; JPG has no transparency." }, { question: "Is my image uploaded?", answer: "No. The image is decoded, inverted, previewed, and exported in your browser." }],
   },
   text: {
     slug: "add-text-to-photo",

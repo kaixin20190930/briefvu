@@ -3,13 +3,18 @@ import Link from "next/link";
 import { availableTools } from "@/lib/tools/registry";
 
 const contextualRecommendations: Record<string, string[]> = {
-  "crop-image": ["rotate-image", "add-text-to-photo", "photo-editor", "remove-metadata"],
-  "rotate-image": ["crop-image", "add-text-to-photo", "remove-metadata", "photo-editor"],
+  "image-converter": ["crop-image", "rotate-image", "remove-metadata", "photo-editor"],
+  "crop-image": ["rotate-image", "mirror-image", "add-text-to-photo", "remove-metadata"],
+  "rotate-image": ["mirror-image", "crop-image", "add-text-to-photo", "remove-metadata"],
+  "mirror-image": ["rotate-image", "crop-image", "add-text-to-photo", "photo-editor"],
+  "resize-image": ["compress-image", "remove-metadata", "crop-image", "photo-editor"],
+  "compress-image": ["resize-image", "remove-metadata", "image-converter", "photo-editor"],
+  "invert-image": ["photo-editor", "image-color-picker", "add-text-to-photo", "mirror-image"],
   "add-text-to-photo": ["remove-metadata", "crop-image", "photo-editor", "image-color-picker"],
   "remove-metadata": ["crop-image", "sprite-sheet", "photo-editor", "image-color-picker"],
   "sprite-sheet": ["remove-metadata", "crop-image", "image-color-picker", "photo-editor"],
   "image-color-picker": ["photo-editor", "add-text-to-photo", "crop-image", "remove-metadata"],
-  "photo-editor": ["remove-metadata", "sprite-sheet", "crop-image", "add-text-to-photo"],
+  "photo-editor": ["resize-image", "compress-image", "remove-metadata", "add-text-to-photo"],
   "photocraft-online": ["remove-metadata", "image-color-picker", "crop-image", "sprite-sheet"],
 };
 

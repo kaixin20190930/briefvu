@@ -29,6 +29,7 @@ const MAX_PIXELS = 24_000_000;
 type ActiveTool = "crop" | "rotate" | "text" | "adjust";
 type ExportType = "image/png" | "image/jpeg" | "image/webp";
 type CropRect = { x: number; y: number; width: number; height: number };
+type CropHandle = "nw" | "ne" | "sw" | "se";
 
 const modeTabs: { id: ActiveTool; label: string }[] = [
   { id: "crop", label: "Crop" },
@@ -38,7 +39,7 @@ const modeTabs: { id: ActiveTool; label: string }[] = [
 ];
 
 function initialTab(mode: PhotoToolMode): ActiveTool {
-  return mode === "all" ? "crop" : mode;
+  return mode === "all" ? "crop" : mode === "mirror" ? "rotate" : mode === "invert" ? "adjust" : mode;
 }
 
 function extensionFor(type: ExportType) {
@@ -55,6 +56,10 @@ function toolIdForMode(mode: PhotoToolMode): ToolId {
     ? "crop-image"
     : mode === "rotate"
       ? "rotate-image"
+      : mode === "mirror"
+        ? "mirror-image"
+        : mode === "invert"
+          ? "invert-image"
       : mode === "text"
         ? "add-text-to-photo"
         : "photo-editor";
@@ -65,6 +70,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sourceRef = useRef<HTMLImageElement | null>(null);
+  const cropHandleRef = useRef<CropHandle | null>(null);
   const [fileName, setFileName] = useState("image");
   const [imageSize, setImageSize] = useState<{ width: number; height: number } | null>(null);
   const [activeTool, setActiveTool] = useState<ActiveTool>(initialTab(mode));
@@ -74,6 +80,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
   const [brightness, setBrightness] = useState(100);
   const [contrast, setContrast] = useState(100);
   const [saturation, setSaturation] = useState(100);
+  const [inverted, setInverted] = useState(false);
   const [text, setText] = useState("");
   const [textColor, setTextColor] = useState("#ffffff");
   const [textSize, setTextSize] = useState(6);
@@ -82,6 +89,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
   const [cropRatio, setCropRatio] = useState("free");
   const [cropScale, setCropScale] = useState(mode === "crop" ? 80 : 100);
   const [exportType, setExportType] = useState<ExportType>("image/png");
+  const [exportQuality, setExportQuality] = useState(92);
   const [dragActive, setDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -102,7 +110,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
     context.translate(width / 2, height / 2);
     context.rotate((rotation * Math.PI) / 180);
     context.scale(flipX ? -1 : 1, flipY ? -1 : 1);
-    context.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
+    context.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) invert(${inverted ? 100 : 0}%)`;
     context.drawImage(source, -source.naturalWidth / 2, -source.naturalHeight / 2);
     context.restore();
 
@@ -121,7 +129,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       context.fillText(text.trim(), x, y, width * 0.92);
     }
     return output;
-  }, [brightness, contrast, flipX, flipY, rotation, saturation, text, textColor, textPoint, textSize]);
+  }, [brightness, contrast, flipX, flipY, inverted, rotation, saturation, text, textColor, textPoint, textSize]);
 
   const drawPreview = useCallback(() => {
     const preview = canvasRef.current;
@@ -159,8 +167,20 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       context.lineTo(x + width, y + (height * 2) / 3);
       context.stroke();
       context.setLineDash([]);
+      if (cropRatio === "free") {
+        const radius = Math.max(7, preview.width / 140);
+        context.fillStyle = "#ffffff";
+        context.strokeStyle = "#136fe8";
+        context.lineWidth = Math.max(2, preview.width / 600);
+        for (const [handleX, handleY] of [[x, y], [x + width, y], [x, y + height], [x + width, y + height]]) {
+          context.beginPath();
+          context.arc(handleX, handleY, radius, 0, Math.PI * 2);
+          context.fill();
+          context.stroke();
+        }
+      }
     }
-  }, [activeTool, crop, renderBase]);
+  }, [activeTool, crop, cropRatio, renderBase]);
 
   useEffect(() => drawPreview(), [drawPreview]);
 
@@ -205,6 +225,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       setBrightness(100);
       setContrast(100);
       setSaturation(100);
+      setInverted(false);
       setText("");
       setCropRatio("free");
       const initialScale = mode === "crop" ? 80 : 100;
@@ -242,20 +263,71 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
     else setError("No supported image was found in that drop.");
   }
 
-  function handleCanvasPointer(event: PointerEvent<HTMLCanvasElement>) {
+  function normalizedPointer(event: PointerEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return null;
     const bounds = canvas.getBoundingClientRect();
     const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
     const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+    return { x, y, bounds };
+  }
+
+  function handleCanvasPointerDown(event: PointerEvent<HTMLCanvasElement>) {
+    const point = normalizedPointer(event);
+    if (!point) return;
+    const { x, y, bounds } = point;
     if (activeTool === "text") setTextPoint({ x, y });
     if (activeTool === "crop") {
+      if (cropRatio === "free") {
+        const thresholdX = 18 / bounds.width;
+        const thresholdY = 18 / bounds.height;
+        const handles: [CropHandle, number, number][] = [["nw", crop.x, crop.y], ["ne", crop.x + crop.width, crop.y], ["sw", crop.x, crop.y + crop.height], ["se", crop.x + crop.width, crop.y + crop.height]];
+        const handle = handles.find(([, handleX, handleY]) => Math.abs(x - handleX) <= thresholdX && Math.abs(y - handleY) <= thresholdY);
+        if (handle) {
+          cropHandleRef.current = handle[0];
+          event.currentTarget.setPointerCapture(event.pointerId);
+          return;
+        }
+      }
       setCrop((current) => ({
         ...current,
         x: Math.min(1 - current.width, Math.max(0, x - current.width / 2)),
         y: Math.min(1 - current.height, Math.max(0, y - current.height / 2)),
       }));
     }
+  }
+
+  function handleCanvasPointerMove(event: PointerEvent<HTMLCanvasElement>) {
+    const handle = cropHandleRef.current;
+    if (!handle || activeTool !== "crop" || cropRatio !== "free") return;
+    const point = normalizedPointer(event);
+    if (!point) return;
+    const minimum = 0.03;
+    setCrop((current) => {
+      const right = current.x + current.width;
+      const bottom = current.y + current.height;
+      if (handle === "nw") {
+        const x = Math.min(right - minimum, point.x);
+        const y = Math.min(bottom - minimum, point.y);
+        return { x, y, width: right - x, height: bottom - y };
+      }
+      if (handle === "ne") {
+        const nextRight = Math.max(current.x + minimum, point.x);
+        const y = Math.min(bottom - minimum, point.y);
+        return { x: current.x, y, width: nextRight - current.x, height: bottom - y };
+      }
+      if (handle === "sw") {
+        const x = Math.min(right - minimum, point.x);
+        const nextBottom = Math.max(current.y + minimum, point.y);
+        return { x, y: current.y, width: right - x, height: nextBottom - current.y };
+      }
+      return { x: current.x, y: current.y, width: Math.max(minimum, point.x - current.x), height: Math.max(minimum, point.y - current.y) };
+    });
+  }
+
+  function stopCropResize(event: PointerEvent<HTMLCanvasElement>) {
+    cropHandleRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
 
   function resetEdits() {
@@ -265,6 +337,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
     setBrightness(100);
     setContrast(100);
     setSaturation(100);
+    setInverted(false);
     setText("");
     setTextPoint({ x: 0.5, y: 0.82 });
     setCropRatio("free");
@@ -287,7 +360,7 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
       output.height = sh;
       output.getContext("2d")?.drawImage(base, sx, sy, sw, sh, 0, 0, sw, sh);
     }
-    const quality = exportType === "image/png" ? undefined : 0.92;
+    const quality = exportType === "image/png" ? undefined : exportQuality / 100;
     output.toBlob((blob) => {
       if (!blob) return setError("The browser could not create the download. Try PNG instead.");
       const url = URL.createObjectURL(blob);
@@ -301,11 +374,27 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
     }, exportType, quality);
   }
 
-  const visibleTabs = mode === "all" ? modeTabs : modeTabs.filter((tab) => tab.id === mode || tab.id === "adjust");
+  const focusedTab = mode === "mirror" ? "rotate" : mode === "invert" ? "adjust" : mode;
+  const visibleTabs = mode === "all" ? modeTabs : modeTabs.filter((tab) => tab.id === focusedTab || (mode !== "invert" && tab.id === "adjust"));
+  const orientedWidth = imageSize ? (Math.abs(rotation / 90) % 2 === 1 ? imageSize.height : imageSize.width) : 0;
+  const orientedHeight = imageSize ? (Math.abs(rotation / 90) % 2 === 1 ? imageSize.width : imageSize.height) : 0;
   const cropPixels = imageSize ? {
-    width: Math.round((Math.abs(rotation / 90) % 2 === 1 ? imageSize.height : imageSize.width) * crop.width),
-    height: Math.round((Math.abs(rotation / 90) % 2 === 1 ? imageSize.width : imageSize.height) * crop.height),
+    x: Math.round(orientedWidth * crop.x),
+    y: Math.round(orientedHeight * crop.y),
+    width: Math.round(orientedWidth * crop.width),
+    height: Math.round(orientedHeight * crop.height),
   } : null;
+
+  function updateCropPixels(field: "x" | "y" | "width" | "height", value: number) {
+    if (!orientedWidth || !orientedHeight) return;
+    setCrop((current) => {
+      const normalized = value / (field === "x" || field === "width" ? orientedWidth : orientedHeight);
+      if (field === "x") return { ...current, x: Math.max(0, Math.min(1 - current.width, normalized)) };
+      if (field === "y") return { ...current, y: Math.max(0, Math.min(1 - current.height, normalized)) };
+      if (field === "width") return { ...current, width: Math.max(1 / orientedWidth, Math.min(1 - current.x, normalized)) };
+      return { ...current, height: Math.max(1 / orientedHeight, Math.min(1 - current.y, normalized)) };
+    });
+  }
 
   return (
     <section className="photo-editor-shell" aria-labelledby="photo-editor-title">
@@ -332,8 +421,8 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
             <aside className="photo-editor-controls">
               {activeTool === "crop" && <>
                 <label>Aspect ratio<select value={cropRatio} onChange={(event) => { setCropRatio(event.target.value); setRatioCrop(event.target.value); }}><option value="free">Custom</option><option value="1:1">Square 1:1</option><option value="4:5">Portrait 4:5</option><option value="3:2">Landscape 3:2</option><option value="16:9">Widescreen 16:9</option></select></label>
-                <label>Crop size <output>{cropScale}%</output><input type="range" min="20" max="100" value={cropScale} onChange={(event) => { const value = Number(event.target.value); setCropScale(value); setRatioCrop(cropRatio, value); }} /></label>
-                <p className="control-help">Click or tap the preview to center the crop.</p>
+                {cropRatio === "free" ? cropPixels && <div className="crop-pixel-grid"><label>X<input type="number" min="0" max={orientedWidth - 1} value={cropPixels.x} onChange={(event) => updateCropPixels("x", Number(event.target.value))}/></label><label>Y<input type="number" min="0" max={orientedHeight - 1} value={cropPixels.y} onChange={(event) => updateCropPixels("y", Number(event.target.value))}/></label><label>Width<input type="number" min="1" max={orientedWidth - cropPixels.x} value={cropPixels.width} onChange={(event) => updateCropPixels("width", Number(event.target.value))}/></label><label>Height<input type="number" min="1" max={orientedHeight - cropPixels.y} value={cropPixels.height} onChange={(event) => updateCropPixels("height", Number(event.target.value))}/></label></div> : <label>Crop size <output>{cropScale}%</output><input type="range" min="20" max="100" value={cropScale} onChange={(event) => { const value = Number(event.target.value); setCropScale(value); setRatioCrop(cropRatio, value); }} /></label>}
+                <p className="control-help">{cropRatio === "free" ? "Drag a corner handle to resize freely, or enter exact pixel values. Click elsewhere to move the crop." : "Click or tap the preview to center the crop."}</p>
                 {cropPixels && <p className="output-size">Output: <strong>{cropPixels.width} × {cropPixels.height}px</strong></p>}
               </>}
               {activeTool === "rotate" && <div className="control-button-grid">
@@ -351,16 +440,18 @@ export function PhotoEditor({ mode }: { mode: PhotoToolMode }) {
                 <label>Brightness <output>{brightness}%</output><input type="range" min="50" max="150" value={brightness} onChange={(event) => setBrightness(Number(event.target.value))} /></label>
                 <label>Contrast <output>{contrast}%</output><input type="range" min="50" max="150" value={contrast} onChange={(event) => setContrast(Number(event.target.value))} /></label>
                 <label>Saturation <output>{saturation}%</output><input type="range" min="0" max="200" value={saturation} onChange={(event) => setSaturation(Number(event.target.value))} /></label>
+                <div className="control-button-grid"><button type="button" className={inverted ? "active" : ""} onClick={() => setInverted((value) => !value)}>{inverted ? "Remove color inversion" : "Invert image colors"}</button></div>
               </>}
               <button className="reset-edit-button" type="button" onClick={resetEdits}>Reset edits</button>
             </aside>
 
-            <div className="photo-editor-preview"><canvas ref={canvasRef} onPointerDown={handleCanvasPointer} aria-label="Image editing preview" /></div>
+            <div className="photo-editor-preview"><canvas ref={canvasRef} onPointerDown={handleCanvasPointerDown} onPointerMove={handleCanvasPointerMove} onPointerUp={stopCropResize} onPointerCancel={stopCropResize} aria-label="Image editing preview" /></div>
           </div>
 
           <div className="photo-editor-export">
             <div><strong>{fileName}</strong><span>{imageSize.width} × {imageSize.height}px source</span></div>
             <label><span>Format</span><select value={exportType} onChange={(event) => setExportType(event.target.value as ExportType)}><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></label>
+            {exportType !== "image/png" && <label className="export-quality"><span>Quality {exportQuality}%</span><input type="range" min="40" max="100" value={exportQuality} onChange={(event) => setExportQuality(Number(event.target.value))}/></label>}
             <button type="button" className="button-primary" onClick={download}><Download size={17} /> Download image</button>
             <button type="button" className="button-secondary" onClick={() => inputRef.current?.click()}>Choose another</button>
           </div>
