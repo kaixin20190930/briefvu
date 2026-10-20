@@ -29,6 +29,12 @@ export default function GuidesPage() {
     </section>
     <section className="guide-directory" aria-label="Available guides">
       <article>
+        <div><span>Web images</span><time dateTime="2026-10-20">Updated October 20, 2026</time></div>
+        <h2>How to Prepare Images for the Web</h2>
+        <p>Crop, resize, choose the final format, compress once, inspect metadata, and verify the image in its real publishing context.</p>
+        <Link href="/guides/prepare-images-for-web">Read guide <ArrowRight size={16} /></Link>
+      </article>
+      <article>
         <div><span>Image privacy</span><time dateTime="2026-10-20">Updated October 20, 2026</time></div>
         <h2>What Is Photo Metadata?</h2>
         <p>Understand EXIF, GPS, XMP, ICC profiles, C2PA Content Credentials, and what a metadata cleaner can and cannot remove.</p>

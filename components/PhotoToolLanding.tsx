@@ -1,4 +1,5 @@
 import { CheckCircle2, Download, MousePointer2, ShieldCheck, Upload } from "lucide-react";
+import { ImageToolBreadcrumbs } from "@/components/ImageToolBreadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { PhotoEditor } from "@/components/PhotoEditor";
 import { RelatedTools } from "@/components/RelatedTools";
@@ -25,7 +26,7 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-        { "@type": "ListItem", position: 2, name: "Tools", item: absoluteUrl("/tools") },
+        { "@type": "ListItem", position: 2, name: "Image Tools", item: absoluteUrl("/tools") },
         { "@type": "ListItem", position: 3, name: config.title, item: absoluteUrl(path) },
       ],
     },
@@ -38,6 +39,7 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
 
   return <main>
     <JsonLd data={structuredData} />
+    <ImageToolBreadcrumbs current={config.title} />
     <section className="tool-hero photo-tool-hero">
       <span className="eyebrow">{config.eyebrow}</span>
       <h1>{config.title}</h1>

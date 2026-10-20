@@ -29,6 +29,7 @@ describe("sitemap", () => {
       "/guides/what-is-photo-metadata",
       "/guides/sprite-sheet-game-development",
       "/guides/image-formats-jpg-png-webp",
+      "/guides/prepare-images-for-web",
       "/guides/rea-claude-code",
       "/privacy",
       "/terms",

@@ -74,7 +74,7 @@ export default function Home() {
           <h2 id="utilities-title">Text, document, and developer tools</h2>
           <p>BriefVu also keeps a smaller set of focused utilities for other practical jobs. They remain available in the complete tool directory without diluting the image workflow above.</p>
         </div>
-        <div className="featured-tool-grid compact-tool-grid">
+        <div className="utility-tool-row">
           {utilityTools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}
         </div>
       </section>

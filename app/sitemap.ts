@@ -33,6 +33,7 @@ export const sitemapEntries = [
   { path: "/guides/what-is-photo-metadata", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/sprite-sheet-game-development", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/image-formats-jpg-png-webp", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/guides/prepare-images-for-web", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/rea-claude-code", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },

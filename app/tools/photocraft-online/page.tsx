@@ -15,6 +15,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
+import { ImageToolBreadcrumbs } from "@/components/ImageToolBreadcrumbs";
 import { RelatedTools } from "@/components/RelatedTools";
 import { TrackedEditorLink } from "@/components/TrackedEditorLink";
 import {
@@ -77,7 +78,7 @@ export default function PhotoCraftOnlinePage() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-        { "@type": "ListItem", position: 2, name: "Tools", item: absoluteUrl("/tools") },
+        { "@type": "ListItem", position: 2, name: "Image Tools", item: absoluteUrl("/tools") },
         {
           "@type": "ListItem",
           position: 3,
@@ -100,6 +101,7 @@ export default function PhotoCraftOnlinePage() {
   return (
     <main>
       <JsonLd data={structuredData} />
+      <ImageToolBreadcrumbs current="PhotoCraft Online" />
 
       <section className="tool-hero photocraft-hero">
         <span className="eyebrow"><ImageIcon size={15} /> Open-source image editor</span>

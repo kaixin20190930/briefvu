@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Copy, Crosshair, MonitorSmartphone, MousePointer2, Upload } from "lucide-react";
 import { ImageColorPicker } from "@/components/ImageColorPicker";
+import { ImageToolBreadcrumbs } from "@/components/ImageToolBreadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { RelatedTools } from "@/components/RelatedTools";
 import { absoluteUrl, createPageMetadata } from "@/lib/site";
@@ -57,7 +58,7 @@ export default function ImageColorPickerPage() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-        { "@type": "ListItem", position: 2, name: "Tools", item: absoluteUrl("/tools") },
+        { "@type": "ListItem", position: 2, name: "Image Tools", item: absoluteUrl("/tools") },
         { "@type": "ListItem", position: 3, name: "Image Color Picker", item: absoluteUrl("/tools/image-color-picker") },
       ],
     },
@@ -75,6 +76,7 @@ export default function ImageColorPickerPage() {
   return (
     <main>
       <JsonLd data={structuredData} />
+      <ImageToolBreadcrumbs current="Color Picker from Image" />
       <section className="tool-hero color-tool-hero">
         <span className="eyebrow">Free browser color utility</span>
           <h1>Color Picker from Image</h1>
