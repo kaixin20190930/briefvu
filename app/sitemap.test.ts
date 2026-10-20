@@ -16,6 +16,8 @@ describe("sitemap", () => {
       "/tools/text-reverser",
       "/tools/character-remover",
       "/tools/text-to-lrc",
+      "/tools/remove-metadata",
+      "/tools/sprite-sheet",
       "/tools/wordcraft-online",
       "/tools/photocraft-online",
       "/guides",

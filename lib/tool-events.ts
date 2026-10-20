@@ -11,6 +11,8 @@ export const TOOL_IDS = [
   "text-reverser",
   "character-remover",
   "text-to-lrc",
+  "remove-metadata",
+  "sprite-sheet",
 ] as const;
 
 export const TOOL_EVENT_NAMES = [

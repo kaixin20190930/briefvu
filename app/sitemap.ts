@@ -16,6 +16,8 @@ export const sitemapEntries = [
   { path: "/tools/text-reverser", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/character-remover", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/text-to-lrc", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/tools/remove-metadata", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/sprite-sheet", priority: 1, changeFrequency: "monthly" as const },
   ...(wordcraftRuntimeReady
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),

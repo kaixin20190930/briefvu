@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@opennextjs/cloudflare": "latest",
+    "exifr": "^7.1.3",
+    "gifenc": "^1.0.3",
+    "gifuct-js": "^2.1.2",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
