@@ -4,8 +4,8 @@ export const DEFAULT_SITE_URL = "https://briefvu.com";
 
 export const siteConfig = {
   name: "BriefVu",
-  defaultTitle: "BriefVu — Small tools, instantly useful",
-  description: "Fast, focused browser tools for text, color, documents, and other practical jobs.",
+  defaultTitle: "Free Online Image Tools — Private, No Upload | BriefVu",
+  description: "Free online image tools for cropping, rotating, removing metadata, making sprite sheets, picking colors, and adding text. Your files stay in your browser.",
 };
 
 export function getSiteUrl() {
@@ -42,13 +42,13 @@ export function createPageMetadata(input: {
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "BriefVu browser tools" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "BriefVu private browser image tools" }],
     },
     twitter: {
       card: "summary_large_image",
       title: input.title,
       description: input.description,
-      images: [{ url: "/opengraph-image", alt: "BriefVu browser tools" }],
+      images: [{ url: "/opengraph-image", alt: "BriefVu private browser image tools" }],
     },
   };
 }

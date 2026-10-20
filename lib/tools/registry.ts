@@ -29,7 +29,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
     name: "Image Color Picker",
     shortDescription: "Pick exact HEX, RGB and HSL colors from any image or screenshot.",
     href: "/tools/image-color-picker",
-    category: "Color",
+    category: "Images",
     status: "available",
     tier: "free",
   },

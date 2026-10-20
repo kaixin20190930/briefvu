@@ -9,7 +9,7 @@ export function SiteHeader() {
         <span>BriefVu</span>
       </Link>
       <nav aria-label="Main navigation">
-        <Link href="/guides">Guides</Link>
+        <Link href="/guides">Learn</Link>
         <Link className="header-tool-link" href="/tools">Browse tools <ArrowRight size={15} /></Link>
       </nav>
     </header>
@@ -22,10 +22,10 @@ export function SiteFooter() {
       <Link className="brand" href="/">
         <span className="brand-mark" aria-hidden="true"><span /></span><span>BriefVu</span>
       </Link>
-      <p>Small tools, instantly useful.</p>
+      <p>Private image tools, right in your browser.</p>
       <nav aria-label="Footer navigation">
         <Link href="/tools">Tools</Link>
-        <Link href="/guides">Guides</Link>
+        <Link href="/guides">Learn</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/terms">Terms</Link>
       </nav>

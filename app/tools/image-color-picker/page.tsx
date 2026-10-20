@@ -77,7 +77,7 @@ export default function ImageColorPickerPage() {
       <JsonLd data={structuredData} />
       <section className="tool-hero color-tool-hero">
         <span className="eyebrow">Free browser color utility</span>
-        <h1>Image Color Picker</h1>
+          <h1>Color Picker from Image</h1>
         <p>Use this image color picker to sample any pixel from a photo or screenshot. The private color picker from image files gives you precise HEX, RGB, and HSL values without sending the source image anywhere.</p>
       </section>
 
