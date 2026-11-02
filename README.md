@@ -2,6 +2,12 @@
 
 BriefVu is a first-party browser tool platform: small, focused utilities run directly on BriefVu rather than acting as a directory of third-party products.
 
+## Use BriefVu online
+
+[Open BriefVu](https://briefvu.com/) to use the hosted browser tools, or [browse the tool library](https://briefvu.com/tools) to choose a focused task. The hosted website and this repository can be at different release stages; the sections below describe this checkout.
+
+For example, the [Image Color Picker](https://briefvu.com/tools/image-color-picker) samples a local image and returns HEX, RGB, and HSL values. Image processing stays on your device for tools whose pages explicitly state local processing. Review each tool’s supported formats and limitations before exporting a result.
+
 ## Current tools
 
 - **Invisible Text Generator** generates, copies, and locally verifies documented Unicode characters.
