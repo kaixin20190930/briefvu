@@ -23,6 +23,12 @@ describe("canonical domain redirects", () => {
     expect(canonicalRedirectUrl("https://briefvu.com/examples", "briefvu.com")).toBeNull();
   });
 
+  it("upgrades HTTP on the canonical host without changing the path or query", () => {
+    expect(canonicalRedirectUrl("http://briefvu.com/tools/image-color-picker?source=test", "briefvu.com")?.href)
+      .toBe("https://briefvu.com/tools/image-color-picker?source=test");
+    expect(canonicalRedirectUrl("http://localhost:3000/tools", "localhost")).toBeNull();
+  });
+
   it("prefers the forwarded host and normalizes port, case, and proxy lists", () => {
     expect(
       resolveRequestHostname(

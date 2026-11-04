@@ -14,9 +14,11 @@ export function resolveRequestHostname(
 }
 
 export function canonicalRedirectUrl(requestUrl: string, hostname: string) {
-  if (!LEGACY_HOSTS.some((host) => host === hostname.toLowerCase())) return null;
   const destination = new URL(requestUrl);
   const canonical = new URL(CANONICAL_ORIGIN);
+  const legacyHost = LEGACY_HOSTS.some((host) => host === hostname.toLowerCase());
+  const insecureCanonical = hostname.toLowerCase() === canonical.hostname && destination.protocol === "http:";
+  if (!legacyHost && !insecureCanonical) return null;
   destination.protocol = canonical.protocol;
   destination.hostname = canonical.hostname;
   destination.port = canonical.port;

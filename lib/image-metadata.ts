@@ -1,88 +1,132 @@
 export type MetadataBlock = { category: "EXIF" | "XMP" | "C2PA" | "Text" | "Color profile"; label: string; bytes: number };
 export type MetadataResult = { format: "jpeg" | "png" | "webp"; blocks: MetadataBlock[] };
-
+type Segment = { start: number; end: number; category: MetadataBlock["category"] | null; label: string; kind?: string };
 const decoder = new TextDecoder("latin1");
 const text = (bytes: Uint8Array) => decoder.decode(bytes);
+const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10];
 
 export function detectMetadataFormat(bytes: Uint8Array): MetadataResult["format"] | null {
   if (bytes[0] === 0xff && bytes[1] === 0xd8) return "jpeg";
   if (bytes.length >= 12 && text(bytes.subarray(0, 4)) === "RIFF" && text(bytes.subarray(8, 12)) === "WEBP") return "webp";
-  if (bytes.length >= 8 && bytes[0] === 0x89 && text(bytes.subarray(1, 4)) === "PNG") return "png";
+  if (pngSignature.every((byte, index) => bytes[index] === byte)) return "png";
+  return null;
+}
+function categoryFor(kind: string): MetadataBlock["category"] | null {
+  if (["caBX", "C2PA", "JUMB"].includes(kind)) return "C2PA";
+  if (["eXIf", "EXIF"].includes(kind)) return "EXIF";
+  if (["iCCP", "ICCP"].includes(kind)) return "Color profile";
+  if (["tEXt", "zTXt", "iTXt", "tIME"].includes(kind)) return "Text";
+  if (kind === "XMP ") return "XMP";
+  return null;
+}
+function jpegCategory(marker: number, body: Uint8Array): MetadataBlock["category"] | null {
+  const signature = text(body.subarray(0, 80));
+  if (marker === 0xfe) return "Text";
+  if (marker === 0xe1 && signature.startsWith("Exif\0\0")) return "EXIF";
+  if (marker === 0xe1 && /^(http:\/\/ns\.adobe\.com\/(xap|xmp)|<\?xpacket)/i.test(signature)) return "XMP";
+  if (marker === 0xe2 && signature.startsWith("ICC_PROFILE\0")) return "Color profile";
+  // JPEG APP11 JUMBF is an embedded provenance/container block, not an arbitrary payload match.
+  if (marker === 0xeb && (signature.startsWith("JP") || /c2pa|jumb/i.test(signature))) return "C2PA";
   return null;
 }
 
-function categoryFor(value: string): MetadataBlock["category"] | null {
-  if (/c2pa|jumb/i.test(value)) return "C2PA";
-  if (/exif/i.test(value)) return "EXIF";
-  if (value === "iCCP" || value === "ICCP") return "Color profile";
-  if (["tEXt", "zTXt", "iTXt", "tIME"].includes(value)) return "Text";
-  if (/xmp|xml/i.test(value)) return "XMP";
-  return null;
-}
-
-function jpegSegments(bytes: Uint8Array) {
-  const segments: { start: number; end: number; marker: number; body: Uint8Array }[] = [];
-  let offset = 2;
-  while (offset + 3 < bytes.length && bytes[offset] === 0xff) {
-    const marker = bytes[offset + 1];
-    if (marker === 0xda || marker === 0xd9) break;
-    const length = (bytes[offset + 2] << 8) | bytes[offset + 3];
-    if (length < 2 || offset + 2 + length > bytes.length) break;
-    segments.push({ start: offset, end: offset + 2 + length, marker, body: bytes.subarray(offset + 4, offset + 2 + length) });
-    offset += 2 + length;
+function segments(bytes: Uint8Array, format: MetadataResult["format"]): Segment[] {
+  const result: Segment[] = [];
+  const invalid = () => { throw new Error("The image container is truncated or malformed. No cleaned copy was created."); };
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if (format === "jpeg") {
+    let offset = 2, sawScan = false;
+    while (offset < bytes.length) {
+      const start = offset;
+      if (bytes[offset++] !== 0xff) return invalid();
+      while (bytes[offset] === 0xff) offset++;
+      if (offset >= bytes.length) return invalid();
+      const marker = bytes[offset++];
+      if (marker === 0xd9) {
+        if (!sawScan) return invalid();
+        // Preserve trailing unrecognized data; never call this a complete privacy scrub.
+        return result;
+      }
+      if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) continue;
+      if (marker === 0 || marker === 0xd8 || offset + 2 > bytes.length) return invalid();
+      const size = view.getUint16(offset);
+      if (size < 2 || offset + size > bytes.length) return invalid();
+      const end = offset + size;
+      const category = jpegCategory(marker, bytes.subarray(offset + 2, end));
+      result.push({ start, end, category, label: `${category ?? "Other"} JPEG block` });
+      offset = end;
+      if (marker === 0xda) {
+        sawScan = true;
+        // Walk entropy data, respecting escaped FF and restart markers. Continue between progressive scans.
+        while (offset < bytes.length) {
+          if (bytes[offset] !== 0xff) { offset++; continue; }
+          let next = offset + 1;
+          while (bytes[next] === 0xff) next++;
+          if (next >= bytes.length) return invalid();
+          if (bytes[next] === 0 || (bytes[next] >= 0xd0 && bytes[next] <= 0xd7)) { offset = next + 1; continue; }
+          break;
+        }
+      }
+    }
+    return invalid();
   }
-  return segments;
+  let offset = format === "png" ? 8 : 12;
+  if (format === "webp" && view.getUint32(4, true) + 8 !== bytes.length) return invalid();
+  let sawHeader = false, sawData = false;
+  while (offset < bytes.length) {
+    const header = format === "png" ? 12 : 8;
+    if (offset + header > bytes.length) return invalid();
+    const size = view.getUint32(offset + (format === "png" ? 0 : 4), format === "webp");
+    const kind = text(bytes.subarray(offset + (format === "png" ? 4 : 0), offset + (format === "png" ? 8 : 4)));
+    const end = offset + header + size + (format === "webp" ? size % 2 : 0);
+    if (end > bytes.length || !/^[A-Za-z0-9 ]{4}$/.test(kind)) return invalid();
+    if (format === "png") {
+      if (!sawHeader && (kind !== "IHDR" || size !== 13)) return invalid();
+      if (kind === "IHDR") { if (sawHeader) return invalid(); sawHeader = true; }
+      if (kind === "IDAT") sawData = true;
+      if (kind === "IEND" && (size !== 0 || !sawData || end !== bytes.length)) return invalid();
+    } else if (kind === "VP8X" && size !== 10) return invalid();
+    const category = categoryFor(kind);
+    result.push({ start: offset, end, category, label: `${kind} ${format === "png" ? "PNG" : "WebP"} chunk`, kind });
+    offset = end;
+    if (format === "png" && kind === "IEND") return result;
+  }
+  if (format === "png") return invalid();
+  return result;
 }
 
 export function scanMetadata(bytes: Uint8Array): MetadataResult | null {
   const format = detectMetadataFormat(bytes);
   if (!format) return null;
-  const blocks: MetadataBlock[] = [];
-  if (format === "jpeg") {
-    for (const segment of jpegSegments(bytes)) {
-      const signature = text(segment.body.subarray(0, 80));
-      const category = segment.marker === 0xfe ? "Text" : segment.marker === 0xe1 ? (/xmp/i.test(signature) ? "XMP" : "EXIF") : segment.marker === 0xe2 && /icc_profile/i.test(signature) ? "Color profile" : segment.marker === 0xeb || /c2pa|jumb/i.test(signature) ? "C2PA" : null;
-      if (category) blocks.push({ category, label: `${category} JPEG block`, bytes: segment.end - segment.start });
+  return { format, blocks: segments(bytes, format).flatMap(s => s.category ? [{ category: s.category, label: s.label, bytes: s.end - s.start }] : []) };
+}
+function join(parts: Uint8Array[]) { const length = parts.reduce((sum, part) => sum + part.length, 0); const output = new Uint8Array(length); let offset = 0; for (const part of parts) { output.set(part, offset); offset += part.length; } return output; }
+export function stripMetadata(bytes: Uint8Array): Uint8Array<ArrayBuffer> {
+  const format = detectMetadataFormat(bytes);
+  if (!format) throw new Error("Unsupported image format");
+  const parts: Uint8Array[] = [];
+  let cursor = 0;
+  for (const segment of segments(bytes, format)) {
+    parts.push(bytes.subarray(cursor, segment.start));
+    if (!segment.category) {
+      const chunk = bytes.slice(segment.start, segment.end);
+      if (format === "webp" && segment.kind === "VP8X") chunk[8] &= ~0x2c;
+      parts.push(chunk);
     }
-  } else if (format === "png") {
-    let offset = 8;
-    while (offset + 12 <= bytes.length) {
-      const size = new DataView(bytes.buffer, bytes.byteOffset + offset, 4).getUint32(0);
-      const kind = text(bytes.subarray(offset + 4, offset + 8));
-      const category = categoryFor(kind);
-      if (category) blocks.push({ category, label: `${kind} PNG chunk`, bytes: size + 12 });
-      offset += size + 12;
-      if (kind === "IEND") break;
-    }
-  } else {
-    let offset = 12;
-    while (offset + 8 <= bytes.length) {
-      const kind = text(bytes.subarray(offset, offset + 4));
-      const size = new DataView(bytes.buffer, bytes.byteOffset + offset + 4, 4).getUint32(0, true);
-      const category = categoryFor(kind);
-      if (category) blocks.push({ category, label: `${kind} WebP chunk`, bytes: size + 8 + (size % 2) });
-      offset += 8 + size + (size % 2);
-    }
+    cursor = segment.end;
   }
-  return { format, blocks };
+  parts.push(bytes.subarray(cursor));
+  const output = join(parts);
+  if (format === "webp") new DataView(output.buffer).setUint32(4, output.length - 8, true);
+  return output;
 }
 
-function join(parts: Uint8Array[]) { const length = parts.reduce((sum, part) => sum + part.length, 0); const output = new Uint8Array(length); let offset = 0; for (const part of parts) { output.set(part, offset); offset += part.length; } return output; }
-
-export function stripMetadata(bytes: Uint8Array): Uint8Array {
-  const result = scanMetadata(bytes);
-  if (!result) throw new Error("Unsupported image format");
-  if (result.format === "jpeg") {
-    const segments = jpegSegments(bytes); const parts = [bytes.subarray(0, 2)]; let cursor = 2;
-    for (const segment of segments) { if (cursor < segment.start) parts.push(bytes.subarray(cursor, segment.start)); const signature = text(segment.body.subarray(0, 80)); const remove = segment.marker === 0xfe || segment.marker === 0xe1 || segment.marker === 0xeb || (segment.marker === 0xe2 && /icc_profile/i.test(signature)) || /c2pa|jumb|xmp|exif/i.test(signature); if (!remove) parts.push(bytes.subarray(segment.start, segment.end)); cursor = segment.end; }
-    parts.push(bytes.subarray(cursor)); return join(parts);
-  }
-  if (result.format === "png") {
-    const parts = [bytes.subarray(0, 8)]; let offset = 8;
-    while (offset + 12 <= bytes.length) { const size = new DataView(bytes.buffer, bytes.byteOffset + offset, 4).getUint32(0); const end = offset + size + 12; const kind = text(bytes.subarray(offset + 4, offset + 8)); if (!categoryFor(kind)) parts.push(bytes.subarray(offset, end)); offset = end; if (kind === "IEND") break; }
-    return join(parts);
-  }
-  const chunks: Uint8Array[] = []; let offset = 12;
-  while (offset + 8 <= bytes.length) { const kind = text(bytes.subarray(offset, offset + 4)); const size = new DataView(bytes.buffer, bytes.byteOffset + offset + 4, 4).getUint32(0, true); const end = offset + 8 + size + (size % 2); if (!categoryFor(kind)) { const chunk = bytes.slice(offset, end); if (kind === "VP8X" && size >= 1) chunk[8] &= ~0x2c; chunks.push(chunk); } offset = end; }
-  const body = join(chunks); const output = new Uint8Array(12 + body.length); output.set(bytes.subarray(0, 12)); output.set(body, 12); new DataView(output.buffer).setUint32(4, output.length - 8, true); return output;
+// Expose only recognized bounded payloads to the local field viewer.
+export function metadataPayloads(bytes: Uint8Array) {
+  const format = detectMetadataFormat(bytes);
+  if (!format) return [];
+  return segments(bytes, format).filter(s => s.category).map(s => ({
+    category: s.category!, kind: s.kind,
+    bytes: bytes.subarray(s.start + (format === "png" ? 8 : format === "webp" ? 8 : 4), s.end - (format === "png" ? 4 : format === "webp" ? (new DataView(bytes.buffer, bytes.byteOffset + s.start + 4, 4).getUint32(0, true) % 2) : 0)),
+  }));
 }

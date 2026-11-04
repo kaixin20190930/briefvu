@@ -3,7 +3,9 @@ import Link from "next/link";
 import { availableTools } from "@/lib/tools/registry";
 
 const contextualRecommendations: Record<string, string[]> = {
-  "image-converter": ["crop-image", "rotate-image", "remove-metadata", "photo-editor"],
+  "tga-viewer": ["image-converter", "compress-image", "image-to-ico", "remove-metadata"],
+  "image-to-ico": ["image-converter", "resize-image", "color-palette-from-image", "compress-image"],
+  "image-converter": ["tga-viewer", "image-to-ico", "crop-image", "remove-metadata"],
   "crop-image": ["rotate-image", "mirror-image", "add-text-to-photo", "remove-metadata"],
   "rotate-image": ["mirror-image", "crop-image", "add-text-to-photo", "remove-metadata"],
   "mirror-image": ["rotate-image", "crop-image", "add-text-to-photo", "photo-editor"],
@@ -13,7 +15,8 @@ const contextualRecommendations: Record<string, string[]> = {
   "add-text-to-photo": ["remove-metadata", "crop-image", "photo-editor", "image-color-picker"],
   "remove-metadata": ["crop-image", "sprite-sheet", "photo-editor", "image-color-picker"],
   "sprite-sheet": ["remove-metadata", "crop-image", "image-color-picker", "photo-editor"],
-  "image-color-picker": ["photo-editor", "add-text-to-photo", "crop-image", "remove-metadata"],
+  "color-palette-from-image": ["image-color-picker", "image-converter", "resize-image", "compress-image"],
+  "image-color-picker": ["color-palette-from-image", "add-text-to-photo", "crop-image", "remove-metadata"],
   "photo-editor": ["resize-image", "compress-image", "remove-metadata", "add-text-to-photo"],
   "photocraft-online": ["remove-metadata", "image-color-picker", "crop-image", "sprite-sheet"],
 };

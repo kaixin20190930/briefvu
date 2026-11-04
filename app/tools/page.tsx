@@ -4,8 +4,8 @@ import { createPageMetadata } from "@/lib/site";
 import { toolRegistry } from "@/lib/tools/registry";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Free Browser Tools",
-  description: "Browse BriefVu image, text, document, audio, and developer tools. Core file processing runs privately in your browser with no account required.",
+  title: "Image Tools — Free Browser Utilities",
+  description: "Free online image tools that run in your browser: crop, rotate, mirror, invert, convert, resize, compress, and more, plus focused text and document utilities.",
   path: "/tools",
 });
 
@@ -15,7 +15,7 @@ export default function ToolsPage() {
     <main className="content-shell">
       <section className="page-hero compact">
         <span className="section-label">BriefVu tool library</span>
-        <h1>Free Browser Tools</h1>
+        <h1>Image Tools</h1>
         <p>Start with private image tools, then browse focused utilities for text, documents, audio, and developer workflows.</p>
       </section>
       {categories.map((category) => {

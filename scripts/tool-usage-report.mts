@@ -1,50 +1,35 @@
-import { existsSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
+import { usageCredentials, usageWindow, usageQuery, parseUsageResponse, usageHttpError } from "../lib/usage-report.ts";
 
-if (existsSync(".env.local")) process.loadEnvFile(".env.local");
-
-const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-const apiToken = process.env.CLOUDFLARE_API_TOKEN;
-const hours = Number(process.argv[2] || 168);
-
-if (!accountId || !apiToken) {
-  throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN are required.");
+async function main() {
+  const args = process.argv.slice(2);
+  let hours = 168, until = new Date(), json = false, output: string | undefined;
+  if (args[0] && !args[0].startsWith("--")) hours = Number(args.shift());
+  while (args.length) {
+    const arg = args.shift();
+    if (arg === "--json") json = true;
+    else if (arg === "--until" && args[0]) until = new Date(args.shift()!);
+    else if (arg === "--output" && args[0]) output = args.shift();
+    else throw new Error("Usage: npm run usage:report -- [hours] [--until ISO] [--json] [--output path.json]");
+  }
+  const window = usageWindow(hours, until);
+  if (existsSync(".env.local")) process.loadEnvFile(".env.local");
+  const credentials = usageCredentials(process.env);
+  const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${credentials.accountId}/analytics_engine/sql`, {
+    method: "POST", headers: { Authorization: `Bearer ${credentials.token}`, "Content-Type": "text/plain" }, body: usageQuery(window), signal: AbortSignal.timeout(30000),
+  });
+  if (!response.ok) throw new Error(usageHttpError(response.status));
+  const rows = parseUsageResponse(await response.json());
+  const report = { fetchedAt: new Date().toISOString(), window: { ...window, timezone: "UTC", endExclusive: true }, dataset: "briefvu_tool_events", credentialSource: credentials.tokenSource, unit: "sample-weighted action count; not unique users", qaNote: "Includes QA activity. Events have no session/source identifier, so historical QA cannot be reliably subtracted.", rows };
+  const content = JSON.stringify(report, null, 2);
+  if (output) writeFileSync(output, content + "\n");
+  if (json) console.log(content);
+  else {
+    console.log(`BriefVu events: ${window.from} ≤ timestamp < ${window.until} (UTC)`);
+    console.log(`Credential source: ${credentials.tokenSource}. Counts include QA activity, not unique users.`);
+    if (!rows.length) console.log("Query succeeded: no recorded events in this window.");
+    else console.table(rows);
+    if (output) console.log(`Saved report: ${output}`);
+  }
 }
-if (!Number.isInteger(hours) || hours < 1 || hours > 2160) {
-  throw new Error("Usage: npm run usage:report -- [hours between 1 and 2160]");
-}
-
-const sql = `
-SELECT
-  index1 AS tool,
-  blob1 AS event,
-  SUM(_sample_interval) AS events
-FROM briefvu_tool_events
-WHERE timestamp >= NOW() - INTERVAL '${hours}' HOUR
-GROUP BY tool, event
-ORDER BY tool, event
-`;
-
-const response = await fetch(
-  `https://api.cloudflare.com/client/v4/accounts/${accountId}/analytics_engine/sql`,
-  {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiToken}`,
-      "Content-Type": "text/plain",
-    },
-    body: sql,
-  },
-);
-
-if (!response.ok) {
-  const detail = (await response.text()).slice(0, 500);
-  throw new Error(`Cloudflare Analytics Engine query failed (${response.status}): ${detail}`);
-}
-
-const rows = await response.json() as Array<{ tool: string; event: string; events: number }>;
-if (!rows.length) {
-  console.log(`No tool events recorded in the last ${hours} hours.`);
-} else {
-  console.log(`BriefVu tool events — last ${hours} hours`);
-  console.table(rows.map((row) => ({ ...row, events: Math.round(row.events) })));
-}
+main().catch(error => { console.error(error instanceof Error ? error.message : "Usage report failed."); process.exitCode = 1; });

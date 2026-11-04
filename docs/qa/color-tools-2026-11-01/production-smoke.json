@@ -1,0 +1,88 @@
+[
+  {
+    "url": "https://briefvu.com/",
+    "status": "200",
+    "title": "Free Online Image Tools \u2014 Private, No Upload | BriefVu",
+    "canonical": "<link rel=\"canonical\" href=\"https://briefvu.com\"/>",
+    "redirect": [],
+    "h1_count": 1,
+    "palette_link": true
+  },
+  {
+    "url": "https://briefvu.com/tools",
+    "status": "200",
+    "title": "Image Tools \u2014 Free Browser Utilities | BriefVu",
+    "canonical": "<link rel=\"canonical\" href=\"https://briefvu.com/tools\"/>",
+    "redirect": [],
+    "h1_count": 1,
+    "palette_link": true
+  },
+  {
+    "url": "https://briefvu.com/tools/color-palette-from-image",
+    "status": "200",
+    "title": "Color Palette From Image \u2014 Extract HEX &amp; RGB Colors | BriefVu",
+    "canonical": "<link rel=\"canonical\" href=\"https://briefvu.com/tools/color-palette-from-image\"/>",
+    "redirect": [],
+    "h1_count": 1,
+    "palette_link": true
+  },
+  {
+    "url": "https://briefvu.com/tools/image-color-picker",
+    "status": "200",
+    "title": "Color Picker from Image \u2014 Get HEX, RGB &amp; HSL | BriefVu",
+    "canonical": "<link rel=\"canonical\" href=\"https://briefvu.com/tools/image-color-picker\"/>",
+    "redirect": [],
+    "h1_count": 1,
+    "palette_link": true
+  },
+  {
+    "url": "https://briefvu.com/tools/image-converter",
+    "status": "200",
+    "title": "Image Converter \u2014 JPG, PNG, WebP &amp; AVIF | BriefVu",
+    "canonical": "<link rel=\"canonical\" href=\"https://briefvu.com/tools/image-converter\"/>",
+    "redirect": [],
+    "h1_count": 1,
+    "palette_link": false
+  },
+  {
+    "url": "https://briefvu.com/sitemap.xml",
+    "status": "200",
+    "title": null,
+    "canonical": null,
+    "redirect": [],
+    "url_count": 30,
+    "updated": [
+      "https://briefvu.com/",
+      "https://briefvu.com/tools",
+      "https://briefvu.com/tools/image-color-picker",
+      "https://briefvu.com/tools/color-palette-from-image",
+      "https://briefvu.com/tools/image-converter"
+    ]
+  },
+  {
+    "url": "https://briefvu.com/robots.txt",
+    "status": "200",
+    "title": null,
+    "canonical": null,
+    "redirect": [],
+    "sitemap_declared": true
+  },
+  {
+    "url": "http://briefvu.com/tools/image-color-picker?source=qa",
+    "status": "308",
+    "title": null,
+    "canonical": null,
+    "redirect": [
+      "Location: https://briefvu.com/tools/image-color-picker?source=qa"
+    ]
+  },
+  {
+    "url": "https://www.briefvu.com/tools/color-palette-from-image",
+    "status": "308",
+    "title": null,
+    "canonical": null,
+    "redirect": [
+      "location: https://briefvu.com/tools/color-palette-from-image"
+    ]
+  }
+]

@@ -8,6 +8,9 @@ export const sitemapEntries = [
   { path: "/tools", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/tools/invisible-text", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/image-color-picker", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/color-palette-from-image", priority: 1, changeFrequency: "monthly" as const },
+  { path: "/tools/image-to-ico" },
+  { path: "/tools/tga-viewer" },
   { path: "/tools/image-converter", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/crop-image", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/rotate-image", priority: 0.9, changeFrequency: "monthly" as const },
@@ -35,16 +38,30 @@ export const sitemapEntries = [
   { path: "/guides/image-formats-jpg-png-webp", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/guides/prepare-images-for-web", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/rea-claude-code", priority: 0.9, changeFrequency: "monthly" as const },
+  { path: "/guides/compress-image-to-target-size" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
 ] as const;
 
+// Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
+export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/tga-viewer": "2026-11-03T00:00:00.000Z",
+  "/tools/remove-metadata": "2026-11-01T00:00:00.000Z",
+  "/tools/image-to-ico": "2026-11-03T00:00:00.000Z",
+  "/": "2026-11-03T00:00:00.000Z",
+  "/tools": "2026-11-03T00:00:00.000Z",
+  "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",
+  "/tools/image-color-picker": "2026-11-01T00:00:00.000Z",
+  // Preserve the converter metadata update already present in the working tree.
+  "/tools/image-converter": "2026-11-03T00:00:00.000Z",
+  "/tools/compress-image": "2026-11-03T00:00:00.000Z",
+  "/guides": "2026-11-03T00:00:00.000Z",
+  "/guides/compress-image-to-target-size": "2026-11-03T00:00:00.000Z",
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-10-20T00:00:00.000Z");
   return sitemapEntries.map((entry) => ({
     url: absoluteUrl(entry.path),
-    lastModified,
-    changeFrequency: entry.changeFrequency,
-    priority: entry.priority,
+    lastModified: new Date(pageLastModified[entry.path] ?? "2026-10-20T00:00:00.000Z"),
   }));
 }

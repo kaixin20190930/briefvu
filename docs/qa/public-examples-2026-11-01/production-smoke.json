@@ -1,0 +1,39 @@
+{
+  "/tools/color-palette-from-image": {
+    "httpSuccess": true,
+    "content": true,
+    "h1": 1,
+    "canonical": "https://briefvu.com/tools/color-palette-from-image"
+  },
+  "/tools/image-to-ico": {
+    "httpSuccess": true,
+    "content": true,
+    "h1": 1,
+    "canonical": "https://briefvu.com/tools/image-to-ico"
+  },
+  "/tools/remove-metadata": {
+    "httpSuccess": true,
+    "content": true,
+    "h1": 1,
+    "canonical": "https://briefvu.com/tools/remove-metadata"
+  },
+  "/examples/five-color-reference.png": {
+    "httpSuccess": true,
+    "matchesLocal": true,
+    "bytes": 4609
+  },
+  "/examples/palette-five-colors.png": {
+    "httpSuccess": true,
+    "matchesLocal": true,
+    "bytes": 58519
+  },
+  "/examples/ico-fit-preview.png": {
+    "httpSuccess": true,
+    "matchesLocal": true,
+    "bytes": 54242
+  },
+  "sitemap": {
+    "uniqueUrls": 31,
+    "modifiedPagesDate": "2026-11-01"
+  }
+}

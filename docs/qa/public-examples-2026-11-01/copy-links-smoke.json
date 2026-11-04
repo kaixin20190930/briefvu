@@ -1,0 +1,17 @@
+{
+  "color-palette-from-image": {
+    "title": "Color Palette From Image — HEX & RGB Colors | BriefVu",
+    "description": "Extract a color palette from an image locally. Get dominant and average colors, up to 10 swatches, HEX, RGB, HSL, and CSS or JSON exports. No upload.",
+    "checks": "passed"
+  },
+  "image-color-picker": {
+    "title": "Color Picker from Image — Get HEX, RGB & HSL | BriefVu",
+    "description": "Use a private color picker from image files or screenshots to sample exact pixels and copy HEX, RGB and HSL values directly in your browser.",
+    "checks": "passed"
+  },
+  "image-to-ico": {
+    "title": "Image to ICO — Free Favicon & Icon Converter | BriefVu",
+    "description": "Image to ICO converter — turn PNG, JPG, or WebP into a multi-size favicon. Preview 16–256px icons and download a website ZIP. No upload or account.",
+    "checks": "passed"
+  }
+}

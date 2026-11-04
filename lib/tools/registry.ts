@@ -15,6 +15,17 @@ export type ToolRegistryEntry = {
 };
 
 export const toolRegistry: readonly ToolRegistryEntry[] = [
+  { slug: "tga-viewer", name: "TGA Viewer", shortDescription: "Open, inspect, and convert supported TGA files without uploading them.", href: "/tools/tga-viewer", category: "Images", status: "available", tier: "free" },
+  { slug: "image-to-ico", name: "PNG to ICO Converter", shortDescription: "Convert PNG to ICO, make favicons, and export Chrome extension icon packs.", href: "/tools/image-to-ico", category: "Images", status: "available", tier: "free" },
+  {
+    slug: "color-palette-from-image",
+    name: "Color Palette From Image",
+    shortDescription: "Extract dominant colors, an average color, and CSS or JSON palettes locally.",
+    href: "/tools/color-palette-from-image",
+    category: "Images",
+    status: "available",
+    tier: "free",
+  },
   {
     slug: "invisible-text",
     name: "Invisible Text Generator",
@@ -63,7 +74,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   {
     slug: "image-converter",
     name: "Image Converter",
-    shortDescription: "Convert JPG, PNG, WebP, and AVIF images locally in your browser.",
+    shortDescription: "Convert JPG, PNG, WebP, AVIF, and supported TGA images locally.",
     href: "/tools/image-converter",
     category: "Images",
     status: "available",

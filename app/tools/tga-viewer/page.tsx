@@ -1,0 +1,41 @@
+import type { Metadata } from "next";
+import { ArrowDown } from "lucide-react";
+import Link from "next/link";
+import { ImageToolBreadcrumbs } from "@/components/ImageToolBreadcrumbs";
+import { JsonLd } from "@/components/JsonLd";
+import { RelatedTools } from "@/components/RelatedTools";
+import { TgaViewer } from "@/components/TgaViewer";
+import { absoluteUrl, createPageMetadata } from "@/lib/site";
+
+const path = "/tools/tga-viewer";
+export const metadata: Metadata = createPageMetadata({
+  title: "TGA Viewer — Open & Convert .tga Files",
+  description: "Open supported .tga files in your browser. Inspect dimensions, color depth, and alpha, then convert TGA to PNG, WebP, or JPG. No upload or account.",
+  path,
+});
+
+const faqs = [
+  ["What TGA files can BriefVu open?", "This release supports uncompressed and RLE 24-bit or 32-bit true-color TGA files, plus 8-bit grayscale files. It reports indexed-color, 16-bit, interleaved, and premultiplied-alpha variants as unsupported instead of silently producing the wrong image."],
+  ["Can I convert TGA to PNG?", "Yes. PNG is the default output because it preserves decoded pixels and alpha transparency. Open the TGA, inspect its preview and details, then choose Convert to PNG."],
+  ["Will JPG keep TGA transparency?", "No. JPG has no alpha channel. BriefVu fills transparent pixels with the background color selected in the converter before creating the JPG."],
+  ["Why does a 32-bit TGA look opaque?", "A 32-bit pixel layout can contain an alpha byte, but that does not guarantee visible transparency. BriefVu reports both the declared attribute bits and whether the decoded pixels actually contain alpha values below 255."],
+  ["Are TGA files uploaded?", "No. The file is read, decoded, previewed, and converted in your browser. Anonymous tool events never include the filename or image data."],
+  ["Can I batch convert TGA files?", "Not in this release. Process one file at a time so each preview, format warning, and conversion result can be checked before download."],
+];
+
+export default function TgaViewerPage() {
+  const data = [{ "@context": "https://schema.org", "@type": "WebApplication", name: "BriefVu TGA Viewer", url: absoluteUrl(path), applicationCategory: "MultimediaApplication", operatingSystem: "Any", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }, { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") }, { "@type": "ListItem", position: 2, name: "Image Tools", item: absoluteUrl("/tools") }, { "@type": "ListItem", position: 3, name: "TGA Viewer", item: absoluteUrl(path) }] }];
+  return <main><JsonLd data={data}/><ImageToolBreadcrumbs current="TGA Viewer"/>
+    <section className="tool-hero"><span className="eyebrow">Free private TGA viewer</span><h1>TGA Viewer — Open, Inspect, and Convert TGA Files</h1><p>Use this TGA viewer to open a supported .tga file, check its color depth and alpha channel, then convert it without uploading the image.</p><ArrowDown className="hero-down" size={20}/></section>
+    <div className="tool-page-wrap"><TgaViewer/>
+      <section className="content-section"><div className="content-heading"><span>Three steps</span><h2>How to open a TGA file in your browser</h2></div><p>Choose a .tga file or open the small built-in transparent sample. BriefVu reads the header and pixel stream locally, corrects the stored image origin, and draws the decoded result on a canvas. Check the dimensions, color mode, compression, origin, and alpha summary beside the preview. Then select PNG, WebP, or JPG and download the new file.</p><p>If the file uses a TGA variant outside the supported set, the viewer names the detected limitation. A message about indexed color, 16-bit pixels, interleaving, or premultiplied alpha means the file was recognized but is not safe to decode with this release. A truncation message means the declared pixel data is incomplete.</p></section>
+      <section className="content-section"><div className="content-heading"><span>Recommended output</span><h2>TGA to PNG: the conversion most people need</h2></div><p>TGA to PNG is the safest default when the source contains transparent edges, game textures, rendered overlays, or interface artwork. PNG preserves the decoded RGBA pixels through a lossless browser encoder. It is easier to preview in browsers and file managers, and it works in common design and publishing workflows.</p><p>Open the file, inspect it against the checkerboard, and keep PNG selected. The downloaded PNG uses the TGA dimensions and does not resize or crop the artwork. If the source has no visible transparent pixels, PNG still preserves sharp graphic edges, although a photographic image may produce a larger file.</p><p>This TGA to PNG conversion creates a new pixel image. It does not preserve TGA extension metadata, developer areas, color-correction tables, or non-square pixel display settings. Keep the original TGA when those source details matter.</p></section>
+      <section className="content-section"><div className="content-heading"><span>Other formats</span><h2>TGA to JPG vs TGA to WebP: which keeps transparency?</h2></div><div className="split-copy"><div><h3>WebP</h3><p>WebP can preserve transparency while producing a smaller lossy file. Use it for a modern website or application that accepts WebP. Inspect fine lines and gradients after lowering quality.</p></div><div><h3>JPG</h3><p>JPG is useful when broad photo compatibility matters, but it cannot keep transparency. Select a background color first. Transparent pixels are filled before encoding so they do not unexpectedly turn black.</p></div></div></section>
+      <section className="content-section"><div className="content-heading"><span>File details</span><h2>What color depth and alpha channel mean in a TGA file</h2></div><p>A 24-bit true-color TGA stores blue, green, and red bytes for each pixel. A 32-bit file adds a fourth byte that may carry alpha. The header also declares attribute bits, and newer TGA files can include an attribute type in their extension area. Those signals need to be interpreted together; the label “32-bit” alone does not prove that any pixel is transparent.</p><p>BriefVu reports the stored bit depth and checks the decoded pixels for actual transparency. It treats ambiguous or unsupported alpha modes conservatively. Premultiplied alpha is rejected in this release because decoding it as ordinary straight alpha can create dark or pale edges.</p></section>
+      <section className="content-section"><div className="content-heading"><span>Visual check</span><h2>Check transparency with the checkerboard background</h2></div><p>The checkerboard makes fully or partly transparent pixels visible without changing the image. Switch to a light or dark background to see how edge pixels will blend in a real interface. Use 100%, 200%, or 400% for pixel-level inspection, or Fit for a large image. The zoom changes only the preview, not the exported dimensions.</p></section>
+      <section className="content-section"><div className="content-heading"><span>Compatibility</span><h2>Why browsers and file explorers will not preview every TGA</h2></div><p>TGA is common in older graphics, game, and rendering pipelines, but it has several pixel formats, compression modes, origin flags, and optional extension fields. General browser image decoders do not expose it as a standard web image format, and operating-system previews vary. BriefVu includes a focused local parser for a deliberately limited, documented subset.</p><p>For a normal JPG, PNG, WebP, or AVIF file, use the <Link href="/tools/image-converter">image converter</Link>. After conversion, <Link href="/tools/compress-image">compress the result</Link> if delivery size matters, or <Link href="/tools/image-to-ico">turn the artwork into an icon</Link>.</p></section>
+      <section className="content-section faq"><div className="content-heading"><span>FAQ</span><h2>TGA questions</h2></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+      <RelatedTools currentSlug="tga-viewer"/>
+    </div>
+  </main>;
+}

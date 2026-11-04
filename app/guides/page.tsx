@@ -29,6 +29,12 @@ export default function GuidesPage() {
     </section>
     <section className="guide-directory" aria-label="Available guides">
       <article>
+        <div><span>Image compression</span><time dateTime="2026-11-03">Updated November 3, 2026</time></div>
+        <h2>How to Compress an Image to a Target File Size</h2>
+        <p>Balance dimensions, format, and quality to get under 20, 50, 100, or 200 KB—and recognize an unrealistic target.</p>
+        <Link href="/guides/compress-image-to-target-size">Read guide <ArrowRight size={16} /></Link>
+      </article>
+      <article>
         <div><span>Web images</span><time dateTime="2026-10-20">Updated October 20, 2026</time></div>
         <h2>How to Prepare Images for the Web</h2>
         <p>Crop, resize, choose the final format, compress once, inspect metadata, and verify the image in its real publishing context.</p>

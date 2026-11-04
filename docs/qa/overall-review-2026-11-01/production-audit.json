@@ -1,0 +1,903 @@
+{
+  "summary": {
+    "urls": 31,
+    "unique_urls": 31,
+    "tools": 21,
+    "guides": 5,
+    "updated_2026_11_01": 7,
+    "issues": [],
+    "extra_internal_targets": []
+  },
+  "pages": [
+    {
+      "url": "https://briefvu.com/",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/character-remover",
+        "/tools/color-palette-from-image",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/image-converter",
+        "/tools/image-to-ico",
+        "/tools/invert-image",
+        "/tools/invisible-text",
+        "/tools/mirror-image",
+        "/tools/photo-editor",
+        "/tools/photocraft-online",
+        "/tools/rea-mcp-config",
+        "/tools/remove-metadata",
+        "/tools/resize-image",
+        "/tools/rotate-image",
+        "/tools/sprite-sheet",
+        "/tools/text-reverser",
+        "/tools/text-to-lrc",
+        "/tools/wordcraft-online"
+      ],
+      "schemas": [
+        "WebSite",
+        "Organization"
+      ],
+      "content_images": [],
+      "approx_page_words": 635
+    },
+    {
+      "url": "https://briefvu.com/tools",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/character-remover",
+        "/tools/color-palette-from-image",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/image-converter",
+        "/tools/image-to-ico",
+        "/tools/invert-image",
+        "/tools/invisible-text",
+        "/tools/mirror-image",
+        "/tools/photo-editor",
+        "/tools/photocraft-online",
+        "/tools/rea-mcp-config",
+        "/tools/remove-metadata",
+        "/tools/resize-image",
+        "/tools/rotate-image",
+        "/tools/sprite-sheet",
+        "/tools/text-reverser",
+        "/tools/text-to-lrc",
+        "/tools/wordcraft-online"
+      ],
+      "schemas": [],
+      "content_images": [],
+      "approx_page_words": 399
+    },
+    {
+      "url": "https://briefvu.com/tools/invisible-text",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/invisible-text"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/character-remover",
+        "/tools/color-palette-from-image",
+        "/tools/image-to-ico",
+        "/tools/text-reverser"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1613
+    },
+    {
+      "url": "https://briefvu.com/tools/image-color-picker",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/image-color-picker"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/color-palette-from-image",
+        "/tools/crop-image",
+        "/tools/remove-metadata"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1694
+    },
+    {
+      "url": "https://briefvu.com/tools/color-palette-from-image",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/color-palette-from-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/compress-image",
+        "/tools/image-color-picker",
+        "/tools/image-converter",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 1175
+    },
+    {
+      "url": "https://briefvu.com/tools/image-to-ico",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/image-to-ico"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/compress-image",
+        "/tools/image-converter",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 1235
+    },
+    {
+      "url": "https://briefvu.com/tools/image-converter",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/image-converter"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/image-converter",
+        "/tools/image-to-ico",
+        "/tools/photo-editor",
+        "/tools/remove-metadata",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1009
+    },
+    {
+      "url": "https://briefvu.com/tools/crop-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/crop-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/crop-image",
+        "/tools/mirror-image",
+        "/tools/remove-metadata",
+        "/tools/rotate-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1009
+    },
+    {
+      "url": "https://briefvu.com/tools/rotate-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/rotate-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/crop-image",
+        "/tools/mirror-image",
+        "/tools/remove-metadata",
+        "/tools/rotate-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 858
+    },
+    {
+      "url": "https://briefvu.com/tools/mirror-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/mirror-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/crop-image",
+        "/tools/mirror-image",
+        "/tools/photo-editor",
+        "/tools/rotate-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 944
+    },
+    {
+      "url": "https://briefvu.com/tools/resize-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/resize-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/photo-editor",
+        "/tools/remove-metadata"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 707
+    },
+    {
+      "url": "https://briefvu.com/tools/compress-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/compress-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/image-formats-jpg-png-webp",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/image-converter",
+        "/tools/photo-editor",
+        "/tools/remove-metadata",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 735
+    },
+    {
+      "url": "https://briefvu.com/tools/invert-image",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/invert-image"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/image-color-picker",
+        "/tools/invert-image",
+        "/tools/mirror-image",
+        "/tools/photo-editor"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 905
+    },
+    {
+      "url": "https://briefvu.com/tools/add-text-to-photo",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/add-text-to-photo"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/photo-editor",
+        "/tools/remove-metadata"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 983
+    },
+    {
+      "url": "https://briefvu.com/tools/photo-editor",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/photo-editor"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/add-text-to-photo",
+        "/tools/compress-image",
+        "/tools/photo-editor",
+        "/tools/remove-metadata",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 877
+    },
+    {
+      "url": "https://briefvu.com/tools/rea-mcp-config",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/rea-mcp-config"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/rea-claude-code",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/image-color-picker",
+        "/tools/image-to-ico",
+        "/tools/invisible-text",
+        "/tools/rea-mcp-config"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 973
+    },
+    {
+      "url": "https://briefvu.com/tools/text-reverser",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/text-reverser"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/character-remover",
+        "/tools/color-palette-from-image",
+        "/tools/image-to-ico",
+        "/tools/invisible-text"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 528
+    },
+    {
+      "url": "https://briefvu.com/tools/character-remover",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/character-remover"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/image-to-ico",
+        "/tools/invisible-text",
+        "/tools/text-reverser"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 513
+    },
+    {
+      "url": "https://briefvu.com/tools/text-to-lrc",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/text-to-lrc"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/image-color-picker",
+        "/tools/image-to-ico",
+        "/tools/invisible-text"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 671
+    },
+    {
+      "url": "https://briefvu.com/tools/remove-metadata",
+      "lastmod": "2026-11-01T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/remove-metadata"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/what-is-photo-metadata",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/image-converter",
+        "/tools/photo-editor",
+        "/tools/sprite-sheet"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1492
+    },
+    {
+      "url": "https://briefvu.com/tools/sprite-sheet",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/sprite-sheet"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/sprite-sheet-game-development",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/photo-editor",
+        "/tools/remove-metadata"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 856
+    },
+    {
+      "url": "https://briefvu.com/tools/wordcraft-online",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/wordcraft-online"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/color-palette-from-image",
+        "/tools/image-color-picker",
+        "/tools/image-to-ico",
+        "/tools/invisible-text"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1296
+    },
+    {
+      "url": "https://briefvu.com/tools/photocraft-online",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/tools/photocraft-online"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/remove-metadata",
+        "/tools/sprite-sheet"
+      ],
+      "schemas": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "content_images": [],
+      "approx_page_words": 1298
+    },
+    {
+      "url": "https://briefvu.com/guides",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/image-formats-jpg-png-webp",
+        "/guides/prepare-images-for-web",
+        "/guides/rea-claude-code",
+        "/guides/sprite-sheet-game-development",
+        "/guides/what-is-photo-metadata",
+        "/privacy",
+        "/terms",
+        "/tools"
+      ],
+      "schemas": [
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 191
+    },
+    {
+      "url": "https://briefvu.com/guides/what-is-photo-metadata",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides/what-is-photo-metadata"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/prepare-images-for-web",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/image-converter",
+        "/tools/remove-metadata"
+      ],
+      "schemas": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 984
+    },
+    {
+      "url": "https://briefvu.com/guides/sprite-sheet-game-development",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides/sprite-sheet-game-development"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/crop-image",
+        "/tools/remove-metadata",
+        "/tools/sprite-sheet"
+      ],
+      "schemas": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 739
+    },
+    {
+      "url": "https://briefvu.com/guides/image-formats-jpg-png-webp",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides/image-formats-jpg-png-webp"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/prepare-images-for-web",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/image-color-picker",
+        "/tools/image-converter",
+        "/tools/photo-editor",
+        "/tools/remove-metadata",
+        "/tools/resize-image",
+        "/tools/rotate-image"
+      ],
+      "schemas": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 970
+    },
+    {
+      "url": "https://briefvu.com/guides/prepare-images-for-web",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides/prepare-images-for-web"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/guides/image-formats-jpg-png-webp",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/compress-image",
+        "/tools/crop-image",
+        "/tools/image-converter",
+        "/tools/remove-metadata",
+        "/tools/resize-image"
+      ],
+      "schemas": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 862
+    },
+    {
+      "url": "https://briefvu.com/guides/rea-claude-code",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/guides/rea-claude-code"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools",
+        "/tools/rea-mcp-config"
+      ],
+      "schemas": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "content_images": [],
+      "approx_page_words": 1447
+    },
+    {
+      "url": "https://briefvu.com/privacy",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/privacy"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools"
+      ],
+      "schemas": [],
+      "content_images": [],
+      "approx_page_words": 732
+    },
+    {
+      "url": "https://briefvu.com/terms",
+      "lastmod": "2026-10-20T00:00:00.000Z",
+      "status": 200,
+      "h1": 1,
+      "canonical": [
+        "https://briefvu.com/terms"
+      ],
+      "noindex": false,
+      "internal_paths": [
+        "/",
+        "/guides",
+        "/privacy",
+        "/terms",
+        "/tools"
+      ],
+      "schemas": [],
+      "content_images": [],
+      "approx_page_words": 659
+    }
+  ]
+}

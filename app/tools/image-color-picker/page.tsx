@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Copy, Crosshair, MonitorSmartphone, MousePointer2, Upload } from "lucide-react";
 import { ImageColorPicker } from "@/components/ImageColorPicker";
@@ -81,13 +82,14 @@ export default function ImageColorPickerPage() {
         <span className="eyebrow">Free browser color utility</span>
           <h1>Color Picker from Image</h1>
         <p>Use this image color picker to sample any pixel from a photo or screenshot. The private color picker from image files gives you precise HEX, RGB, and HSL values without sending the source image anywhere.</p>
+        <p className="color-intent-link">Need a full palette instead of a single pixel? <Link href="/tools/color-palette-from-image">Extract up to 10 dominant colors at once.</Link></p>
       </section>
 
       <div className="tool-page-wrap">
         <ImageColorPicker />
 
         <section className="content-section steps" aria-labelledby="color-steps-title">
-          <div className="content-heading"><span>How it works</span><h2 id="color-steps-title">Color Picker from Image — How It Works</h2><p>Use the tool when you need to match a website color, recover a palette from a reference photo, inspect a screenshot, or document an interface. The process is intentionally direct: provide the source, choose the precise pixel, and copy a standard color value. You do not need an account, browser extension, or desktop design application.</p></div>
+          <div className="content-heading"><span>How it works</span><h2 id="color-steps-title">Color Picker from Image — How It Works</h2><p>Use the tool when you need to match a website color, sample a specific spot in a reference photo, inspect a screenshot, or document an interface. The process is intentionally direct: provide the source, choose the precise pixel, and copy a standard color value. You do not need an account, browser extension, or desktop design application.</p></div>
           <div className="steps-grid">
             <article><span>1</span><Upload size={22} /><h3>Open a local image</h3><p>Choose a photo from your device, drag a file into the drop area, or paste a screenshot with Ctrl+V or Cmd+V. The image is decoded locally by your browser and is not sent to BriefVu. Most common formats supported by your browser will work; if an unusual file does not open, export it as PNG or JPEG and try again.</p></article>
             <article><span>2</span><MousePointer2 size={22} /><h3>Inspect the exact pixel</h3><p>Move the pointer across the image to preview its color values in real time. The magnifier enlarges the nearby pixels so you can distinguish a solid fill from a shadow, highlight, or anti-aliased edge. When accuracy matters, sample from the center of an even-colored area and compare a few neighboring pixels before choosing the final value.</p></article>
@@ -111,6 +113,10 @@ export default function ImageColorPickerPage() {
             <article><MonitorSmartphone size={22} /><strong>Displays interpret the result</strong><p>Two screens can render the same numeric color differently because of brightness, panel type, calibration, viewing angle, operating-system settings, or browser color management. An embedded image profile can also influence how the source appears. The copied code records the decoded pixel value; it cannot make every physical display produce exactly the same light.</p></article>
             <article><Copy size={22} /><strong>Use portable numeric values</strong><p>HEX, RGB, and HSL describe the same sampled RGB channels in formats commonly used by web and design tools. Keeping the numeric value gives collaborators a reproducible reference even when their screens differ. For brand-critical work, also test the color in its final interface, against its real background, and on representative devices rather than judging it from one monitor alone.</p></article>
           </div>
+        </section>
+
+        <section className="content-section" aria-labelledby="color-contrast-guide-title">
+          <div className="content-heading"><span>Put the color to work</span><h2 id="color-contrast-guide-title">Check WCAG contrast ratio</h2><p>Pick a pixel, then choose Use picked color as text to compare it with an editable background. The checker displays ordinary and large-text AA and AAA results separately. Transparent text is composited over the chosen opaque background before calculation. Passing one pair does not establish that a complete website is accessible; also check font size, focus states, and the actual surrounding design.</p><h2>Copy as a CSS variable or JSON</h2><p>Use the export panel to copy or download the selected pixel as a CSS variable named <code>--picked-color</code>, or JSON with HEX, RGB, HSL, and alpha. Transparency is preserved in both exports. The original individual HEX/RGB/HSL rows describe RGB channels separately from opacity. If clipboard access fails, select the visible export code and copy it manually.</p><p>Apply your picked colors to a logo, save it as an image, then <Link href="/tools/image-to-ico">turn your brand image into a favicon</Link>. Check the 16px preview before downloading.</p><p>For a coordinated set of representative colors rather than one exact point, <Link href="/tools/color-palette-from-image">extract a full color palette from the image</Link>.</p></div>
         </section>
 
         <section className="content-section faq" aria-labelledby="color-faq-title">

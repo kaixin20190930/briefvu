@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "/tools/image-to-ico": {
+      "status": 200,
+      "canonical": "https://briefvu.com/tools/image-to-ico",
+      "h1": 1,
+      "jsonld_blocks": 1
+    },
+    "/tools/image-converter": {
+      "status": 200,
+      "canonical": "https://briefvu.com/tools/image-converter",
+      "h1": 1,
+      "jsonld_blocks": 1
+    },
+    "/": {
+      "status": 200,
+      "canonical": "https://briefvu.com",
+      "h1": 1,
+      "jsonld_blocks": 1
+    },
+    "/tools": {
+      "status": 200,
+      "canonical": "https://briefvu.com/tools",
+      "h1": 1,
+      "jsonld_blocks": 0
+    }
+  },
+  "sitemap": {
+    "unique_urls": 31,
+    "ico_lastmod": "2026-11-01T00:00:00.000Z",
+    "unchanged_old_dates": 25
+  }
+}

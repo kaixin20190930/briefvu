@@ -1,0 +1,53 @@
+{
+  "zip_crc": "passed",
+  "failed_file_excluded": true,
+  "files": [
+    {
+      "source": "location.jpg",
+      "output": "image-001-clean.jpg",
+      "before": 923,
+      "after": 629,
+      "pixels_identical": true,
+      "image_payload_identical": true,
+      "exif_remaining": 0
+    },
+    {
+      "source": "location.webp",
+      "output": "image-002-clean.webp",
+      "before": 424,
+      "after": 132,
+      "pixels_identical": true,
+      "image_payload_identical": true,
+      "exif_remaining": 0
+    },
+    {
+      "source": "notes.png",
+      "output": "image-003-clean.png",
+      "before": 433,
+      "after": 316,
+      "pixels_identical": true,
+      "image_payload_identical": true,
+      "exif_remaining": 0
+    },
+    {
+      "source": "plain.png",
+      "output": "image-004-clean.png",
+      "before": 316,
+      "after": 316,
+      "pixels_identical": true,
+      "image_payload_identical": true,
+      "exif_remaining": 0
+    }
+  ],
+  "production_downloads": {
+    "zip_crc": "passed",
+    "single_matches_zip": true,
+    "files": [
+      "image-001-clean.jpg",
+      "image-002-clean.webp",
+      "image-003-clean.png",
+      "image-004-clean.png"
+    ],
+    "pixels_identical": true
+  }
+}

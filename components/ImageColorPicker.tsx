@@ -30,6 +30,9 @@ import {
   type PixelPoint,
   type RgbColor,
 } from "@/lib/image-color";
+import { copyText } from "@/lib/clipboard";
+import { ColorExport } from "@/components/ColorExport";
+import { ColorContrast } from "@/components/ColorContrast";
 import { trackToolEvent, trackToolStarted } from "@/lib/tool-events-client";
 
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
@@ -41,26 +44,8 @@ const LOUPE_SOURCE_SIZE = 13;
 type CopyTarget = "hex" | "rgb" | "hsl";
 type CopyState = CopyTarget | "failed" | null;
 
-function fallbackCopy(value: string) {
-  const field = document.createElement("textarea");
-  field.value = value;
-  field.readOnly = true;
-  field.style.position = "fixed";
-  field.style.opacity = "0";
-  document.body.appendChild(field);
-  field.select();
-  let copied = false;
-  try {
-    copied = document.execCommand("copy");
-  } catch {
-    copied = false;
-  } finally {
-    field.remove();
-  }
-  return copied;
-}
-
 export function ImageColorPicker() {
+  const loadGeneration = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const loupeRef = useRef<HTMLCanvasElement>(null);
@@ -80,6 +65,7 @@ export function ImageColorPicker() {
   const alpha = color?.a ?? 255;
 
   useEffect(() => () => {
+    loadGeneration.current++;
     if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
   }, []);
 
@@ -133,6 +119,8 @@ export function ImageColorPicker() {
   }, []);
 
   const loadFile = useCallback(async (file: File) => {
+    const token = ++loadGeneration.current;
+    setImageInfo(null); setColor(null); setPoint(null); setLoading(false);
     setError(null);
     setCopyState(null);
     if (file.type && !file.type.startsWith("image/")) {
@@ -151,6 +139,7 @@ export function ImageColorPicker() {
       image.decoding = "async";
       image.src = objectUrl;
       await image.decode();
+      if (token !== loadGeneration.current) return;
       const width = image.naturalWidth;
       const height = image.naturalHeight;
       if (!width || !height) throw new Error("empty image");
@@ -177,11 +166,14 @@ export function ImageColorPicker() {
       trackToolStarted("image-color-picker");
       trackToolEvent("image-color-picker", "file_loaded");
     } catch {
+      if (token !== loadGeneration.current) return;
       setError("BriefVu could not decode this image. Try exporting it as PNG, JPEG, or another format your browser supports.");
     } finally {
       URL.revokeObjectURL(objectUrl);
-      setLoading(false);
-      if (inputRef.current) inputRef.current.value = "";
+      if (token === loadGeneration.current) {
+        setLoading(false);
+        if (inputRef.current) inputRef.current.value = "";
+      }
     }
   }, [drawLoupe, samplePixel]);
 
@@ -264,17 +256,7 @@ export function ImageColorPicker() {
   }
 
   async function copyValue(target: CopyTarget, value: string) {
-    let copied = false;
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
-        copied = true;
-      } else {
-        copied = fallbackCopy(value);
-      }
-    } catch {
-      copied = fallbackCopy(value);
-    }
+    const copied = await copyText(value);
     setCopyState(copied ? target : "failed");
     if (copied) trackToolEvent("image-color-picker", "copy_completed");
     if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
@@ -297,6 +279,7 @@ export function ImageColorPicker() {
         className="sr-only"
         onChange={(event) => {
           const file = event.target.files?.[0];
+          event.target.value = "";
           if (file) void loadFile(file);
         }}
         ref={inputRef}
@@ -372,6 +355,8 @@ export function ImageColorPicker() {
       <p className="sr-only" aria-live="polite">
         {copyState === "failed" ? "Copy failed. Select the displayed value and copy it manually." : copyState ? `${copyState.toUpperCase()} color copied.` : ""}
       </p>
+      {color && <ColorExport key={`${color.r}-${color.g}-${color.b}-${color.a}`} colors={[{ name: "picked-color", color }]} tool="image-color-picker" />}
+      <ColorContrast selected={color} />
       <div className="paste-tip"><Clipboard size={16} /><span>Tip: paste a screenshot anywhere on this page to open it instantly.</span></div>
     </section>
   );

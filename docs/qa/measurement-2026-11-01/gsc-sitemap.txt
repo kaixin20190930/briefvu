@@ -1,0 +1,62 @@
+- navigation "路径":
+  - heading "站点地图" [level=1]
+- main:
+  - generic: 添加新的站点地图
+  - textbox "输入站点地图网址" [active]
+  - generic: 输入站点地图网址
+  - button "提交" [disabled]:
+    - generic: 提交
+  - heading "已提交的站点地图" [level=1]:
+    - generic: 已提交的站点地图
+  - button "过滤表格行":
+    - generic: 
+  - table:
+    - rowgroup:
+      - row "站点地图 类型 已提交的网址数 上次读取时间 状态 已发现的网页 已发现的视频":
+        - columnheader "站点地图":
+          - text: 站点地图
+        - columnheader "类型":
+          - text: 类型
+        - columnheader "已提交的网址数":
+          - text: 已提交的网址数
+        - columnheader "上次读取时间":
+          - text: 上次读取时间
+        - columnheader "状态":
+          - text: 状态
+        - columnheader "已发现的网页":
+          - text: 已发现的网页
+        - columnheader "已发现的视频":
+          - text: 已发现的视频
+        - columnheader
+    - rowgroup:
+      - row "https://briefvu.com/sitemap.xml 站点地图 2026年10月16日 2026年10月29日 成功 29 0":
+        - cell "https://briefvu.com/sitemap.xml"
+        - cell "站点地图"
+        - cell "2026年10月16日"
+        - cell "2026年10月29日"
+        - cell "成功":
+          - generic: 成功
+        - cell "29"
+        - cell "0"
+        - cell:
+          - button:
+            - generic: 
+  - generic: 每页行数：
+  - listbox "每页行数":
+    - option "5"
+    - option "10" [selected]
+    - option "25"
+    - option "50"
+    - option "100"
+    - option "250"
+    - option "500"
+  - generic: 第 1-1 行，共 1 行
+  - generic: 
+  - generic: 
+- button "Open or close panel":
+- button "Open or close extension":
+- button "AI Autofill":
+- img "Monica"
+- generic: ⌘M
+- text: Explain
+- generic: 站点地图

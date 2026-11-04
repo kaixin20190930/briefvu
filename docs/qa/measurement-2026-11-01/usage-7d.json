@@ -1,0 +1,56 @@
+{
+  "fetchedAt": "2026-11-01T12:48:07.901Z",
+  "window": {
+    "from": "2026-10-25T12:48:06.000Z",
+    "until": "2026-11-01T12:48:06.000Z",
+    "hours": 168,
+    "timezone": "UTC",
+    "endExclusive": true
+  },
+  "dataset": "briefvu_tool_events",
+  "credentialSource": "BRIEFVU_ANALYTICS_API_TOKEN",
+  "unit": "sample-weighted action count; not unique users",
+  "qaNote": "Includes QA activity. Events have no session/source identifier, so historical QA cannot be reliably subtracted.",
+  "rows": [
+    {
+      "tool": "color-palette-from-image",
+      "event": "file_loaded",
+      "events": 2
+    },
+    {
+      "tool": "color-palette-from-image",
+      "event": "tool_started",
+      "events": 2
+    },
+    {
+      "tool": "image-to-ico",
+      "event": "export_completed",
+      "events": 1
+    },
+    {
+      "tool": "image-to-ico",
+      "event": "file_loaded",
+      "events": 1
+    },
+    {
+      "tool": "image-to-ico",
+      "event": "tool_started",
+      "events": 1
+    },
+    {
+      "tool": "remove-metadata",
+      "event": "export_completed",
+      "events": 2
+    },
+    {
+      "tool": "remove-metadata",
+      "event": "file_loaded",
+      "events": 4
+    },
+    {
+      "tool": "remove-metadata",
+      "event": "tool_started",
+      "events": 1
+    }
+  ]
+}

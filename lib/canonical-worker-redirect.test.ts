@@ -2,6 +2,11 @@ import { describe, expect, it } from "vitest";
 import { canonicalWorkerRedirect } from "./canonical-worker-redirect";
 
 describe("Cloudflare entry canonical redirect", () => {
+  it("upgrades canonical HTTP requests before serving HTML", () => {
+    const response = canonicalWorkerRedirect(new Request("http://briefvu.com/tools?source=test"));
+    expect(response?.status).toBe(308);
+    expect(response?.headers.get("location")).toBe("https://briefvu.com/tools?source=test");
+  });
   it("returns an absolute canonical 308 before OpenNext handles the request", () => {
     const response = canonicalWorkerRedirect(
       new Request("http://127.0.0.1:8787/tools/invisible-text?source=worker", {

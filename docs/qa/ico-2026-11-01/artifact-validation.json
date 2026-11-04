@@ -1,0 +1,29 @@
+{
+  "ico_sizes": [
+    [
+      16,
+      16
+    ],
+    [
+      32,
+      32
+    ],
+    [
+      48,
+      48
+    ],
+    [
+      256,
+      256
+    ]
+  ],
+  "zip_entries": [
+    "favicon.ico",
+    "apple-touch-icon.png",
+    "icon-192.png",
+    "icon-512.png",
+    "readme.txt"
+  ],
+  "zip_crc": "passed",
+  "transparency": "ICO and PNG transparent; Apple touch opaque"
+}

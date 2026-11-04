@@ -1,6 +1,9 @@
 export const TOOL_IDS = [
+  "tga-viewer",
   "invisible-text",
   "image-color-picker",
+  "color-palette-from-image",
+  "image-to-ico",
   "image-converter",
   "crop-image",
   "rotate-image",
