@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Terms of Use",
-  description: "Terms governing your use of BriefVu browser tools, hosted editors, and related services.",
-  path: "/terms",
-});
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Terms of Use",
+    description: "Terms governing your use of BriefVu browser tools, hosted editors, and related services.",
+    path: "/terms",
+  }),
+  robots: { index: false, follow: true },
+};
 
 export default function TermsPage() {
   return (

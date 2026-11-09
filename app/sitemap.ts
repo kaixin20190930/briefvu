@@ -39,15 +39,13 @@ export const sitemapEntries = [
   { path: "/guides/prepare-images-for-web", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/rea-claude-code", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/compress-image-to-target-size" },
-  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
-  { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
 ] as const;
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
-  "/tools/tga-viewer": "2026-11-03T00:00:00.000Z",
-  "/tools/remove-metadata": "2026-11-01T00:00:00.000Z",
-  "/tools/image-to-ico": "2026-11-04T00:00:00.000Z",
+  "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
+  "/tools/remove-metadata": "2026-11-09T00:00:00.000Z",
+  "/tools/image-to-ico": "2026-11-09T00:00:00.000Z",
   "/": "2026-11-03T00:00:00.000Z",
   "/tools": "2026-11-03T00:00:00.000Z",
   "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",

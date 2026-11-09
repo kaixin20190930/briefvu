@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
       { source: "/terms", headers: revalidateDocument },
       { source: "/robots.txt", headers: revalidateDocument },
       { source: "/sitemap.xml", headers: revalidateDocument },
-      { source: "/opengraph-image", headers: revalidateDocument },
+      { source: "/opengraph-image", headers: [...revalidateDocument, { key: "X-Robots-Tag", value: "noindex" }] },
       { source: "/icon.svg", headers: revalidateDocument },
     ];
   },

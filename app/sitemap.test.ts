@@ -35,8 +35,6 @@ describe("sitemap", () => {
       "/guides/prepare-images-for-web",
       "/guides/rea-claude-code",
       "/guides/compress-image-to-target-size",
-      "/privacy",
-      "/terms",
     ]);
     expect(sitemap().every((entry) => entry.url.startsWith("https://briefvu.com"))).toBe(true);
     expect(sitemap().every((entry) => !("priority" in entry) && !("changeFrequency" in entry))).toBe(true);
@@ -46,11 +44,12 @@ describe("sitemap", () => {
     const dates = Object.fromEntries(sitemap().map((entry) => [new URL(entry.url).pathname, entry.lastModified]));
     expect(dates["/tools/color-palette-from-image"]).toEqual(new Date("2026-11-01T00:00:00.000Z"));
     expect(dates["/tools/image-color-picker"]).toEqual(new Date("2026-11-01T00:00:00.000Z"));
-    expect(dates["/tools/image-to-ico"]).toEqual(new Date("2026-11-04T00:00:00.000Z"));
-    expect(dates["/tools/tga-viewer"]).toEqual(new Date("2026-11-03T00:00:00.000Z"));
+    expect(dates["/tools/image-to-ico"]).toEqual(new Date("2026-11-09T00:00:00.000Z"));
+    expect(dates["/tools/tga-viewer"]).toEqual(new Date("2026-11-09T00:00:00.000Z"));
     expect(dates["/guides/compress-image-to-target-size"]).toEqual(new Date("2026-11-03T00:00:00.000Z"));
-    expect(dates["/privacy"]).toEqual(new Date("2026-10-20T00:00:00.000Z"));
-    expect(dates["/tools/remove-metadata"]).toEqual(new Date("2026-11-01T00:00:00.000Z"));
+    expect(dates["/privacy"]).toBeUndefined();
+    expect(dates["/terms"]).toBeUndefined();
+    expect(dates["/tools/remove-metadata"]).toEqual(new Date("2026-11-09T00:00:00.000Z"));
     expect(new Set(sitemap().map((entry) => entry.url)).size).toBe(sitemap().length);
   });
 });

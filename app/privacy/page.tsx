@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Privacy Policy",
-  description: "How BriefVu handles files, tool inputs, technical data, browser storage, and privacy requests.",
-  path: "/privacy",
-});
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Privacy Policy",
+    description: "How BriefVu handles files, tool inputs, technical data, browser storage, and privacy requests.",
+    path: "/privacy",
+  }),
+  robots: { index: false, follow: true },
+};
 
 export default function PrivacyPage() {
   return (
