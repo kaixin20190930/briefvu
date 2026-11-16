@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       "Run the open-source WordCraft editor in your browser. Open and edit DOCX files locally, then save or export your work. Alpha software; desktop recommended.",
     path: "/tools/wordcraft-online",
   }),
-  robots: wordcraftRuntimeReady ? undefined : { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 const formats = [

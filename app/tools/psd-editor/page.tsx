@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   AlertTriangle,
   Brush,
@@ -28,9 +29,9 @@ import { absoluteUrl, createPageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
-    title: "PhotoCraft Online — Free Browser Photo Editor",
+    title: "PSD Editor Online — Open & Edit Layered PSD Files",
     description:
-      "PhotoCraft Online — free browser photo editor. Open PSD files, edit with layers and masks, export PNG/JPEG/WebP. No install, no account — runs in your browser.",
+      "PSD editor for opening and editing layered PSD files in your browser. Inspect layers and masks, make changes, and export PNG, JPEG, or WebP — no upload, no account.",
     path: "/tools/psd-editor",
   }),
   robots: photocraftRuntimeReady ? undefined : { index: false, follow: false },
@@ -53,7 +54,7 @@ export default function PhotoCraftOnlinePage() {
       ? [{
           "@context": "https://schema.org",
           "@type": "WebApplication",
-          name: "PhotoCraft Online on BriefVu",
+          name: "PSD Editor on BriefVu — powered by PhotoCraft",
           url: absoluteUrl("/tools/psd-editor"),
           description:
             "Run the open-source PhotoCraft photo editor in a browser with layers, masks, adjustments, and PSD support.",
@@ -82,7 +83,7 @@ export default function PhotoCraftOnlinePage() {
         {
           "@type": "ListItem",
           position: 3,
-          name: "PhotoCraft Online",
+          name: "PSD Editor",
           item: absoluteUrl("/tools/psd-editor"),
         },
       ],
@@ -101,14 +102,14 @@ export default function PhotoCraftOnlinePage() {
   return (
     <main>
       <JsonLd data={structuredData} />
-      <ImageToolBreadcrumbs current="PhotoCraft Online" />
+      <ImageToolBreadcrumbs current="PSD Editor" />
 
       <section className="tool-hero photocraft-hero">
         <span className="eyebrow"><ImageIcon size={15} /> Open-source image editor</span>
-        <h1>PhotoCraft Online — Free Photo Editor in Your Browser</h1>
+        <h1>PSD Editor</h1>
         <p>
-          Edit images with layers, masks, adjustment tools, and PSD support. No install or
-          account required — image processing stays in your browser.
+          Open layered files in this PSD editor powered by PhotoCraft. Inspect layers,
+          masks, and adjustments, then export a new copy — no upload, install, or account.
         </p>
         {photocraftRuntimeReady && (
           <div className="hero-actions tool-hero-actions">
@@ -289,7 +290,28 @@ export default function PhotoCraftOnlinePage() {
           </div>
         </section>
 
-        <RelatedTools currentSlug="photocraft-online" />
+        <section className="content-section" aria-labelledby="psd-viewer-editor">
+          <div className="content-heading"><span>Choose your workflow</span><h2 id="psd-viewer-editor">PSD viewer vs PSD editor</h2></div>
+          <div className="photo-tool-guide"><p>A PSD viewer is useful when you only need to see a document. A PSD editor also lets you change its contents: hide a layer, adjust opacity, add a mask, or edit a composition before saving. PhotoCraft provides both workflows in the same workspace. To use it as a PSD file viewer, open a copy and inspect the canvas and Layers panel without saving over your source.</p><p>Layer support does not guarantee that every Photoshop feature will look identical. Check typography, effects, masks, smart objects, and the overall composite when opening a complex PSD. For a critical handoff, compare the result with a reference exported by the author and verify a saved copy in the application that will receive it.</p></div>
+        </section>
+
+        <section className="content-section" aria-labelledby="psd-to-png">
+          <div className="content-heading"><span>Export a flat copy</span><h2 id="psd-to-png">Convert PSD to PNG</h2></div>
+          <div className="photo-tool-guide"><p>Open the PSD in PhotoCraft, check which layers are visible, then choose File → Export → Export As and select PNG. Check the dimensions and transparency before downloading. PNG keeps transparency and is useful for graphics, screenshots, and web assets; it does not preserve the editable PSD layer structure. Keep the original PSD as your working file.</p><p>Review the downloaded image at its intended size before publishing. If you need a smaller WebP or another delivery format after exporting PNG, continue with the <Link href="/tools/image-converter">image converter</Link>. That converter handles the flat exported image; open the layered PSD here first. Converting a PNG back to PSD later will not restore the original layers, masks, or editable text.</p></div>
+        </section>
+
+        <section className="content-section" aria-labelledby="open-psd-without-photoshop">
+          <div className="content-heading"><span>Get started</span><h2 id="open-psd-without-photoshop">How to open a PSD file without Photoshop</h2></div>
+          <div className="photo-tool-guide"><p>Launch PhotoCraft using the button above and wait for the application to load. Choose Open, select a local PSD file, and inspect the canvas and layer list. The editor processes the document on your device. It downloads application code on first launch, so allow that download to finish before choosing your file.</p><p>To edit PSD online, start with a copy, make one change, and export a preview to verify the result. Missing fonts and unsupported effects can alter appearance even when a file opens successfully. Desktop Chrome is the recommended starting point for this early-alpha build. Save a separate layered copy if you need to keep editing, and export PNG for a flattened result you can share.</p></div>
+        </section>
+
+        <section className="content-section" aria-labelledby="photocraft-photopea">
+          <div className="content-heading"><span>Choosing an editor</span><h2 id="photocraft-photopea">PhotoCraft vs Photopea</h2></div>
+          <div className="photo-tool-guide"><p>If you are looking for a Photopea alternative, evaluate it with the PSD you actually need to edit. BriefVu hosts the pinned open-source PhotoCraft v{photocraftRelease.version} release, with layers, masks, adjustments, and local exports. It is early alpha software, with limited bundled fonts and no dependable web crash recovery. BriefVu is independent of both projects.</p><p>Use a copy of a representative document to compare the rendered composite, text layout, masks, effects, and saved output in each editor. Choose based on the features your file uses rather than the number of controls in the interface. Keep the source PSD and a reference image, especially for client work or print handoffs. For an ordinary flat image, the smaller BriefVu editor may be sufficient.</p></div>
+        </section>
+
+        <p>Not a PSD? <Link href="/tools/photo-editor">Use the browser photo editor →</Link></p>
+        <RelatedTools currentSlug="psd-editor" />
       </div>
     </main>
   );

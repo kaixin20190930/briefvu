@@ -19,7 +19,7 @@ export default function ToolsPage() {
         <p>Start with private image tools, then browse focused utilities for text, documents, audio, and developer workflows.</p>
       </section>
       {categories.map((category) => {
-        const tools = toolRegistry.filter((tool) => tool.category === category);
+        const tools = toolRegistry.filter((tool) => tool.category === category && tool.discoverable !== false);
         if (!tools.length) return null;
         return <section className="tool-category" key={category} aria-labelledby={`category-${category.replaceAll(" ", "-").toLowerCase()}`}>
           <div className="section-heading"><span className="section-label">{category === "Images" ? "Start here" : "Utilities"}</span><h2 id={`category-${category.replaceAll(" ", "-").toLowerCase()}`}>{category}</h2></div>

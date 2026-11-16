@@ -12,6 +12,7 @@ export type ToolRegistryEntry = {
   category: string;
   status: ToolStatus;
   tier: ToolTier;
+  discoverable?: boolean;
 };
 
 export const toolRegistry: readonly ToolRegistryEntry[] = [
@@ -100,6 +101,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   },
   {
     slug: "wordcraft-online",
+    discoverable: false,
     name: "WordCraft Online",
     shortDescription: "Open and edit Word documents with an open-source browser word processor.",
     href: "/tools/wordcraft-online",
@@ -109,7 +111,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   },
   {
     slug: "psd-editor",
-    name: "PhotoCraft Online",
+    name: "PSD Editor",
     shortDescription: "Edit images with layers, masks, adjustments, and PSD support in your browser.",
     href: "/tools/psd-editor",
     category: "Images",
@@ -181,6 +183,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   },
   {
     slug: "rea-mcp-config",
+    discoverable: false,
     name: "REA MCP Setup Helper",
     shortDescription: "Generate official REA setup, verification, and troubleshooting commands for your AI coding agent.",
     href: "/tools/rea-mcp-config",
@@ -190,7 +193,7 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   },
   {
     slug: "photo-editor",
-    name: "Photo Editor",
+    name: "Browser Photo Editor",
     shortDescription: "Crop, rotate, adjust, and add text to images in one focused editor.",
     href: "/tools/photo-editor",
     category: "Images",
@@ -200,5 +203,5 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
 ] as const;
 
 export const availableTools = toolRegistry.filter(
-  (tool) => tool.status === "available",
+  (tool) => tool.status === "available" && tool.discoverable !== false,
 );

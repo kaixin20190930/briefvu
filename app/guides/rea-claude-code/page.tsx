@@ -7,11 +7,14 @@ import { absoluteUrl, createPageMetadata } from "@/lib/site";
 
 const path = "/guides/rea-claude-code";
 
-export const metadata: Metadata = createPageMetadata({
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+  ...createPageMetadata({
   title: "REA + Claude Code Setup — Install to First Query",
   description: "Install REA for Claude Code, preview its MCP configuration changes, verify the connection, and run your first authorized reverse engineering analysis.",
   path,
-});
+  }),
+};
 
 const faq = [
   ["Is REA free and open source?", "Yes. REA is published under the MIT license. Some optional analysis engines are separate products with their own licenses and requirements, so check the license for Ghidra, Hopper, IDA, or any other software you connect."],

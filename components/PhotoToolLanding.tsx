@@ -1,4 +1,5 @@
 import { CheckCircle2, Download, MousePointer2, ShieldCheck, Upload } from "lucide-react";
+import Link from "next/link";
 import { ImageToolBreadcrumbs } from "@/components/ImageToolBreadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { PhotoEditor } from "@/components/PhotoEditor";
@@ -7,6 +8,7 @@ import type { PhotoToolConfig } from "@/lib/photo-tools";
 import { absoluteUrl } from "@/lib/site";
 
 export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
+  const linkPhotoCraft = (text: string) => text.split("PhotoCraft Online").map((part, index) => <span key={index}>{index > 0 && <Link href="/tools/psd-editor">PhotoCraft PSD Editor</Link>}{part}</span>);
   const path = `/tools/${config.slug}`;
   const structuredData = [
     {
@@ -50,7 +52,7 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
       <PhotoEditor mode={config.mode} />
 
       <section className="content-section steps" aria-labelledby={`${config.slug}-steps`}>
-        <div className="content-heading"><span>{config.introLabel}</span><h2 id={`${config.slug}-steps`}>{config.introTitle}</h2><p>{config.intro}</p></div>
+        <div className="content-heading"><span>{config.introLabel}</span><h2 id={`${config.slug}-steps`}>{config.introTitle}</h2><p>{linkPhotoCraft(config.intro)}</p></div>
         <div className="steps-grid">
           {config.steps.map(([title, text], index) => <article key={title}><span>{index + 1}</span>{index === 0 ? <Upload size={22} /> : index === 1 ? <MousePointer2 size={22} /> : <Download size={22} />}<h3>{title}</h3><p>{text}</p></article>)}
         </div>
@@ -63,7 +65,7 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
 
       <section className="content-section" aria-labelledby={`${config.slug}-guide`}>
         <div className="content-heading"><span>Practical guide</span><h2 id={`${config.slug}-guide`}>{config.guideTitle}</h2></div>
-        <div className="photo-tool-guide">{config.guideParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+        <div className="photo-tool-guide">{config.guideParagraphs.map((paragraph) => <p key={paragraph}>{linkPhotoCraft(paragraph)}</p>)}</div>
       </section>
 
       <section className="content-section" aria-labelledby={`${config.slug}-privacy`}>
@@ -77,6 +79,7 @@ export function PhotoToolLanding({ config }: { config: PhotoToolConfig }) {
         <div className="content-heading"><span>FAQ</span><h2 id={`${config.slug}-faq`}>Common questions</h2></div>
         <div className="faq-list">{config.faqs.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
       </section>
+      {config.slug === "photo-editor" && <p>Editing a layered PSD? <Link href="/tools/psd-editor">Open it in the PSD Editor →</Link></p>}
       <RelatedTools currentSlug={config.slug} />
     </div>
   </main>;

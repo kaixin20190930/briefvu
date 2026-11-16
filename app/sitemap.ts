@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "../lib/site";
 import { photocraftRuntimeReady } from "../lib/photocraft";
-import { wordcraftRuntimeReady } from "../lib/wordcraft";
 
 export const sitemapEntries = [
   { path: "/", priority: 1, changeFrequency: "weekly" as const },
@@ -20,15 +19,11 @@ export const sitemapEntries = [
   { path: "/tools/invert-image", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/tools/add-text-to-photo", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/photo-editor", priority: 0.9, changeFrequency: "monthly" as const },
-  { path: "/tools/rea-mcp-config", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/text-reverser", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/character-remover", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/text-to-lrc", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/tools/remove-metadata", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/sprite-sheet", priority: 1, changeFrequency: "monthly" as const },
-  ...(wordcraftRuntimeReady
-    ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
-    : []),
   ...(photocraftRuntimeReady
     ? [{ path: "/tools/psd-editor", priority: 1, changeFrequency: "monthly" as const }]
     : []),
@@ -37,12 +32,12 @@ export const sitemapEntries = [
   { path: "/guides/sprite-sheet-game-development", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/image-formats-jpg-png-webp", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/guides/prepare-images-for-web", priority: 0.9, changeFrequency: "monthly" as const },
-  { path: "/guides/rea-claude-code", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/guides/compress-image-to-target-size" },
 ] as const;
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/photo-editor": "2026-11-16T00:00:00.000Z",
   "/tools/psd-editor": "2026-11-16T00:00:00.000Z",
   // Homepage and directory links now point directly to the PSD landing page.
   "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
@@ -55,7 +50,7 @@ export const pageLastModified: Readonly<Record<string, string>> = {
   // Preserve the converter metadata update already present in the working tree.
   "/tools/image-converter": "2026-11-03T00:00:00.000Z",
   "/tools/compress-image": "2026-11-03T00:00:00.000Z",
-  "/guides": "2026-11-03T00:00:00.000Z",
+  "/guides": "2026-11-16T00:00:00.000Z",
   "/guides/compress-image-to-target-size": "2026-11-03T00:00:00.000Z",
 };
 

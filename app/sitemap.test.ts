@@ -20,22 +20,20 @@ describe("sitemap", () => {
       "/tools/invert-image",
       "/tools/add-text-to-photo",
       "/tools/photo-editor",
-      "/tools/rea-mcp-config",
       "/tools/text-reverser",
       "/tools/character-remover",
       "/tools/text-to-lrc",
       "/tools/remove-metadata",
       "/tools/sprite-sheet",
-      "/tools/wordcraft-online",
       "/tools/psd-editor",
       "/guides",
       "/guides/what-is-photo-metadata",
       "/guides/sprite-sheet-game-development",
       "/guides/image-formats-jpg-png-webp",
       "/guides/prepare-images-for-web",
-      "/guides/rea-claude-code",
       "/guides/compress-image-to-target-size",
     ]);
+    expect(sitemap()).toHaveLength(28);
     expect(sitemap().every((entry) => entry.url.startsWith("https://briefvu.com"))).toBe(true);
     expect(sitemap().every((entry) => !("priority" in entry) && !("changeFrequency" in entry))).toBe(true);
   });

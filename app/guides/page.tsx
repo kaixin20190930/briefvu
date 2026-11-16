@@ -58,12 +58,6 @@ export default function GuidesPage() {
         <p>Compare photo compression, transparency, animation, editing quality, metadata, and common browser workflows.</p>
         <Link href="/guides/image-formats-jpg-png-webp">Read guide <ArrowRight size={16} /></Link>
       </article>
-      <article>
-        <div><span>Developer tools</span><time dateTime="2026-10-18">Updated October 18, 2026</time></div>
-        <h2>REA + Claude Code Setup</h2>
-        <p>Install REA with its current guided setup, verify the MCP connection, prepare the right analysis engine, and run a first authorized investigation.</p>
-        <Link href="/guides/rea-claude-code">Read guide <ArrowRight size={16} /></Link>
-      </article>
     </section>
   </main>;
 }

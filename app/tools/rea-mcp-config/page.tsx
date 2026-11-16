@@ -9,11 +9,14 @@ import { absoluteUrl, createPageMetadata } from "@/lib/site";
 
 const path = "/tools/rea-mcp-config";
 
-export const metadata: Metadata = createPageMetadata({
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+  ...createPageMetadata({
   title: "REA MCP Setup & Config Helper",
   description: "Generate the correct REA MCP setup, verification, and troubleshooting commands for Claude Code, Cursor, Codex, and other supported agents.",
   path,
-});
+  }),
+};
 
 const faqs = [
   ["Does this tool edit my MCP configuration?", "No. BriefVu only generates commands and a checklist in your browser. You decide what to copy and run in your own terminal. REA's official setup command previews its planned paths and changes, asks for approval, and maintains its own configuration backups."],
