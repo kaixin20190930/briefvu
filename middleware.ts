@@ -7,6 +7,11 @@ import { canonicalRedirectUrl, resolveRequestHostname } from "./lib/domain-redir
 export const runtime = "experimental-edge";
 
 export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/tools/photocraft-online") {
+    const destination = request.nextUrl.clone();
+    destination.pathname = "/tools/psd-editor";
+    return NextResponse.redirect(destination, 301);
+  }
   const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
   const hostname = resolveRequestHostname(
     forwardedHost ?? null,

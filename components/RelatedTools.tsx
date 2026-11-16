@@ -18,7 +18,7 @@ const contextualRecommendations: Record<string, string[]> = {
   "color-palette-from-image": ["image-color-picker", "image-converter", "resize-image", "compress-image"],
   "image-color-picker": ["color-palette-from-image", "add-text-to-photo", "crop-image", "remove-metadata"],
   "photo-editor": ["resize-image", "compress-image", "remove-metadata", "add-text-to-photo"],
-  "photocraft-online": ["remove-metadata", "image-color-picker", "crop-image", "sprite-sheet"],
+  "psd-editor": ["remove-metadata", "image-color-picker", "crop-image", "sprite-sheet"],
 };
 
 export function RelatedTools({ currentSlug }: { currentSlug: string }) {

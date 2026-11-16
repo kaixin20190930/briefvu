@@ -3,6 +3,11 @@ import { NextRequest } from "next/server";
 import { middleware } from "./middleware";
 
 describe("canonical host middleware", () => {
+  it("migrates the PhotoCraft landing page with a query-preserving 301", () => {
+    const response = middleware(new NextRequest("https://briefvu.com/tools/photocraft-online?source=legacy"));
+    expect(response.status).toBe(301);
+    expect(response.headers.get("location")).toBe("https://briefvu.com/tools/psd-editor?source=legacy");
+  });
   it("returns a path-and-query-preserving 308 for the legacy public host", () => {
     const request = new NextRequest(
       "http://localhost:8787/tools/invisible-text?source=legacy",

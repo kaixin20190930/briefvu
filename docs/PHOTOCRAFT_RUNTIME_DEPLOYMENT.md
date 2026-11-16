@@ -1,7 +1,7 @@
 # PhotoCraft shared apps runtime
 
 PhotoCraft is published at `https://apps.briefvu.com/photocraft/`. Its indexable product page is
-`https://briefvu.com/tools/photocraft-online`. The runtime host sends
+`https://briefvu.com/tools/psd-editor`. The runtime host sends
 `X-Robots-Tag: noindex, nofollow` and its host-wide `robots.txt` disallows crawling.
 
 ## Pinned upstream release

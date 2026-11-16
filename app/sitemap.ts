@@ -30,7 +30,7 @@ export const sitemapEntries = [
     ? [{ path: "/tools/wordcraft-online", priority: 1, changeFrequency: "monthly" as const }]
     : []),
   ...(photocraftRuntimeReady
-    ? [{ path: "/tools/photocraft-online", priority: 1, changeFrequency: "monthly" as const }]
+    ? [{ path: "/tools/psd-editor", priority: 1, changeFrequency: "monthly" as const }]
     : []),
   { path: "/guides", priority: 0.7, changeFrequency: "weekly" as const },
   { path: "/guides/what-is-photo-metadata", priority: 0.9, changeFrequency: "monthly" as const },
@@ -43,11 +43,13 @@ export const sitemapEntries = [
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/psd-editor": "2026-11-16T00:00:00.000Z",
+  // Homepage and directory links now point directly to the PSD landing page.
   "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
   "/tools/remove-metadata": "2026-11-09T00:00:00.000Z",
   "/tools/image-to-ico": "2026-11-09T00:00:00.000Z",
-  "/": "2026-11-03T00:00:00.000Z",
-  "/tools": "2026-11-03T00:00:00.000Z",
+  "/": "2026-11-16T00:00:00.000Z",
+  "/tools": "2026-11-16T00:00:00.000Z",
   "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",
   "/tools/image-color-picker": "2026-11-01T00:00:00.000Z",
   // Preserve the converter metadata update already present in the working tree.

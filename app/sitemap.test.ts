@@ -27,7 +27,7 @@ describe("sitemap", () => {
       "/tools/remove-metadata",
       "/tools/sprite-sheet",
       "/tools/wordcraft-online",
-      "/tools/photocraft-online",
+      "/tools/psd-editor",
       "/guides",
       "/guides/what-is-photo-metadata",
       "/guides/sprite-sheet-game-development",

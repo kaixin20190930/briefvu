@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "PhotoCraft Online — Free Browser Photo Editor",
     description:
       "PhotoCraft Online — free browser photo editor. Open PSD files, edit with layers and masks, export PNG/JPEG/WebP. No install, no account — runs in your browser.",
-    path: "/tools/photocraft-online",
+    path: "/tools/psd-editor",
   }),
   robots: photocraftRuntimeReady ? undefined : { index: false, follow: false },
 };
@@ -54,7 +54,7 @@ export default function PhotoCraftOnlinePage() {
           "@context": "https://schema.org",
           "@type": "WebApplication",
           name: "PhotoCraft Online on BriefVu",
-          url: absoluteUrl("/tools/photocraft-online"),
+          url: absoluteUrl("/tools/psd-editor"),
           description:
             "Run the open-source PhotoCraft photo editor in a browser with layers, masks, adjustments, and PSD support.",
           applicationCategory: "MultimediaApplication",
@@ -83,7 +83,7 @@ export default function PhotoCraftOnlinePage() {
           "@type": "ListItem",
           position: 3,
           name: "PhotoCraft Online",
-          item: absoluteUrl("/tools/photocraft-online"),
+          item: absoluteUrl("/tools/psd-editor"),
         },
       ],
     },

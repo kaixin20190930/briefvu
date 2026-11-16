@@ -108,10 +108,10 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
     tier: "free",
   },
   {
-    slug: "photocraft-online",
+    slug: "psd-editor",
     name: "PhotoCraft Online",
     shortDescription: "Edit images with layers, masks, adjustments, and PSD support in your browser.",
-    href: "/tools/photocraft-online",
+    href: "/tools/psd-editor",
     category: "Images",
     status: photocraftRuntimeReady ? "available" : "coming-soon",
     tier: "free",
