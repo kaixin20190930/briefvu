@@ -48,3 +48,10 @@
 - 新 `/tools/psd-editor`：GSC 是否已抓取、是否已收录，本次未核实。最近一次实际读取结果仍为本日发布后“Google 无法识别此网址”，随后索引请求成功加入优先抓取队列；该历史结果不代表本次状态。
 - 独立 HTTP 复查：旧 URL 返回 301，Location 为 `/tools/psd-editor`；新 URL 返回 200。
 - 后续待连接恢复：检查两个 URL 的索引覆盖状态、上次抓取时间及 Google 选择的 canonical，再更新结果。本次未重复请求索引，未修改页面内容、sitemap 或部署。
+
+## GSC 再次连接（2026-11-16 15:41，Asia/Shanghai）
+
+- 通过 Chrome 原生界面成功打开 BriefVu 的 GSC 资源 `sc-domain:briefvu.com`；现有账号已登录，无需新增授权。浏览器标签连接接口仍超时。
+- 已尝试在网址检查框检查旧 PhotoCraft URL，但 Chrome 活动标签多次切换，操作保护提示需重新读取状态；未获得任何一条目标 URL 的本次检查结果。
+- 旧 `/tools/photocraft-online` 的 Google 重定向识别、新 `/tools/psd-editor` 的抓取与收录状态、上次抓取时间和 Google canonical 均仍待核实。不能将成功连接 GSC 或此前线上 301/200 视为 Google 已处理迁移。
+- 已请求用户将 Chrome 保持在 BriefVu GSC 标签，待就绪后继续两条 URL 的只读检查。本次没有重复请求索引，没有修改页面内容、sitemap 或部署；仅更新本清单，无需运行产品测试。
