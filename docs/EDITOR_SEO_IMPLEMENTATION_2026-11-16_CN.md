@@ -22,6 +22,7 @@
 - [x] 桌面：打开 PSD → 添加图层 → 导出 PNG。
 - [ ] iPhone 真机同路径检查，未验证前不宣称移动端可用，不发布 Product Hunt。
 - [x] GSC 新 PSD URL 检查、请求索引。
+- [x] GSC 再次只读检查两条 URL：新 PSD URL 已抓取并收录（11 月 16 日 15:24:42）；旧 URL 仍显示迁移前的已收录记录。
 - [ ] 等 Google 重新抓取后复核旧 URL 的 GSC 重定向识别；线上 HTTP 301 已验证。
 - [ ] 11 月 23–25 日复核 C2PA、ICO 查询数据；本批冻结这两页。
 - [ ] 三个月观察 PSD 与 browser photo editor 排名；排名是观察目标，不作为代码交付承诺。
@@ -55,3 +56,23 @@
 - 已尝试在网址检查框检查旧 PhotoCraft URL，但 Chrome 活动标签多次切换，操作保护提示需重新读取状态；未获得任何一条目标 URL 的本次检查结果。
 - 旧 `/tools/photocraft-online` 的 Google 重定向识别、新 `/tools/psd-editor` 的抓取与收录状态、上次抓取时间和 Google canonical 均仍待核实。不能将成功连接 GSC 或此前线上 301/200 视为 Google 已处理迁移。
 - 已请求用户将 Chrome 保持在 BriefVu GSC 标签，待就绪后继续两条 URL 的只读检查。本次没有重复请求索引，没有修改页面内容、sitemap 或部署；仅更新本清单，无需运行产品测试。
+
+## GSC 复核完成（2026-11-16 15:53，Asia/Shanghai）
+
+用户保持 Chrome 停留在 BriefVu GSC 后，已直接读取两条 URL 的 Google 索引检查结果并展开“网页索引编制”详情。以下抓取时间按 GSC 界面原样记录。
+
+| 检查项 | 旧 PhotoCraft URL | 新 PSD Editor URL |
+| --- | --- | --- |
+| URL | `https://briefvu.com/tools/photocraft-online` | `https://briefvu.com/tools/psd-editor` |
+| 索引状态 | 网址已收录到 Google；网页已编入索引 | 网址已收录到 Google；网页已编入索引 |
+| 上次抓取时间 | 2026-11-06 17:22:43 | 2026-11-16 15:24:42 |
+| 用户代理 | Googlebot 智能手机版 | Googlebot 智能手机版 |
+| 是否允许抓取 / 网页抓取 / 是否允许索引 | 是 / 成功 / 是 | 是 / 成功 / 是 |
+| 用户声明的规范网址 | 旧 PhotoCraft URL | 新 PSD Editor URL |
+| Google 选择的规范网址 | 所检查的网址（旧 URL） | 所检查的网址（新 URL） |
+| 发现来源 | sitemap.xml；引荐来源为 `/tools/rotate-image` | 未检测到引荐站点地图及引荐来源网页；界面提示可能有未报告的其他来源 |
+
+- **结论：新 PSD Editor 已抓取并收录，Google canonical 指向自身。** 本日首次请求索引后的等待项已完成，无需重复请求。
+- **旧 PhotoCraft 的重定向识别尚未体现在 GSC 中。** 其索引详情仍是 11 月 6 日的迁移前抓取记录，没有显示“网页会自动重定向”。此前 HTTP 301 验证仍成立；本次结果不能据此认定线上重定向失败，也不能将整次迁移标为 Google 已处理完成。
+- 下一步仅等待 Google 重抓旧 URL，在后续复核中检查覆盖原因及 canonical 是否更新；保持现有 301、内容和内链。本次未点击“测试实际网址”或“请求编入索引”，未改页面、sitemap 或部署。
+- 验证范围：GSC 两条 URL 的索引记录与详情；仅文档更新并执行 `git diff --check`，不运行产品测试或构建。
