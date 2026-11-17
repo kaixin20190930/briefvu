@@ -429,3 +429,17 @@ footer { width: min(1180px, calc(100% - 40px)); min-height: 120px; margin: auto;
 .tga-info dt { color:var(--muted); }.tga-info dd { margin:0; text-align:right; font-weight:650; }
 .batch-results { display:grid; gap:14px; margin-top:20px; }
 @media(max-width:760px) { .tga-workspace { grid-template-columns:1fr; } .tga-preview { min-height:220px; } }
+
+/* Image workflow controls share the existing tool shell. */
+.sprite-tabs-three { grid-template-columns: repeat(3, 1fr); }
+.checker-preview { background-color: #fff; background-image: conic-gradient(#edf1f4 25%, #fff 0 50%, #edf1f4 0 75%, #fff 0); background-size: 18px 18px; }
+.sprite-grid-preview { padding: 18px; margin-top: 20px; border: 1px solid var(--line); border-radius: 12px; overflow: auto; text-align: center; }
+.sprite-grid-preview canvas { max-width: 100%; max-height: 450px; object-fit: contain; image-rendering: pixelated; }
+.sprite-grid-preview p, .frame-scrub { color: var(--muted); font-size: 12px; }
+.frame-scrub { display: block; margin-top: 14px; }
+.frame-scrub input { display: block; width: 100%; }
+.sprite-maker-frames article { grid-template-columns: 24px repeat(5, 32px) minmax(40px, 1fr); cursor: grab; }
+.sprite-maker-frames article canvas { width: 28px; height: 28px; object-fit: contain; }
+.sprite-maker-frames small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sprite-controls label { max-width: 150px; flex: 1; }
+@media (max-width: 700px) { .sprite-tabs-three { grid-template-columns: 1fr; } }

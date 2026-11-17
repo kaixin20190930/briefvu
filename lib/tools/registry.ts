@@ -92,8 +92,8 @@ export const toolRegistry: readonly ToolRegistryEntry[] = [
   },
   {
     slug: "sprite-sheet",
-    name: "Sprite Sheet Generator",
-    shortDescription: "Convert GIF to sprite sheet or sprite sheet to animated GIF in your browser.",
+    name: "Sprite Sheet Maker",
+    shortDescription: "Arrange image frames, export PNG and JSON, or convert GIF animations locally.",
     href: "/tools/sprite-sheet",
     category: "Images",
     status: "available",

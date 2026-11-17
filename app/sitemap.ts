@@ -37,20 +37,22 @@ export const sitemapEntries = [
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/sprite-sheet": "2026-11-17T00:00:00.000Z",
+  "/guides/sprite-sheet-game-development": "2026-11-17T00:00:00.000Z",
   "/tools/photo-editor": "2026-11-16T00:00:00.000Z",
   "/tools/psd-editor": "2026-11-16T00:00:00.000Z",
   // Homepage and directory links now point directly to the PSD landing page.
   "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
   "/tools/remove-metadata": "2026-11-09T00:00:00.000Z",
   "/tools/image-to-ico": "2026-11-09T00:00:00.000Z",
-  "/": "2026-11-16T00:00:00.000Z",
-  "/tools": "2026-11-16T00:00:00.000Z",
+  "/": "2026-11-17T00:00:00.000Z",
+  "/tools": "2026-11-17T00:00:00.000Z",
   "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",
   "/tools/image-color-picker": "2026-11-01T00:00:00.000Z",
   // Preserve the converter metadata update already present in the working tree.
   "/tools/image-converter": "2026-11-03T00:00:00.000Z",
   "/tools/compress-image": "2026-11-03T00:00:00.000Z",
-  "/guides": "2026-11-16T00:00:00.000Z",
+  "/guides": "2026-11-17T00:00:00.000Z",
   "/guides/compress-image-to-target-size": "2026-11-03T00:00:00.000Z",
 };
 
