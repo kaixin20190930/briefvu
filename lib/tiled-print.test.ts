@@ -11,6 +11,9 @@ describe("tiled print", () => {
     expect(layout.tiles[1].x).toBe(layout.contentWidth - 5);
     expect(layout.tiles[3].y).toBe(layout.contentHeight - 5);
     expect(layout.ppi).toBeCloseTo(254);
+    expect(layout.contentLeft - 2).toBeGreaterThanOrEqual(options.margin);
+    expect(layout.contentBottom).toBeGreaterThan(options.margin);
+    expect(layout.contentBottom + layout.contentHeight + 2).toBeLessThanOrEqual(layout.paperHeight - options.margin);
   });
   it("fits proportions into a Letter landscape page grid and rejects excessive pages", () => {
     const layout = tiledPrintLayout(600, 400, { ...options, paper: "Letter", landscape: true, mode: "pages" });
