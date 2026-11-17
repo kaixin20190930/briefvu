@@ -1,0 +1,43 @@
+check_circle
+网址已收录到 Google
+它能显示在 Google 搜索结果中（如果没有受到人工处置措施或移除要求的影响），并能使用所有相关的增强选项。了解详情
+查看被抓取的网页
+更改了网页？
+请求编入索引
+check_circle
+网页索引编制
+网页已编入索引
+
+发现
+站点地图
+临时处理错误
+引荐来源网页
+https://briefvu.com/tools/remove-metadata
+抓取
+上次抓取时间
+2026年11月13日 17:23:39
+当时所用的用户代理
+Googlebot 智能手机版
+是否允许抓取？
+是
+网页抓取
+成功
+是否允许编入索引？
+是
+编制索引
+用户声明的规范网址
+https://briefvu.com/tools/sprite-sheet
+Google 选择的规范网址
+
+所检查的网址
+了解详情
+打开报告
+增强功能和体验
+check_circle
+HTTPS
+网页采用 HTTPS 协议
+
+check_circle
+路径
+检测到了 1 项有效内容
+

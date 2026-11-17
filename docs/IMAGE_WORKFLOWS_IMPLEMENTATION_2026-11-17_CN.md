@@ -38,7 +38,7 @@
 ## 暂缓及人工事项
 
 - [ ] 海报专页：验证 DR≥10 后再评估与打印页的意图区分，复用打印核心，不提前新建 URL。
-- [ ] 精灵页按查询拆分的 GSC 基线；不阻塞实际功能交付，不根据未读到的数据改旧入口。
+- [x] 精灵页按查询拆分的 GSC 基线：11 月 18 日已读取收录、抓取、规范网址与 28 天查询明细，见文末记录。
 - [ ] printtiler 外链结构：需 Ahrefs 数据，本轮不以未经核实的引用域数制定承诺。
 - [ ] 每周两批外链、每批 5–10 个，使用现有 `docs/backlinks/LISTING_KIT_EN.md`；历史 prospects 清单需重审相关性；本轮不代用户向第三方公开发帖。Product Hunt 仍需先完成既有 iPhone 真机待办。
 - [ ] 实物打印第一页，核对校准尺为 100mm、选 Actual size / 100%、关闭 Fit；再验证相邻页拼接。
@@ -70,17 +70,60 @@
 - [x] 线上 9 个相关页面均返回 200；canonical、工具/指南标题分工、首页与 crop/resize/photo-editor/sprite 的内链通过检查。指南仅保留一处指向精灵工具的链接。
 - [x] sitemap 共 30 条；新增 print 与 pixelate，未加入受门槛限制的海报 URL。对应变更页按 11 月 17 / 18 日实际日期更新，PSD 保持 11 月 16 日，TGA 与 ICO 保持 11 月 9 日。
 - [x] 129 项测试通过；最后的打印留白修正另通过 5 项针对性检查、ESLint、发布构建与第一页 PDF 渲染。校准尺、页码和裁切标记在打印机留白内侧，不依靠超出可打印区的纸边。
-- [x] 线上复核明细：`docs/qa/image-workflows-2026-11-18/production-smoke.json`。本轮未向 GSC 重复提交索引请求；HTTP 200 不代表已收录。
-- [ ] 人工验收仍保留：真实打印 100mm 校准尺与相邻页拼装；iPhone 编辑器既有待办；外链实际投稿与 GSC 查询基线。PSD 正文中两处 PhotoCraft 旧 H2 属于可选后续文案，本轮按冻结范围保留。
+- [x] 线上复核明细：`docs/qa/image-workflows-2026-11-18/production-smoke.json`。发布复核时未向 GSC 重复提交索引请求；11 月 18 日后续已按用户要求提交两个新页面，见下文。HTTP 200 不代表已收录。
+- [ ] 人工验收仍保留：真实打印 100mm 校准尺与相邻页拼装；iPhone 编辑器既有待办；外链实际投稿。GSC 查询基线已补齐。PSD 正文中两处 PhotoCraft 旧 H2 属于可选后续文案，本轮按冻结范围保留。
 
-优先手动提交的新页面：
+已于 2026-11-18 通过 GSC 请求编入索引的新页面（无需再次手动提交）：
 
 1. https://briefvu.com/tools/print-image-multiple-pages
 2. https://briefvu.com/tools/pixelate-image
 
-可在有配额时提交本轮更新的已有页面：
+本轮未追加索引请求的已有页面（sprite 已确认收录；指南未检查，不例行重复提交）：
 
 - https://briefvu.com/tools/sprite-sheet
 - https://briefvu.com/guides/sprite-sheet-game-development
 
 站点地图：https://briefvu.com/sitemap.xml 。海报页等待 DR≥10；外链与排名仍是后续工作，不能将本轮功能上线写成已完成获客或排名目标。
+
+## GSC 索引请求与精灵页基线（2026-11-18）
+
+本次只操作 `sc-domain:briefvu.com` 的 GSC 并更新记录；未修改页面内容、TDK、内链或 sitemap，未重新部署。直接核对 GSC 界面确认结果，不以 HTTP 状态推断收录。
+
+- [x] `/tools/print-image-multiple-pages`：检查时「网址尚未收录到 Google／Google 无法识别此网址」，无上次抓取、引荐站点地图及规范网址记录。点击请求并等待实际网址检查完成，收到「已请求编入索引／已将网址添加到优先抓取队列中」。
+- [x] `/tools/pixelate-image`：同样尚未收录、Google 无法识别，暂无抓取与规范网址记录；已收到相同提交成功确认。
+- [x] 两页各提交一次；排队不等于已抓取或已收录，不重复消耗配额。
+- [x] `/tools/sprite-sheet`：已收录。上次抓取为 **2026-11-13 17:23:39（GSC 界面原值）**，Googlebot 智能手机版；允许抓取、抓取成功、允许索引。用户声明 canonical 为自身，Google 选择「所检查的网址」；HTTPS 有效，检测到 1 项有效路径内容。引荐页为 `/tools/remove-metadata`。
+- [x] 精灵页发现信息中的「站点地图」显示 **临时处理错误**，如实记录，不能据此判定当前 sitemap 不可访问。该页当前仍已收录；最后抓取早于 11 月 17 日升级，尚不能确认 Google 已抓取新版 Maker。此次只读该页，未额外请求重抓。
+
+### Sprite-sheet 搜索表现
+
+口径：搜索类型「网页（文本）」；网页「完全匹配的网址」为 `https://briefvu.com/tools/sprite-sheet`；所有国家/设备；**2026-10-20 至 2026-11-16，28 天**。GSC 界面提示上次更新为 3.5 小时前。该区间早于新版上线，作为升级前基线。
+
+| 指标 | 基线 |
+|---|---:|
+| 点击 | 0 |
+| 展示 | 13 |
+| CTR | 0% |
+| 平均排名 | 66.7 |
+| 可见查询行 | 12 |
+
+| 查询（保留 GSC 原文） | 点击 | 展示 | CTR | 平均排名 |
+|---|---:|---:|---:|---:|
+| spritesheet extractor | 0 | 1 | 0% | 2.0 |
+| create sprite sheet online | 0 | 1 | 0% | 3.0 |
+| make sprite sheet online | 0 | 1 | 0% | 27.0 |
+| how to create a sprite sheet froma gif | 0 | 1 | 0% | 85.0 |
+| sprite converter | 0 | 1 | 0% | 85.0 |
+| gif to sprites | 0 | 1 | 0% | 90.0 |
+| video to sprite sheet | 0 | 1 | 0% | 90.0 |
+| sprite sheet maker from gif | 0 | 1 | 0% | 92.0 |
+| gif spritesheet | 0 | 1 | 0% | 94.0 |
+| gif maker from sprite sheet | 0 | 1 | 0% | 96.0 |
+| gif sprite sheet maker | 0 | 1 | 0% | 96.0 |
+| sprite gif maker | 0 | 1 | 0% | 99.0 |
+
+查询表合计 12 次展示，页面汇总 13 次；GSC 查询明细可能因隐私过滤等口径不完整，不补造缺失词。单词仅 1 次展示，#2/#3 不视为稳定排名；`video to sprite sheet` 仅记录，不扩展不具备的视频输入能力。`create sprite sheet online` 与 `make sprite sheet online` 共 2 次展示，原有提取意图 `spritesheet extractor` 为 1 次；其余词逐行保留，不据低样本改变入口。主词 `sprite sheet maker` 未出现于可见查询，不等于没有需求。
+
+凭据保存在 `docs/qa/image-workflows-2026-11-18/`：`gsc-print-index-request.jpg`、`gsc-pixelate-index-request.jpg`、`gsc-sprite-index-status.jpg/.txt`、`gsc-sprite-performance.jpg/.txt`。
+
+- [ ] 下次人工复核：11 月 25 日左右检查两个新页是否抓取/收录、sprite 最后抓取是否晚于升级，并复查站点地图临时处理提示；对比同口径数据，另单列 11 月 17 日之后的上线后表现。期间冻结页面内容，不因单次低样本排名再改定位。

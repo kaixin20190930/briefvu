@@ -1,0 +1,274 @@
+- navigation:
+  - heading [level=1]: 效果
+- button:
+  - generic: 
+  - generic: 导出
+- radiogroup:
+  - radio:
+    - generic: 24 小时
+  - radio:
+    - generic: 7 天
+  - radio:
+    - generic: 28 天
+  - radio:
+    - generic: 3 个月
+- button:
+  - generic: 自定义
+  - generic: arrow_drop_down
+- list:
+  - button:
+    - generic: 搜索类型：网页（文本）
+    - generic: arrow_drop_down
+  - tooltip: 搜索类型：网页（文本）
+  - button:
+    - generic: 网页：https://briefvu.com/tools/sprite-sheet
+  - tooltip: 网页：https://briefvu.com/tools/sprite-sheet
+  - button:
+    - generic: close
+  - button:
+    - generic: add
+    - generic: 添加过滤条件
+  - tooltip: 添加过滤条件
+  - button:
+    - generic: filter_list_spark
+  - tooltip: 使用 AI 自定义效果报告
+  - button:
+    - generic: 重置过滤条件
+  - tooltip: 重置过滤条件
+- generic: 上次更新日期：3.5小时前
+- main:
+  - button:
+    - generic: 
+    - generic: 总点击次数
+    - generic: "0"
+  - button:
+    - generic: 
+  - button:
+    - generic: 
+    - generic: 总曝光次数
+    - generic: "13"
+  - button:
+    - generic: 
+  - button:
+    - generic: 
+    - generic: 平均点击率
+    - generic: 0%
+  - button:
+    - generic: 
+  - button:
+    - generic: 
+    - generic: 平均排名
+    - generic: "66.7"
+  - button:
+    - generic: 
+  - button:
+    - generic: 每日
+  - application:
+    - generic: 图表，包含从 2026年10月20日到 2026年11月16日的总点击次数、总曝光次数、平均点击率和平均排名计数
+  - generic: info
+  - generic: 详细了解您的网站在 Google 搜索的生成式 AI 功能中的表现
+  - generic: 打开报告
+  - generic: chevron_forward
+  - link:
+    - /url: ./search-console/performance/search-analytics/ai?resource_id=sc-domain%3Abriefvu.com
+  - tablist:
+    - tab [selected]:
+      - generic: 查询数
+    - tab:
+      - generic: 网页
+    - tab:
+      - generic: 国家/地区
+    - tab:
+      - generic: 设备
+    - tab:
+      - generic: 搜索结果呈现
+    - tab:
+      - generic: 天
+  - tabpanel:
+    - button:
+      - generic: 
+    - table:
+      - rowgroup:
+        - row:
+          - columnheader:
+            - generic: 热门查询
+            - button:
+          - columnheader:
+            - button:
+            - generic: 点击次数
+          - columnheader:
+            - button:
+            - generic: 展示
+          - columnheader:
+            - button:
+            - generic: 点击率
+          - columnheader:
+            - button:
+            - generic: 排名
+      - rowgroup:
+        - row:
+          - cell:
+            - generic: spritesheet extractor
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "2.0"
+        - row:
+          - cell:
+            - generic: create sprite sheet online
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "3.0"
+        - row:
+          - cell:
+            - generic: make sprite sheet online
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "27.0"
+        - row:
+          - cell:
+            - generic: how to create a sprite sheet froma gif
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "85.0"
+        - row:
+          - cell:
+            - generic: sprite converter
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "85.0"
+        - row:
+          - cell:
+            - generic: gif to sprites
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "90.0"
+        - row:
+          - cell:
+            - generic: video to sprite sheet
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "90.0"
+        - row:
+          - cell:
+            - generic: sprite sheet maker from gif
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "92.0"
+        - row:
+          - cell:
+            - generic: gif spritesheet
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "94.0"
+        - row:
+          - cell:
+            - generic: gif maker from sprite sheet
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "96.0"
+        - row:
+          - cell:
+            - generic: gif sprite sheet maker
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "96.0"
+        - row:
+          - cell:
+            - generic: sprite gif maker
+          - cell:
+            - generic: "0"
+          - cell:
+            - generic: "1"
+          - cell:
+            - generic: 0%
+          - cell:
+            - generic: "99.0"
+    - generic: 每页行数：
+    - listbox:
+      - text: 5 10
+      - option [selected]: "25"
+      - text: 50 100 250 500
+    - generic: 第 1-12 行，共 12 行
+    - button [disabled]:
+    - tooltip: 上一页
+    - button [disabled]:
+    - tooltip: 下一页
+- dialog "网页":
+  - heading "网页" [level=2]:
+    - generic: 网页
+  - tablist:
+    - tab "过滤器" [selected]:
+      - generic: 过滤器
+    - tab "比较":
+      - generic: 比较
+  - tabpanel "过滤器":
+    - combobox "字符串匹配选项下拉菜单":
+      - generic: 完全匹配的网址
+    - generic: 网址
+    - generic: 网址
+    - textbox "网址": https://briefvu.com/tools/sprite-sheet
+  - button "取消" [active]:
+    - generic: 取消
+  - button "应用":
+    - generic: 应用
+- button "Open or close panel":
+- button "Open or close extension":
+- button "AI Autofill":
+- img "Monica"
+- generic: ⌘M
+- text: Explain
