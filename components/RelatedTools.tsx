@@ -3,6 +3,7 @@ import Link from "next/link";
 import { availableTools } from "@/lib/tools/registry";
 
 const contextualRecommendations: Record<string, string[]> = {
+  "pixelate-image": ["crop-image", "resize-image", "color-palette-from-image", "remove-metadata"],
   "print-image-multiple-pages": ["crop-image", "resize-image", "image-converter", "compress-image"],
   "tga-viewer": ["image-converter", "compress-image", "image-to-ico", "remove-metadata"],
   "image-to-ico": ["image-converter", "resize-image", "color-palette-from-image", "compress-image"],
@@ -15,10 +16,10 @@ const contextualRecommendations: Record<string, string[]> = {
   "invert-image": ["photo-editor", "image-color-picker", "add-text-to-photo", "mirror-image"],
   "add-text-to-photo": ["remove-metadata", "crop-image", "photo-editor", "image-color-picker"],
   "remove-metadata": ["crop-image", "sprite-sheet", "photo-editor", "image-color-picker"],
-  "sprite-sheet": ["remove-metadata", "crop-image", "image-color-picker", "photo-editor"],
+  "sprite-sheet": ["pixelate-image", "crop-image", "image-color-picker", "photo-editor"],
   "color-palette-from-image": ["image-color-picker", "image-converter", "resize-image", "compress-image"],
   "image-color-picker": ["color-palette-from-image", "add-text-to-photo", "crop-image", "remove-metadata"],
-  "photo-editor": ["resize-image", "compress-image", "remove-metadata", "add-text-to-photo"],
+  "photo-editor": ["pixelate-image", "compress-image", "remove-metadata", "add-text-to-photo"],
   "psd-editor": ["remove-metadata", "image-color-picker", "crop-image", "sprite-sheet"],
 };
 

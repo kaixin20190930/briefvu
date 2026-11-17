@@ -12,6 +12,7 @@ describe("sitemap", () => {
       "/tools/image-to-ico",
       "/tools/tga-viewer",
       "/tools/print-image-multiple-pages",
+      "/tools/pixelate-image",
       "/tools/image-converter",
       "/tools/crop-image",
       "/tools/rotate-image",
@@ -34,7 +35,7 @@ describe("sitemap", () => {
       "/guides/prepare-images-for-web",
       "/guides/compress-image-to-target-size",
     ]);
-    expect(sitemap()).toHaveLength(29);
+    expect(sitemap()).toHaveLength(30);
     expect(sitemap().every((entry) => entry.url.startsWith("https://briefvu.com"))).toBe(true);
     expect(sitemap().every((entry) => !("priority" in entry) && !("changeFrequency" in entry))).toBe(true);
   });

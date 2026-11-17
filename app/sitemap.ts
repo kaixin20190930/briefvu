@@ -11,6 +11,7 @@ export const sitemapEntries = [
   { path: "/tools/image-to-ico" },
   { path: "/tools/tga-viewer" },
   { path: "/tools/print-image-multiple-pages" },
+  { path: "/tools/pixelate-image" },
   { path: "/tools/image-converter", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/crop-image", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/rotate-image", priority: 0.9, changeFrequency: "monthly" as const },
@@ -38,12 +39,13 @@ export const sitemapEntries = [
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/pixelate-image": "2026-11-18T00:00:00.000Z",
   "/tools/print-image-multiple-pages": "2026-11-18T00:00:00.000Z",
   "/tools/crop-image": "2026-11-18T00:00:00.000Z",
   "/tools/resize-image": "2026-11-18T00:00:00.000Z",
-  "/tools/sprite-sheet": "2026-11-17T00:00:00.000Z",
+  "/tools/sprite-sheet": "2026-11-18T00:00:00.000Z",
   "/guides/sprite-sheet-game-development": "2026-11-17T00:00:00.000Z",
-  "/tools/photo-editor": "2026-11-16T00:00:00.000Z",
+  "/tools/photo-editor": "2026-11-18T00:00:00.000Z",
   "/tools/psd-editor": "2026-11-16T00:00:00.000Z",
   // Homepage and directory links now point directly to the PSD landing page.
   "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",

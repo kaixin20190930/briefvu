@@ -1,4 +1,5 @@
 export const TOOL_IDS = [
+  "pixelate-image",
   "print-image-multiple-pages",
   "tga-viewer",
   "invisible-text",
