@@ -1,0 +1,164 @@
+{
+  "/": {
+    "status": 200,
+    "title": "Free Online Image Tools — Private, No Upload | BriefVu",
+    "h1": "Free OnlineImage Tools.",
+    "canonical": "https://briefvu.com",
+    "schemaTypes": [
+      "WebSite",
+      "Organization"
+    ],
+    "linksVerified": [
+      "/tools/print-image-multiple-pages",
+      "/tools/pixelate-image"
+    ]
+  },
+  "/tools": {
+    "status": 200,
+    "title": "Image Tools — Free Browser Utilities | BriefVu",
+    "h1": "Image Tools",
+    "canonical": "https://briefvu.com/tools",
+    "schemaTypes": [],
+    "linksVerified": [
+      "/tools/print-image-multiple-pages",
+      "/tools/pixelate-image"
+    ]
+  },
+  "/tools/sprite-sheet": {
+    "status": 200,
+    "title": "Sprite Sheet Maker — Free Sprite Sheet Generator & GIF Converter | BriefVu",
+    "h1": "Sprite Sheet Maker",
+    "canonical": "https://briefvu.com/tools/sprite-sheet",
+    "schemaTypes": [
+      "WebApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/guides/sprite-sheet-game-development",
+      "/tools/pixelate-image"
+    ]
+  },
+  "/guides/sprite-sheet-game-development": {
+    "status": 200,
+    "title": "How to Make a Sprite Sheet for Unity, Godot & Phaser | BriefVu",
+    "h1": "How to Make a Sprite Sheet for Game Development",
+    "canonical": "https://briefvu.com/guides/sprite-sheet-game-development",
+    "schemaTypes": [
+      "Article",
+      "BreadcrumbList"
+    ],
+    "linksVerified": [
+      "/tools/sprite-sheet"
+    ]
+  },
+  "/tools/print-image-multiple-pages": {
+    "status": 200,
+    "title": "Print a Large Image on Multiple Pages — Free Tiled Print Tool | BriefVu",
+    "h1": "Print a Large Image on Multiple Pages",
+    "canonical": "https://briefvu.com/tools/print-image-multiple-pages",
+    "schemaTypes": [
+      "SoftwareApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/tools/crop-image",
+      "/tools/resize-image"
+    ]
+  },
+  "/tools/pixelate-image": {
+    "status": 200,
+    "title": "Pixelate Image Online — Free Pixelate & Blur Tool | BriefVu",
+    "h1": "Pixelate Image",
+    "canonical": "https://briefvu.com/tools/pixelate-image",
+    "schemaTypes": [
+      "WebApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/tools/crop-image",
+      "/tools/remove-metadata",
+      "/tools/color-palette-from-image"
+    ]
+  },
+  "/tools/crop-image": {
+    "status": 200,
+    "title": "Image Cropper — Crop Image Online Free | BriefVu",
+    "h1": "Crop Image Online — Free Image Cropper",
+    "canonical": "https://briefvu.com/tools/crop-image",
+    "schemaTypes": [
+      "WebApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/tools/print-image-multiple-pages"
+    ]
+  },
+  "/tools/resize-image": {
+    "status": 200,
+    "title": "Resize Image Online — Change Image Dimensions | BriefVu",
+    "h1": "Resize Image Online",
+    "canonical": "https://briefvu.com/tools/resize-image",
+    "schemaTypes": [
+      "WebApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/tools/print-image-multiple-pages"
+    ]
+  },
+  "/tools/photo-editor": {
+    "status": 200,
+    "title": "Browser Photo Editor — Edit Photos Without Uploading | BriefVu",
+    "h1": "Browser Photo Editor",
+    "canonical": "https://briefvu.com/tools/photo-editor",
+    "schemaTypes": [
+      "WebApplication",
+      "BreadcrumbList",
+      "FAQPage"
+    ],
+    "linksVerified": [
+      "/tools/pixelate-image"
+    ]
+  },
+  "/sitemap.xml": {
+    "status": 200,
+    "urlCount": 30,
+    "lastmod": {
+      "/": "2026-11-18T00:00:00.000Z",
+      "/tools": "2026-11-18T00:00:00.000Z",
+      "/tools/invisible-text": "2026-10-20T00:00:00.000Z",
+      "/tools/image-color-picker": "2026-11-01T00:00:00.000Z",
+      "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",
+      "/tools/image-to-ico": "2026-11-09T00:00:00.000Z",
+      "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
+      "/tools/print-image-multiple-pages": "2026-11-18T00:00:00.000Z",
+      "/tools/pixelate-image": "2026-11-18T00:00:00.000Z",
+      "/tools/image-converter": "2026-11-03T00:00:00.000Z",
+      "/tools/crop-image": "2026-11-18T00:00:00.000Z",
+      "/tools/rotate-image": "2026-10-20T00:00:00.000Z",
+      "/tools/mirror-image": "2026-10-20T00:00:00.000Z",
+      "/tools/resize-image": "2026-11-18T00:00:00.000Z",
+      "/tools/compress-image": "2026-11-03T00:00:00.000Z",
+      "/tools/invert-image": "2026-10-20T00:00:00.000Z",
+      "/tools/add-text-to-photo": "2026-10-20T00:00:00.000Z",
+      "/tools/photo-editor": "2026-11-18T00:00:00.000Z",
+      "/tools/text-reverser": "2026-10-20T00:00:00.000Z",
+      "/tools/character-remover": "2026-10-20T00:00:00.000Z",
+      "/tools/text-to-lrc": "2026-10-20T00:00:00.000Z",
+      "/tools/remove-metadata": "2026-11-09T00:00:00.000Z",
+      "/tools/sprite-sheet": "2026-11-18T00:00:00.000Z",
+      "/tools/psd-editor": "2026-11-16T00:00:00.000Z",
+      "/guides": "2026-11-17T00:00:00.000Z",
+      "/guides/what-is-photo-metadata": "2026-10-20T00:00:00.000Z",
+      "/guides/sprite-sheet-game-development": "2026-11-17T00:00:00.000Z",
+      "/guides/image-formats-jpg-png-webp": "2026-10-20T00:00:00.000Z",
+      "/guides/prepare-images-for-web": "2026-10-20T00:00:00.000Z",
+      "/guides/compress-image-to-target-size": "2026-11-03T00:00:00.000Z"
+    }
+  }
+}
