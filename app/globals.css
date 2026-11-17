@@ -443,3 +443,16 @@ footer { width: min(1180px, calc(100% - 40px)); min-height: 120px; margin: auto;
 .sprite-maker-frames small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sprite-controls label { max-width: 150px; flex: 1; }
 @media (max-width: 700px) { .sprite-tabs-three { grid-template-columns: 1fr; } }
+.workflow-settings { margin: 22px 0; padding: 18px; border: 1px solid var(--line); border-radius: 12px; }
+.workflow-settings legend { padding: 0 8px; font-weight: 800; }
+.workflow-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+.workflow-controls label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; }
+.workflow-controls input, .workflow-controls select, .workflow-controls textarea { width: 100%; min-height: 42px; border: 1px solid #acbfcd; border-radius: 7px; padding: 8px; color: var(--ink); background: #fff; }
+.workflow-checks { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 18px; font-size: 12px; }
+.workflow-checks label { display: flex; gap: 6px; align-items: center; }
+.workflow-summary { padding: 18px; border-radius: 12px; background: var(--soft-blue); margin: 18px 0; }
+.workflow-summary p, .workflow-preview + p { font-size: 13px; line-height: 1.7; }
+.workflow-preview { text-align: center; border: 1px solid var(--line); border-radius: 12px; padding: 16px; overflow: auto; }
+.workflow-preview canvas { display: block; max-width: 100%; max-height: 650px; object-fit: contain; margin: auto; }
+.workflow-steps { padding-left: 24px; line-height: 1.8; }
+.workflow-steps li { margin: 12px 0; }

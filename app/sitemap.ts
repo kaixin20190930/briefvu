@@ -10,6 +10,7 @@ export const sitemapEntries = [
   { path: "/tools/color-palette-from-image", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/image-to-ico" },
   { path: "/tools/tga-viewer" },
+  { path: "/tools/print-image-multiple-pages" },
   { path: "/tools/image-converter", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/crop-image", priority: 1, changeFrequency: "monthly" as const },
   { path: "/tools/rotate-image", priority: 0.9, changeFrequency: "monthly" as const },
@@ -37,6 +38,9 @@ export const sitemapEntries = [
 
 // Editorial dates, not build timestamps. Only bump a URL after a meaningful change.
 export const pageLastModified: Readonly<Record<string, string>> = {
+  "/tools/print-image-multiple-pages": "2026-11-18T00:00:00.000Z",
+  "/tools/crop-image": "2026-11-18T00:00:00.000Z",
+  "/tools/resize-image": "2026-11-18T00:00:00.000Z",
   "/tools/sprite-sheet": "2026-11-17T00:00:00.000Z",
   "/guides/sprite-sheet-game-development": "2026-11-17T00:00:00.000Z",
   "/tools/photo-editor": "2026-11-16T00:00:00.000Z",
@@ -45,8 +49,8 @@ export const pageLastModified: Readonly<Record<string, string>> = {
   "/tools/tga-viewer": "2026-11-09T00:00:00.000Z",
   "/tools/remove-metadata": "2026-11-09T00:00:00.000Z",
   "/tools/image-to-ico": "2026-11-09T00:00:00.000Z",
-  "/": "2026-11-17T00:00:00.000Z",
-  "/tools": "2026-11-17T00:00:00.000Z",
+  "/": "2026-11-18T00:00:00.000Z",
+  "/tools": "2026-11-18T00:00:00.000Z",
   "/tools/color-palette-from-image": "2026-11-01T00:00:00.000Z",
   "/tools/image-color-picker": "2026-11-01T00:00:00.000Z",
   // Preserve the converter metadata update already present in the working tree.

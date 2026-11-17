@@ -16,6 +16,7 @@ export type ToolRegistryEntry = {
 };
 
 export const toolRegistry: readonly ToolRegistryEntry[] = [
+  { slug: "print-image-multiple-pages", name: "Print Image on Multiple Pages", shortDescription: "Tile an image across A4 or Letter pages and export a printable PDF locally.", href: "/tools/print-image-multiple-pages", category: "Images", status: "available", tier: "free" },
   { slug: "tga-viewer", name: "TGA Viewer", shortDescription: "Open, inspect, and convert supported TGA files without uploading them.", href: "/tools/tga-viewer", category: "Images", status: "available", tier: "free" },
   { slug: "image-to-ico", name: "PNG to ICO Converter", shortDescription: "Convert PNG to ICO, make favicons, and export Chrome extension icon packs.", href: "/tools/image-to-ico", category: "Images", status: "available", tier: "free" },
   {

@@ -6,7 +6,7 @@ import { availableTools } from "@/lib/tools/registry";
 import { absoluteUrl } from "@/lib/site";
 
 export default function Home() {
-  const imageToolSlugs = new Set(["tga-viewer", "color-palette-from-image",
+  const imageToolSlugs = new Set(["print-image-multiple-pages", "tga-viewer", "color-palette-from-image",
   "image-to-ico", "image-converter", "crop-image", "rotate-image", "mirror-image", "invert-image", "add-text-to-photo", "image-color-picker", "photo-editor", "resize-image", "compress-image", "remove-metadata", "sprite-sheet", "psd-editor"]);
   const imageTools = availableTools.filter((tool) => imageToolSlugs.has(tool.slug));
   const utilityTools = availableTools.filter((tool) => !imageToolSlugs.has(tool.slug));

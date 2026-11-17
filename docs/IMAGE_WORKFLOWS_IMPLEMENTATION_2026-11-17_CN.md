@@ -20,12 +20,12 @@
 
 ## 第二批：Print Image on Multiple Pages
 
-- [ ] 新 URL `/tools/print-image-multiple-pages`；JPG/PNG/WebP，按图像方向解码。
-- [ ] 实际尺寸或横纵纸张数；mm/cm/in、比例锁定、A4/Letter、方向、留白与重叠。
-- [ ] 拼装示意、有效 PPI、裁切线、行列编号、多页 PDF、第一页试打、100mm 校准尺。
-- [ ] 文件/像素/页数限制与失败提示；透明图像铺白；PDF 固定纸张尺寸与连续裁切。
-- [ ] 指定 TDK/H2、步骤、FAQ/SoftwareApplication/BreadcrumbList；首页、crop、resize 内链。
-- [ ] 必要布局/PDF 检查、浏览器导出与线上复核；实物打印由用户验证，不能以 PDF 检查代替。
+- [x] 新 URL `/tools/print-image-multiple-pages`；JPG/PNG/WebP，按图像方向解码。
+- [x] 实际尺寸或横纵纸张数；mm/cm/in、比例锁定、A4/Letter、方向、留白与重叠。
+- [x] 拼装示意、有效 PPI、裁切线、行列编号、多页 PDF、第一页试打、100mm 校准尺。
+- [x] 文件/像素/页数限制与失败提示；透明图像铺白；PDF 固定纸张尺寸与连续裁切。
+- [x] 指定 TDK/H2、步骤、FAQ/SoftwareApplication/BreadcrumbList；首页、crop、resize 内链。
+- [x] 必要布局/PDF 检查、浏览器导出与线上复核；实物打印仍在人工待办，不能以 PDF 检查代替。
 
 ## 第三批：Pixelate Image
 
@@ -40,7 +40,7 @@
 - [ ] 海报专页：验证 DR≥10 后再评估与打印页的意图区分，复用打印核心，不提前新建 URL。
 - [ ] 精灵页按查询拆分的 GSC 基线；不阻塞实际功能交付，不根据未读到的数据改旧入口。
 - [ ] printtiler 外链结构：需 Ahrefs 数据，本轮不以未经核实的引用域数制定承诺。
-- [ ] 每周两批外链、每批 5–10 个，使用现有 `docs/backlinks/LISTING_KIT_EN.md` 与 prospects 清单；本轮不代用户向第三方公开发帖。Product Hunt 仍需先完成既有 iPhone 真机待办。
+- [ ] 每周两批外链、每批 5–10 个，使用现有 `docs/backlinks/LISTING_KIT_EN.md` ；历史 prospects 清单需重审相关性；本轮不代用户向第三方公开发帖。Product Hunt 仍需先完成既有 iPhone 真机待办。
 - [ ] 实物打印第一页，核对校准尺为 100mm、选 Actual size / 100%、关闭 Fit；再验证相邻页拼接。
 - [ ] 后续观察：精灵 3 个月前 20、打印 3 个月前 20、像素化 3 个月前 30 / 6 个月前 10，仅作为复核目标。
 
@@ -48,4 +48,9 @@
 
 - 初始工作区干净；已读本机 Next 的 page 与 sitemap 文档。仅新增两个可立即实施的 URL，海报页暂缓。
 
-- 第一批验证：布局与 sitemap 共 4 项检查通过，变更文件 ESLint、Next 构建通过。独立浏览器导入 12 个 16×16 PNG，排序/复制/删除后导出 76×58 PNG 与 JSON（12 帧，spacing=2，margin=3），下载文件尺寸及坐标一致；原 Sheet→GIF 路径按同一网格导出 12 帧 GIF 成功。第一批提交部署待记录。
+- 第一批验证：布局与 sitemap 共 4 项检查通过，变更文件 ESLint、Next 构建通过。独立浏览器导入 12 个 16×16 PNG，排序/复制/删除后导出 76×58 PNG 与 JSON（12 帧，spacing=2，margin=3），下载文件尺寸及坐标一致；原 Sheet→GIF 路径按同一网格导出 12 帧 GIF 成功。第一批提交 `5718f28` 已推送；Cloudflare `d5263df1-83f1-49e6-84fb-f8af36d74960` 已部署，独立浏览器线上确认 Maker H1 与三条处理路径。
+
+- 第二批（2026-11-18）：布局/纸张/PDF 与 sitemap 共 5 项检查通过，变更文件 ESLint 和 Next 构建通过。浏览器用公开透明 PNG 导出 1 页试打 PDF 与 6 页完整 PDF，控制台无错误；PDFium 已渲染检查全部 6 页：A4 为 595.276×841.890 pt、透明背景铺白、上下/左右连续及重叠标记正确；实物校准仍待用户执行。
+- 外链材料发现旧版服装报价产品介绍及付费试点，已改为当前图片工具的免费本地处理定位，并列出七平台人工提交队列；未实际投稿。
+
+- 第二批依赖：固定 `pdf-lib@1.17.1`，仅导出时懒加载。未新增图片上传接口。PDF 样本渲染在 `/tmp/briefvu-print-contact.png`，未将下载或临时测试产物放入公共站点。

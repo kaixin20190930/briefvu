@@ -3,13 +3,14 @@ import Link from "next/link";
 import { availableTools } from "@/lib/tools/registry";
 
 const contextualRecommendations: Record<string, string[]> = {
+  "print-image-multiple-pages": ["crop-image", "resize-image", "image-converter", "compress-image"],
   "tga-viewer": ["image-converter", "compress-image", "image-to-ico", "remove-metadata"],
   "image-to-ico": ["image-converter", "resize-image", "color-palette-from-image", "compress-image"],
   "image-converter": ["tga-viewer", "image-to-ico", "crop-image", "remove-metadata"],
-  "crop-image": ["rotate-image", "mirror-image", "add-text-to-photo", "remove-metadata"],
+  "crop-image": ["print-image-multiple-pages", "mirror-image", "add-text-to-photo", "remove-metadata"],
   "rotate-image": ["mirror-image", "crop-image", "add-text-to-photo", "remove-metadata"],
   "mirror-image": ["rotate-image", "crop-image", "add-text-to-photo", "photo-editor"],
-  "resize-image": ["compress-image", "remove-metadata", "crop-image", "photo-editor"],
+  "resize-image": ["print-image-multiple-pages", "remove-metadata", "crop-image", "photo-editor"],
   "compress-image": ["resize-image", "remove-metadata", "image-converter", "photo-editor"],
   "invert-image": ["photo-editor", "image-color-picker", "add-text-to-photo", "mirror-image"],
   "add-text-to-photo": ["remove-metadata", "crop-image", "photo-editor", "image-color-picker"],
